@@ -30,7 +30,13 @@ In coordinates: if $w = [w_0, w_1]$ with $w_0, w_1 \in \mathbb{C}^{2^{n-1}}$ the
 
 ## The Hadamard convention
 
-The textbook Hadamard $H = \tfrac{1}{\sqrt 2}\bigl(\begin{smallmatrix}1 & 1\\ 1 & -1\end{smallmatrix}\bigr)$ has entries outside $\mathbb{Z}[i]$. Its rephased form
+The textbook Hadamard
+
+```math
+H = \tfrac{1}{\sqrt 2}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}
+```
+
+has entries outside $\mathbb{Z}[i]$. Its rephased form
 
 ```math
 \tilde H = \zeta_8^{-1}\,H = \tfrac{1 - i}{2}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}
