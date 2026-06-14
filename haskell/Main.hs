@@ -21,6 +21,7 @@ import PauliLogic
 import Cyclotomic
 import Grade
 import Transport
+import Postselect
 
 -- Build a CVec from a flat list of length 2^n.
 fromList :: [Complex Double] -> CVec
@@ -111,6 +112,24 @@ main = do
   mapM_
     (\(name, g) -> printf "  %-8s %s\n" name (show (preservesBW2 g)))
     twoQubitGenerators
+
+  -- 11. The (1+i) cost of one Z-postselect on qubit 1 in BW_2.
+  putStrLn ""
+  putStrLn "Z_1-postselect cost check on BW_2:"
+  let v00  = basisState [False, False]                    -- phi^2 |00>, in BW_2
+      v01  = basisState [False, True]                     -- phi^2 |01>, in BW_2
+      v10  = basisState [True,  False]                    -- phi^2 |10>, NOT in BW_2^<Z_1>
+  printf "  inFirstQubitCodespace (phi^2|00>) = %s   (expect True)\n"
+         (show (inFirstQubitCodespace v00))
+  printf "  inFirstQubitCodespace (phi^2|01>) = %s   (expect True)\n"
+         (show (inFirstQubitCodespace v01))
+  printf "  inFirstQubitCodespace (phi^2|10>) = %s   (expect False)\n"
+         (show (inFirstQubitCodespace v10))
+  case zPostselectQ1 v00 of
+    Just inner ->
+      printf "  zPostselectQ1 (phi^2|00>) is a BW_1 vector: %s   (expect True)\n"
+             (show (inBW inner))
+    Nothing -> putStrLn "  zPostselectQ1 (phi^2|00>) failed   (unexpected)"
 
   putStrLn "== done =="
   where
