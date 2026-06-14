@@ -28,4 +28,6 @@ The seventh is bookkeeping that turns out to matter. The Clifford-transport step
 
 What is new versus what is in the literature, in a sentence: the lattice tower, its free-module decomposition, the kissing-number identification with stabilizer counts, and the Clifford-as-lattice-automorphism theorem are in the literature. The presentation theorem (as an assembly), the logical-lattice theorem, the decoder-as-recursion-scheme reading, the Pauli-logic calculus with cut-elimination-as-tableau, the $\lambda$-adic grade, and the small-*n* direct closure are stated and proved here.
 
+For the long view — how three independent traditions (Yates 1937 on algorithmic combinatorics, Barnes–Wall 1959 on geometry of numbers, Bolt–Room–Wall 1961 on finite group theory) spent sixty-five years cultivating the same object without coordinating, and which paper supplied which piece of the story above — see [`08-genealogy.md`](08-genealogy.md). It is read after the technical documents; readers who only want the mathematics can skip it without loss.
+
 For literature pointers used throughout, see [`references.md`](references.md).
