@@ -1,46 +1,31 @@
 # Overview
 
-The Barnes–Wall lattices are a tower
+If you teach a programmer "Gaussian integers" — pairs of whole numbers obeying $i^2 = -1$, with the single odd prime $1 + i$ above two — you have given her enough to do most of stabilizer quantum computing. That is the slogan of this repository, and it is roughly the surprise of the subject.
 
+The Barnes–Wall lattices are the structure that makes the slogan precise. They form a tower
 ```math
-\mathrm{BW}_0 = \mathbb{Z}[i] \subset \mathrm{BW}_1 \subset \mathrm{BW}_2 \subset \dots
+\mathrm{BW}_0 \subset \mathrm{BW}_1 \subset \mathrm{BW}_2 \subset \dots
 ```
+of free modules over $\mathbb{Z}[i]$, doubling in rank at every step. Calderbank used them in the 1990s as a fault-tolerant code; lattice theorists have known them since Barnes and Wall in 1959 as some of the densest packings in low dimensions (the real form of $\mathrm{BW}_2$ is $E_8$). What is more recent — Kliuchnikov and Schönnenbeck, 2024 — is the observation that runs through everything here: a unitary on $n$ qubits preserves $\mathrm{BW}\_{n}$ if and only if it is a Clifford operator, up to a phase. The Clifford group, viewed correctly, is a *lattice automorphism group*. Once you know that, the rest of the theory becomes arithmetic.
 
-of free modules over the ring of Gaussian integers, with one new factor at every step. They appear in the literature in three guises: as a fault-tolerant code (Calderbank 1997); as the densest known lattice packings in low dimensions ($D_4$ at four real dimensions, $E_8$ at eight, the classical Barnes–Wall lattice at sixteen); and, most relevantly for this development, as the unique lattice on the $n$-qubit Hilbert space preserved by the Clifford group up to phase (Kliuchnikov–Schönnenbeck 2024). The third reading is the one this repository pursues.
+This repository is the lattice-arithmetic story, in three media. The Lean 4 sources in [`../lean/`](../lean/) carry the theorems with machine-checked proofs. The Haskell library in [`../haskell/`](../haskell/) runs the constructions on concrete data — lattice membership, decoding, fidelities, the Pauli-logic simulator, the grade calculation, the small-*n* Clifford check. The documents in this folder explain what is going on and why, and mark carefully which pieces come from the literature and which are new.
 
-This codebase makes the third reading concrete. It collects:
+There are seven results worth knowing.
 
-* a Lean 4 formalisation of the basic arithmetic of the lattice tower and the theorems that pin stabilizer codes inside it,
-* a small but complete Haskell library that runs the same constructions on concrete data, and
-* a chapter-by-chapter prose tour of what is proved, where, and what is new versus what is in the literature.
+The first is structural: every vector in $\mathrm{BW}\_{n}$ splits uniquely as $\varphi |0\rangle \otimes a + (|0\rangle + |1\rangle) \otimes b$ with $a, b \in \mathrm{BW}_{n-1}$, where $\varphi = 1 + i$. This is the free-module decomposition, and it turns lattice membership into a recursion — read [`01-bw-family.md`](01-bw-family.md).
 
-The headline results, in plain English:
+The second is categorical. Three independent specifications of the Clifford fragment — Selinger's circuit relations, Backens's graphical calculus, Kliuchnikov–Schönnenbeck's lattice automorphisms — are the same object, in the strict-monoidal sense where there is no associator bookkeeping to do. See [`02-presentation.md`](02-presentation.md).
 
-1. **The Barnes–Wall lattice has a free-module decomposition.** Every vector in $\mathrm{BW}\_{n}$ is uniquely $(1+i)|0\rangle\otimes a + (|0\rangle + |1\rangle)\otimes b$ with $a, b \in \mathrm{BW}\_{n-1}$. This makes lattice membership a structural recursion. See [`01-bw-family.md`](01-bw-family.md).
+The third is the centerpiece of the chapter, and the only result here we believe is unambiguously new. A rank-*m* stabilizer code on *n* qubits has its codespace lattice equal to the inner $(n - m)$-qubit Barnes–Wall lattice, scaled by exactly $(1+i)^m$. Imposing one bit of stabilizer classicality costs one factor of the lattice's prime above two. Stabilizer codes are Barnes–Wall lattices at a finer scale, and the encoder is a lattice isometry. See [`03-logical-lattice.md`](03-logical-lattice.md).
 
-2. **The Clifford group is the lattice automorphism group, up to phase.** Three independent specifications of the Clifford fragment of quantum computing — circuit relations (Selinger), graphical calculus (Backens), lattice automorphisms — fit together at the level of a single prop. See [`02-presentation.md`](02-presentation.md).
+The fourth is the consequence for the existing Micciancio–Nicolosi decoder: it is, line by line, a recursion scheme on the iterated-pair functor, with the lattice's free-module decomposition as its coalgebra and the closest-point reconciliation as its algebra. The mixing step that the original paper verifies by hand turns out to be the phased Clifford $i \cdot (X\tilde H \otimes I)$, supplied by the presentation theorem. The decoder is the categorical structure run as a program. See [`04-prop-computes.md`](04-prop-computes.md).
 
-3. **Stabilizer codes are Barnes–Wall lattices at a finer scale.** For a rank-$m$ stabilizer group $S$ on $n$ qubits, the codespace lattice $\mathrm{BW}\_{n}^S$ is an isometric copy of $\mathrm{BW}\_{n-m}$ scaled by $(1+i)^m$. Imposing one bit of classicality costs one factor of $(1+i)$. See [`03-logical-lattice.md`](03-logical-lattice.md).
+The fifth is a sequent calculus, $\mathsf{PL}\_{n}$, whose literals are signed Pauli words and whose only non-trivial rule is multiplying two commuting generators. Cut elimination in this calculus runs in time linear in the proof DAG, and what it is doing is exactly the row-reduction step of Aaronson and Gottesman's tableau algorithm. Measurement is exposed as a free monad over a single coin-flip operation. See [`05-pauli-logic.md`](05-pauli-logic.md).
 
-4. **The decoder is the categorical structure run as a program.** The Micciancio–Nicolosi bounded-distance decoder is, line by line, a hylomorphism whose coalgebra is the free-module decomposition and whose algebra is the closest-point reconciliation. See [`04-prop-computes.md`](04-prop-computes.md).
+The sixth is the one quantitative refinement worth carrying across to Clifford+*T*. There is a $\lambda$-adic valuation on diagonal characters of the level-*n* Barnes–Wall lattice, with $\lambda = 1 - \zeta_8$ the ramified prime above two in $\mathbb{Z}[\zeta_8]$. We call it the grade. It vanishes on Clifford and is at least one on every *T* gate, so it is a certified *T*-count floor; it has an explicit closed form $\max(0, 2d - 2^{\nu_2(c)})$ for single-monomial characters, where *d* is the support size and $\nu_2(c)$ the 2-adic valuation of the eighth-root coefficient. See [`06-grade.md`](06-grade.md).
 
-5. **Pauli logic.** A sequent calculus $\mathsf{PL}\_{n}$ in which signed Pauli words are literals, the only nontrivial rule is multiplication of commuting generators, and cut elimination is exactly the Aaronson–Gottesman tableau update. The same proof object simulates the Clifford circuit. See [`05-pauli-logic.md`](05-pauli-logic.md).
+The seventh is bookkeeping that turns out to matter. The Clifford-transport step in the proof of the logical-lattice theorem cites Kliuchnikov–Schönnenbeck for general *n*. We close it directly, by kernel computation, at *n* = 2 and *n* = 3. See [`07-r11-transport.md`](07-r11-transport.md).
 
-6. **The grade.** A $\lambda$-adic valuation on Clifford+$T$ operators, where $\lambda = 1 - \zeta_8$ is the totally ramified prime above 2 in $\mathbb{Z}[\zeta_8]$. The grade is a certified $T$-count floor and stratifies the diagonal characters by an explicit closed-form upper bound. See [`06-grade.md`](06-grade.md).
+What is new versus what is in the literature, in a sentence: the lattice tower, its free-module decomposition, the kissing-number identification with stabilizer counts, and the Clifford-as-lattice-automorphism theorem are in the literature. The presentation theorem (as an assembly), the logical-lattice theorem, the decoder-as-recursion-scheme reading, the Pauli-logic calculus with cut-elimination-as-tableau, the $\lambda$-adic grade, and the small-*n* direct closure are stated and proved here.
 
-7. **A direct closure of the Clifford-transport step at small $n$.** At $n = 2$ and $n = 3$, every Clifford generator's preservation of $\mathrm{BW}\_{n}$ is verified by direct computation, removing one citation from the proof of the logical-lattice theorem at those cases. See [`07-r11-transport.md`](07-r11-transport.md).
-
-## What lives where
-
-* [`../lean/`](../lean/) — Lean 4 source for every theorem listed above. The `lean/README.md` is the per-file map.
-* [`../haskell/`](../haskell/) — pure Haskell companion. The library runs concrete demonstrations of every construction; its `Main.hs` is a single-binary test battery.
-* [`../narrative/`](.) — these documents.
-* [`references.md`](references.md) — the literature pointers used here.
-
-## What is new
-
-The split between literature and new work is the same across the documents. In broad strokes:
-
-* The lattice tower, free-module decomposition, kissing-number identification with the stabilizer-state count, and the Clifford-as-lattice-automorphism theorem are in the literature (Barnes–Wall; Calderbank; Kliuchnikov–Schönnenbeck).
-* The presentation theorem, the logical-lattice theorem, the decoder-as-recursion-scheme reading, the Pauli-logic sequent calculus with cut-elimination-as-tableau, the $\lambda$-adic grade, and the direct small-$n$ closure of the transport step are stated and proved in this repository (each at its own document).
-* Every theorem is tagged in place: the Lean source carries the statement, the narrative document explains it in prose, and the Haskell layer computes it on concrete inputs where computation makes sense.
+For literature pointers used throughout, see [`references.md`](references.md).

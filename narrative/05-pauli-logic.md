@@ -1,47 +1,48 @@
 # Pauli logic
 
-## The calculus $\mathsf{PL}_n$
+Stabilizer circuit simulation has a beautiful little algorithm at its heart — Aaronson and Gottesman's tableau update — and a beautiful little observation about what that algorithm is doing. The observation is that the tableau update is cut elimination. The Pauli words are propositions; the stabilizer groups are theories; the Aaronson–Gottesman row operations are the rules of a sequent calculus. We call this calculus $\mathsf{PL}\_{n}$.
 
-Fix $n \ge 1$. The **literals** of $\mathsf{PL}\_{n}$ are signed Pauli words on $n$ qubits: triples $(\sigma, x, z)$ where $\sigma \in \{+, -\}$ and $x, z \in \mathbb{F}_2^n$ encode the $X$- and $Z$-content. The **multiplication** of literals is the symplectic product on $\mathbb{F}_2^{2n}$ paired with the sign rule that tracks the $i$-exponent of the underlying Pauli product. Two literals commute when their symplectic form vanishes.
+## Literals and theories
 
-The sequents of $\mathsf{PL}\_{n}$ have the shape $\Gamma \vdash P$, where $\Gamma$ is a finite list of literals (the **stabilizer theory**) and $P$ is one literal. The proof rules are:
+Fix *n* qubits. The literals of $\mathsf{PL}\_{n}$ are signed Pauli words: triples $(\sigma, x, z)$ with $\sigma \in \{+, -\}$ a sign and $x, z \in \mathbb{F}_2^n$ encoding the *X*- and *Z*-content qubit by qubit. The multiplication of two literals — read as Pauli operators — combines the bit vectors by XOR and tracks the sign through the *i*-exponent of the underlying letter-wise product. Two literals commute exactly when the symplectic form $\langle x_1, z_2 \rangle + \langle z_1, x_2 \rangle$ vanishes over $\mathbb{F}_2$. A *stabilizer theory* $\Gamma$ is a finite list of literals; the codespace of $\Gamma$ is the simultaneous $+1$-eigenspace of its elements.
 
-* **(Ax)** $\Gamma \vdash \Gamma_k$ — the $k$-th element of $\Gamma$.
-* **(Mul)** If $\Gamma \vdash P$ and $\Gamma \vdash Q$ and $P, Q$ commute, then $\Gamma \vdash P \cdot Q$.
-* **(UnitI)** $\Gamma \vdash +I$.
-* **(Cut)** If $\Gamma \vdash P$ and $\Gamma, P \vdash Q$, then $\Gamma \vdash Q$.
+## The rules
 
-The (Mul) rule has a commutativity side condition because the product of two anticommuting Hermitian Paulis is not Hermitian.
+Sequents have the shape $\Gamma \vdash P$, meaning "from the theory $\Gamma$, the literal $P$ is derivable". There are four rules.
+
+The axiom rule says $\Gamma \vdash \Gamma_k$ for every index *k*: each element of the theory is derivable from itself. The unit rule says $\Gamma \vdash +I$: the identity is always derivable. The multiplication rule says that if $\Gamma \vdash P$ and $\Gamma \vdash Q$ and *P*, *Q* commute, then $\Gamma \vdash P \cdot Q$. The cut rule says that if $\Gamma \vdash P$ and $\Gamma, P \vdash Q$, then $\Gamma \vdash Q$ — derivable lemmas may be used as if they were axioms.
+
+The commutativity side condition in multiplication is not optional. The product of two anticommuting Hermitian Pauli words is anti-Hermitian (it carries an *i*), so it is not a literal. The calculus refuses to combine them.
 
 ## Soundness
 
-A literal $P$ is **valid in** a theory $\Gamma$ when every common eigenvector of $\Gamma$ with eigenvalue $+1$ is a $+1$-eigenvector of $P$. Equivalently: the codespace of $\Gamma$ lies inside the $+1$-eigenspace of $P$. The four rules above are sound for validity in this sense.
+A literal *P* is *valid* in a theory $\Gamma$ when the codespace of $\Gamma$ is contained in the $+1$-eigenspace of *P*. The four rules above preserve validity in this sense, which is the soundness theorem. Proof is a small finite-dimensional linear algebra exercise; it is mechanized at [`../lean/PauliLogic/Soundness.lean`](../lean/PauliLogic/Soundness.lean).
 
-## Cut elimination
+## Cut elimination is the tableau update
 
-Every derivation in $\mathsf{PL}\_{n}$ normalises to a cut-free derivation in linear time. The cut-free derivations of a literal $Q$ from $\Gamma$ are in bijection with **subset-product certificates**: subsets $T \subseteq \{1, \dots, m\}$ (with $m$ the size of $\Gamma$) such that $Q = \prod_{k \in T} \Gamma_k$, the multiplication evaluated in any order with signs tracked by the $i$-exponent.
+Cut elimination is the algorithm `normalize` in [`../haskell/src/PauliLogic.hs`](../haskell/src/PauliLogic.hs). Structurally, it splices the proof of a cut formula in for every reference to it on the right premise, recursively. Each splice is a constant-time tableau row update — multiplying one Pauli word by another. The cost is linear in the proof DAG. This is the proof-theoretic content of Aaronson and Gottesman's $O(n)$ row multiplication. The cut-free derivations of a literal *Q* from $\Gamma$ are exactly the subset-product certificates: subsets $T \subseteq \{1, \dots, |\Gamma|\}$ with $Q = \prod_{k \in T} \Gamma_k$.
 
-The cut-elimination procedure is, literally, the row-multiplication of stabilizer tableau algorithms (Aaronson–Gottesman 2004). Splicing the proof of the cut formula into every reference of it in the right premise is one constant-time tableau update; the total cost is linear in the proof DAG.
+Proof *search* — deciding $\Gamma \vdash Q$ given $\Gamma$ and *Q* — is the row reduction of stabilizer tableaux. Starting from *Q*, multiply by any commuting generator that strictly shrinks the Pauli support; iterate. If *Q* reduces to the identity, you have a subset-product certificate. If it reduces to $-I$, the literal is anti-derivable. This is the $O(n^2)$ step of Aaronson–Gottesman, read as entailment checking.
 
-Tableau reduction in the conventional sense — taking a generating set for a stabilizer group and reducing it to row-echelon form — corresponds to **proof search** in $\mathsf{PL}\_{n}$: starting from a theory, decide whether $\Gamma \vdash Q$ by greedy support-reducing row multiplications. This is the $O(n^2)$ step of the Aaronson–Gottesman algorithm, read as entailment checking.
+## Measurement is an effect
 
-## Measurement
+The only place stabilizer simulation interacts with non-deterministic data is measurement. Measuring a literal *q* against a maximal theory $\Gamma$ proceeds in two cases. If *q* commutes with every generator of $\Gamma$, entailment is decidable: either $\Gamma \vdash q$ (outcome $+$, theory unchanged) or $\Gamma \vdash -q$ (outcome $-$, theory unchanged). The outcome is forced.
 
-Measurement is the only place the logic interacts with non-deterministic data. A literal $q$ is measured against a maximal theory $\Gamma$:
+If *q* anticommutes with at least one generator, the outcome is a coin flip. After the flip, the theory updates: pick any anticommuting generator $g_1$, replace it with $(-1)^r q$ where *r* is the outcome, and multiply every other anticommuting generator by $g_1$ to restore commutativity. The state of the simulator is fully captured by the new theory.
 
-* If $q$ commutes with every generator of $\Gamma$, then $\Gamma \vdash q$ or $\Gamma \vdash -q$ (entailment is decidable); the outcome is deterministic and the theory is unchanged.
-* Otherwise, the outcome is a fair coin flip $r \in \{+, -\}$, and the theory updates: pick any generator $g_1$ anticommuting with $q$, replace it by $(-1)^r q$, and multiply every other anticommuting generator by $g_1$ to restore commutativity.
+In Haskell, the coin flip is the only effect in the simulator. It is exposed as a free monad over a single operation:
+```haskell
+newtype MeasF k = FlipCoin (Bool -> k)
+data Sim a = Pure a | Op (MeasF (Sim a))
+```
+Everything else — derivation normalisation, tableau search, theory update — is pure. A handler `runSim` interprets `FlipCoin` against a seedable LCG; you can swap in any other handler (deterministic, probabilistic, density-matrix) without touching the simulator. This is the Plotkin–Pretnar style of algebraic effects, applied to stabilizer simulation: the simulator is a syntactic constructor, the handler is the destructor, and the categorical semantics is exactly the one Heunen and Karvonen identified in 2015 for quantum measurement as the destructor side of a Frobenius monad.
 
-In Haskell, the coin flip is the **only effect** in the entire stabilizer simulator. It is exposed as a free monad over a single operation `FlipCoin :: (Bool -> k) -> MeasF k`; everything else is pure proof normalisation. See [`../haskell/src/PauliLogic.hs`](../haskell/src/PauliLogic.hs).
+We do not lean on the categorical reading anywhere in the proof. It is the right name for what the Haskell code is doing, and it locates this work inside the Edinburgh–Oxford categorical-QM program; the citation belongs in [`03-logical-lattice.md`](03-logical-lattice.md), where it is sharp.
 
-## What's proved
+## What's here and where
 
-* Syntax, rules, and the soundness theorem — [`../lean/PauliLogic/Syntax.lean`](../lean/PauliLogic/Syntax.lean), `Rules.lean`, `Soundness.lean`.
-* Cut elimination as a total recursive function `normalize`, and the corresponding tableau reduction — [`../lean/PauliLogic/CutElimination.lean`](../lean/PauliLogic/CutElimination.lean) and `Tableau.lean`. The Aaronson–Gottesman tableau-step correspondence (`tableau_step_eq_mul`) is kernel-checked there.
-* The Haskell layer realises the data type, cut elimination, the tableau search, and the measurement effect; running `Main.hs` derives $XX$ from $\{XI, IX\}$, checks the certificate via cut elimination, and runs a small Bell-state measurement sequence.
+Syntax, rules, soundness, the tableau correspondence, and cut elimination as a total recursive function are all in [`../lean/PauliLogic/`](../lean/PauliLogic/). The Aaronson–Gottesman row-multiplication identification `tableau_step_eq_mul` is kernel-checked there. The Haskell library [`../haskell/src/PauliLogic.hs`](../haskell/src/PauliLogic.hs) realises everything as data types and pure functions, plus the measurement free monad and a seedable handler. The demo in `Main.hs` derives $XX$ from $\{XI, IX\}$, runs the certificate through cut elimination, and measures $Z_1$ on the Bell state ten times.
 
-## What is in the literature
+## What's new, what's borrowed
 
-The signed-Pauli / symplectic representation, the row multiplication rule, and the tableau update for measurement are standard (Aaronson–Gottesman 2004; the CHP algorithm). The presentation as a sequent calculus, the cut-elimination theorem (with its identification with tableau reduction at linear cost), and the measurement-as-algebraic-effect reading are this development's contribution. The soundness theorem is stated and proved in this repository.
-
-The arithmetic-side reading — every (Mul) step is one factor of $\varphi$ in the lattice semantics — is the bridge to the grade story of [`06-grade.md`](06-grade.md): a derivation of length $\ell$ in $\mathsf{PL}\_{n}$ corresponds to a coordinate move that loses $\ell$ factors of $\varphi$. This bridge is why the logical-lattice theorem of [`03-logical-lattice.md`](03-logical-lattice.md) supplies the lattice semantics of $\mathsf{PL}\_{n}$, with the denotation of a sequent a containment of constraint sublattices.
+The symplectic representation, the row-multiplication rule, and the stabilizer tableau formalism are Aaronson and Gottesman (2004), with antecedents in Gottesman's thesis. The sequent-calculus presentation, the cut-elimination theorem with its identification as tableau reduction at linear cost, and the measurement-as-algebraic-effect realisation are what we add. The soundness theorem is stated and proved here.

@@ -1,46 +1,53 @@
 # The logical-lattice theorem
 
+This is the centerpiece. It is also the only place in the chapter where we believe the result is unambiguously new.
+
 ## Setup
 
-Let $S = \langle g_1, \dots, g_m\rangle$ be a rank-$m$ stabilizer group on $n$ qubits, with $-I \notin S$. Its **constraint sublattice** is
-
+A stabilizer code on *n* qubits is given by a rank-*m* abelian subgroup $S = \langle g_1, \dots, g_m \rangle$ of the Pauli group, with $-I \notin S$. The codespace is the simultaneous $+1$-eigenspace of the generators. What we want is its intersection with the Barnes–Wall lattice:
 ```math
-\mathrm{BW}_n^S = \{\,v \in \mathrm{BW}_n : g \cdot v = v \text{ for every } g \in S\,\}.
+\mathrm{BW}\_{n}^S = \{\,v \in \mathrm{BW}\_{n} : g \cdot v = v \text{ for every } g \in S\,\}.
 ```
+This is what we call the constraint sublattice — the lattice points that satisfy every stabilizer at once.
 
-Equivalently $\mathrm{BW}\_{n}^S$ is the intersection of $\mathrm{BW}\_{n}$ with the codespace of $S$.
+## The statement
 
-## The theorem
+Pick any Clifford encoder $U$ for $S$, normalized in the lattice-preserving convention of [`01-bw-family.md`](01-bw-family.md) — concretely, $U$ takes $Z_j$ to $g_j$ for each $j \le m$.
 
-Let $U$ be any Clifford encoder for $S$ — that is, $U Z_j U^\dagger = g_j$ for $j \le m$ — in the lattice-preserving normalization. Then
+> **Theorem.** $\mathrm{BW}\_{n}^S = U\bigl((1 + i)^m \,|0\rangle^{\otimes m} \otimes \mathrm{BW}_{n - m}\bigr)$.
 
-```math
-\mathrm{BW}_n^S = U\bigl(\,(1 + i)^m\,|0\rangle^{\otimes m} \otimes \mathrm{BW}_{n - m}\bigr).
-```
+In words: the codespace lattice is an isometric copy of the smaller Barnes–Wall lattice $\mathrm{BW}_{n - m}$, scaled by exactly $(1 + i)^m$, and re-embedded into the ambient $\mathrm{BW}\_{n}$ by the encoder. Imposing $m$ bits of stabilizer classicality costs *exactly* $m$ factors of the lattice's prime above two. Stabilizer codes are Barnes–Wall lattices at a finer scale, sitting inside the big one; the encoder is the lattice isometry that puts them there.
 
-That is: the constraint sublattice is an isometric copy of $\mathrm{BW}\_{n - m}$ scaled by $(1 + i)^m$, embedded back into $\mathrm{BW}\_{n}$ by the encoder.
+The two consequences worth keeping in mind. First, the codespace inherits the same arithmetic as $\mathrm{BW}_{n-m}$ — every theorem about the smaller lattice applies, scaled. Second, and operationally more useful, the closest-point problem on the constraint sublattice reduces, through the isometry $U$ and the similarity $(1 + i)^m$, to ordinary bounded-distance decoding on $\mathrm{BW}_{n - m}$. We use this in [`04-prop-computes.md`](04-prop-computes.md) to give a closest-logical-stabilizer-state algorithm with cost exponential in $n - m$ only.
 
-**One-line consequence.** Imposing one bit of stabilizer classicality costs exactly one factor of $\varphi = 1 + i$. Stabilizer codes are Barnes–Wall lattices at a finer scale, sitting inside the big one; the encoder is a lattice isometry.
+## Proof, in two steps
 
-## Proof outline
+The proof is two steps, both honest constructions over $\mathcal{O}_E$.
 
-The proof has two steps.
+The first step handles the special case where the stabilizer group is principal, $S_0 = \langle Z_1, \dots, Z_m \rangle$. Pick any vector $w \in \mathrm{BW}\_{n}$ and apply the free-module decomposition of [`01-bw-family.md`](01-bw-family.md): write $w = \varphi |0\rangle \otimes a + (|0\rangle + |1\rangle) \otimes b$ with $a, b \in \mathrm{BW}_{n-1}$, uniquely. The condition $(Z \otimes I) w = w$ kills the second summand exactly — the $|1\rangle$-block of $w$ is the second summand evaluated on $|1\rangle$, and forcing $Z = +1$ forces it to vanish, so $b = 0$. The remaining vector is $w = \varphi |0\rangle \otimes a$ with $a \in \mathrm{BW}_{n-1}$ arbitrary. Iterating *m* times pins the first *m* qubits to $|0\rangle$ and accumulates a factor of $\varphi^m$. So $\mathrm{BW}\_{n}^{S_0} = \varphi^m |0\rangle^{\otimes m} \otimes \mathrm{BW}_{n - m}$.
 
-**Step 1 — the pinned case.** Take the principal stabilizer group $S_0 = \langle Z_1, \dots, Z_m\rangle$ and decompose any $w \in \mathrm{BW}\_{n}$ via the free-module decomposition of [`01-bw-family.md`](01-bw-family.md): $w = \varphi |0\rangle \otimes a + (|0\rangle + |1\rangle) \otimes b$ with $a, b \in \mathrm{BW}\_{n - 1}$. The condition $(Z \otimes I) w = w$ forces $b = 0$, so the fixed sublattice is exactly $\varphi |0\rangle \otimes \mathrm{BW}\_{n - 1}$. Iterating pins the first $m$ factors.
+The second step transports this to a general $S$. For any Clifford $U$ in the lattice-preserving normalization, the presentation theorem gives $U\,\mathrm{BW}\_{n} = \mathrm{BW}\_{n}$. Substituting $w = Uv$ in the fixed-point equation $g w = w$ converts the condition for $S$ into the condition for the principal group $S_0$ on $v$. So $\mathrm{BW}\_{n}^S = U(\mathrm{BW}\_{n}^{S_0})$, and step one finishes.
 
-**Step 2 — Clifford transport.** For Clifford $U$ in the lattice-preserving normalization, $U\,\mathrm{BW}\_{n} = \mathrm{BW}\_{n}$ (the presentation theorem of [`02-presentation.md`](02-presentation.md)). Substituting $w = Uv$ converts the fixed-point condition for $S$ into the fixed-point condition for $S_0$ on $v$, so $\mathrm{BW}\_{n}^S = U(\mathrm{BW}\_{n}^{S_0})$. Step 1 finishes.
+Unitarity of $U$ makes the identification an isometry; the scaling $(1 + i)^m$ multiplies all squared norms by $2^m$.
 
-Unitarity of $U$ makes the identification isometric; the scaling factor $(1 + i)^m$ multiplies squared norms by $2^m$.
+## A small example
 
-## What's proved
+To pin the arithmetic down, take *n* = 2 and the stabilizer $S = \langle Z_1 \rangle$. Read off coordinates $w = (a, b, c, d)$ in the basis $|00\rangle, |01\rangle, |10\rangle, |11\rangle$. The theorem says $w \in \mathrm{BW}_2^{\langle Z_1 \rangle}$ iff two things hold. First, $c = d = 0$ — the $|1\rangle_1$-block vanishes, because that is what $Z_1 = +1$ enforces. Second, the surviving pair $(a, b)$ is $\varphi$ times something in $\mathrm{BW}_1$; concretely, $(a, b) = \varphi(a', b')$ for some $(a', b') \in \mathrm{BW}_1$, i.e. with $a' + b'$ divisible by $\varphi$. So the one constraint $Z_1 = +1$ costs exactly one factor of $\varphi$. No more, no less.
 
-* The pinned case $m = 1$ and the free-module decomposition that drives it: [`../lean/BarnesWall/BWFreeModule.lean`](../lean/BarnesWall/BWFreeModule.lean) (`freeModuleDecomp`, `pinned_one`).
-* The Bell-theory case ($m = n = 2$), with the minimal-vector classification: [`../lean/BarnesWall/BWFreeModule.lean`](../lean/BarnesWall/BWFreeModule.lean) (`bell_theory`, `bell_minimal_iff`).
-* The Clifford-transport step **at the chapter's headline cases $n = 2$ and $n = 3$**, by direct computation: [`../lean/LogicalLatticeTransport/`](../lean/LogicalLatticeTransport/). See [`07-r11-transport.md`](07-r11-transport.md) for what is verified there.
-* A Haskell realisation of the eleven two-qubit Clifford generators and the spanning-set preservation test: [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs).
+The Bell-theory case $S = \langle Z_1 Z_2, X_1 X_2 \rangle$ at *n* = *m* = 2 is the maximal-rank case: the codespace lattice is rank one, generated by a single scaled Bell vector $\varphi^2 \cdot (|00\rangle + |11\rangle)$, with $\mathbb{Z}[i]$ as its coefficient ring. The four minimal vectors of this constraint sublattice are the eighth-root multiples of the scaled Bell vector — exactly the four logical stabilizer states of the Bell code, scaled into the lattice.
 
-## What is in the literature
+## A categorical reading of the cost
 
-The kissing-number identification (the minimal vectors of $\mathrm{BW}\_{n}$ are the scaled stabilizer states) is Kliuchnikov–Schönnenbeck 2024, Theorem 3.4. The rectangular characterization of Clifford operators as lattice automorphisms is also theirs, Theorem 4.3.
+There is one place where this connects cleanly to existing categorical-quantum-mechanics work. Coecke–Pavlović–Vicary identified orthonormal bases with commutative special $\dagger$-Frobenius monoids in $\mathbf{FdHilb}$. The Z-basis on a single qubit is one such monoid. Heunen and Karvonen (2015) take the next step: the Frobenius monoid generates a Frobenius monad $T(-) = (-) \otimes B$ on $\mathbf{FdHilb}$, and the algebras of this monad (compatibly with the Frobenius structure — the so-called FEM-algebras) are exactly the Coecke–Pavlović measurements satisfying von Neumann's repeatability axiom. The analogy made explicit in their §7 is that an FEM-algebra is the categorical handler of a Frobenius effect, the way an exception-monad algebra is the handler of an exception.
 
-The theorem above is stated and proved in this repository in **code form**: it identifies the codespace lattice as a scaled copy of the inner Barnes–Wall lattice, rather than as the image of an isometry. The two statements are equivalent up to the encoder isometry, but the code form is the one consumed by the logical-decoding corollary of [`04-prop-computes.md`](04-prop-computes.md) and by the lattice semantics of the Pauli logic in [`05-pauli-logic.md`](05-pauli-logic.md).
+Heunen and Karvonen give the categorical existence of these handlers. They say nothing about cost. The logical-lattice theorem, restricted to the case $S = \langle Z_1 \rangle$, is the cost statement: one Z-postselect handler invocation costs exactly $\varphi$ in the lattice's prime above two. Iterating, $m$ commuting Z-postselect invocations cost $\varphi^m$. The arithmetic refines the categorical picture by saying which prime is being paid, and how many times.
+
+This is a single connection at one point. We do not believe it extends to the Pauli logic in [`05-pauli-logic.md`](05-pauli-logic.md) (whose multiplication rule is the Pauli group product, not a Frobenius monoid multiplication), or to the grade in [`06-grade.md`](06-grade.md) (which is a $\lambda$-adic valuation, not a Frobenius-monad invariant). The logical-lattice theorem is where the categorical-QM tradition and the lattice-arithmetic tradition meet sharply, and the next document picks up the operational consequence.
+
+## What's here and where
+
+The pinned case at $m = 1$ and the free-module decomposition that powers it are kernel-checked in [`../lean/BarnesWall/BWFreeModule.lean`](../lean/BarnesWall/BWFreeModule.lean). The Bell-theory case at *m* = *n* = 2 is there too, with the four minimal vectors classified. The Clifford-transport step — step two of the proof — is closed by direct computation at *n* = 2 and *n* = 3 in [`../lean/LogicalLatticeTransport/`](../lean/LogicalLatticeTransport/); see [`07-r11-transport.md`](07-r11-transport.md) for what is checked there. A Haskell realisation of the eleven two-qubit Clifford generators and the $\mathrm{BW}_2$-preservation test sits in [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs).
+
+## What's new, what's borrowed
+
+The kissing-number identification of $\mathrm{BW}\_{n}$'s minimal vectors with stabilizer states is Kliuchnikov–Schönnenbeck 2024, Theorem 3.4. The rectangular characterization of Clifford-as-lattice-automorphism is theirs as well, Theorem 4.3. The theorem above is what we add: the *code form* of the same arithmetic, identifying the codespace lattice as a scaled copy of the inner Barnes–Wall lattice. The two statements are equivalent up to the encoder isometry, but the code form is what the next two documents consume.

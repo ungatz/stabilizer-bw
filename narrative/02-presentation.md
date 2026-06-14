@@ -1,36 +1,15 @@
 # The presentation theorem
 
-## Three views of the Clifford group
+There are three ways to specify the Clifford fragment of quantum computing, and they were not invented to talk to each other.
 
-The Clifford fragment of quantum computing admits three distinct presentations.
+Selinger specifies it as a circuit calculus. There is a list of generators — Hadamard, phase gate, controlled-NOT — and a list of equational relations on circuit words, complete enough to derive every Clifford identity. This is a programmer's specification: gates that compose, relations that rewrite. Backens specifies it graphically. The generators are spiders of the ZX-calculus, and the stabilizer fragment is complete for Clifford circuits up to global phase. This is a diagram-rewriter's specification: pictures that compose, identities that are visible. Kliuchnikov and Schönnenbeck specify it arithmetically. A unitary on $(\mathbb{C}^2)^{\otimes n}$ preserves the Barnes–Wall lattice if and only if it is Clifford, up to phase. This is the lattice theorist's specification, and it is the one we want, because it has *coordinates* — concrete integers that the lattice can check.
 
-**Circuits and relations** (Selinger 2015). Generators $S, \tilde H, \mathrm{CNOT}$ with an explicit finite list of relations between gate words; every Clifford circuit identity is derivable in this calculus.
+The presentation theorem is the assembly. It says all three specifications produce the same object, viewed correctly, and the correct view is as a *prop* — a strict symmetric monoidal category whose objects are natural numbers and whose tensor is concatenation, with no coherence isomorphisms to chase. Concretely, define $\mathfrak{BW}$ to be the symmetric monoidal groupoid with objects the natural numbers (standing for $\mathrm{BW}\_{n}$), morphisms the unitaries $U$ on $(\mathbb{C}^2)^{\otimes n}$ satisfying $U\,\mathrm{BW}\_{n} = \mathrm{BW}\_{n}$, and tensor product on the nose, inherited from the strict tensor structure of the lattice itself.
 
-**Graphical calculus** (Backens 2014). Generators are spiders in the ZX-calculus; the stabilizer fragment is complete for Clifford up to global phase.
+The theorem says the following three statements hold simultaneously. The first: the objects of $\mathfrak{BW}$ in degree *n* are exactly the rank-$2^n$ unitaries preserving the lattice — which is Kliuchnikov–Schönnenbeck's content. The second: Selinger's relations on $\{S, \tilde H, \mathrm{CNOT}\}$ are exactly the equations between morphism words in $\mathfrak{BW}$, with no overhead. The third: the stabilizer fragment of the ZX-calculus, interpreted in $\mathfrak{BW}$, is sound and complete.
 
-**Lattice automorphisms** (Kliuchnikov–Schönnenbeck 2024). The unitary $U$ on $(\mathbb{C}^2)^{\otimes n}$ satisfies $U\,\mathrm{BW}\_{n} = \mathrm{BW}\_{n}$ if and only if $U$ is a Clifford operator times a phase.
+We do not pretend the theorem is hard. Each of the three identifications is essentially already done elsewhere — the Lambek correspondence between syntax (Selinger), pictures (Backens), and semantics (the lattice) is what each side has been doing on its own. What is genuinely useful is the *strict* qualifier. A prop where relations hold up to coherence carries hidden bookkeeping in every composition; a prop where relations hold strictly carries none. Because the Barnes–Wall tensor is strict, our prop is strict, and the relations from Selinger lift on the nose. This is what lets the decoder recursion in [`04-prop-computes.md`](04-prop-computes.md) go through without an associator chase, and what lets the cut elimination in [`05-pauli-logic.md`](05-pauli-logic.md) be linear in proof size.
 
-The presentation theorem says: when one normalises so that all three are strict symmetric monoidal categories with natural-number objects, they all present the same object — a single prop $\mathfrak{BW}$.
+The single-qubit case sits at the bottom of the formalisation. The Lean source [`../lean/BarnesWall/BarnesWall.lean`](../lean/BarnesWall/BarnesWall.lean) checks that the Clifford generators preserve $\mathrm{BW}_1$ and that the orbit of $\varphi^n|0\rangle$ has the right 24 vectors. The Haskell module [`../haskell/src/Prop.hs`](../haskell/src/Prop.hs) realises the generators as `Tree GI -> Tree GI` actions and walks the Clifford orbit at *n* = 1, 2, 3 to recover the kissing numbers $24, 240, 4320$ as a sanity check. The minimal-vector counts factor exactly as $|\mathrm{Stab}\_{n}| \cdot |\langle i \rangle|$, which is the arithmetic shadow of "the points of $\mathrm{BW}\_{n}$ are the stabilizer states with the eighth-root phases dressed back on."
 
-## The prop $\mathfrak{BW}$
-
-Define $\mathfrak{BW}$ as the symmetric monoidal groupoid whose objects are natural numbers $n$ (standing for $\mathrm{BW}\_{n}$), whose morphisms $n \to n$ are the unitaries $U$ on $(\mathbb{C}^2)^{\otimes n}$ with $U\,\mathrm{BW}\_{n} = \mathrm{BW}\_{n}$, and whose monoidal product is the tensor product of operators. Strictness comes for free from the tensor-on-the-nose structure of the lattice itself (see [`01-bw-family.md`](01-bw-family.md)).
-
-## What the theorem says
-
-The presentation theorem is the statement that the following three identifications hold simultaneously:
-
-1. The objects of $\mathfrak{BW}$ in degree $n$ are exactly the rank-$2^n$ unitaries preserving $\mathrm{BW}\_{n}$.
-2. Selinger's relations on $\{S, \tilde H, \mathrm{CNOT}\}$ are precisely the equations between morphism words in $\mathfrak{BW}$.
-3. The ZX-calculus's stabilizer fragment, interpreted in $\mathfrak{BW}$, is sound and complete.
-
-Strict monoidal structure means no associator paths to chase: a program against the Clifford interface runs against the lattice without any coherence bookkeeping. Downstream sections rely on this absence: the decoder recursion in [`04-prop-computes.md`](04-prop-computes.md) and the cut-elimination algorithm in [`05-pauli-logic.md`](05-pauli-logic.md) both consume strict tensor.
-
-## What's proved
-
-* The Clifford generators act on the coordinate tree representation of $\mathrm{BW}\_{n}$, and the $n = 1$ orbit of $\varphi^n|0\rangle$ has 24 elements (the lattice's kissing-number 24 minimal vectors) — kernel-checked in [`../lean/BarnesWall/BarnesWall.lean`](../lean/BarnesWall/BarnesWall.lean) with documented exceptions for the finite enumerations.
-* The generators are implemented as `Tree GI -> Tree GI` actions in [`../haskell/src/Prop.hs`](../haskell/src/Prop.hs); the orbit-enumeration function `minimalVectors` returns $24, 240, 4320$ at $n = 1, 2, 3$.
-
-## What is in the literature
-
-The three pieces — circuits (Selinger), graphics (Backens, Jeandel–Perdrix–Vilmart), lattice (Kliuchnikov–Schönnenbeck) — are each due to their authors. The assembly into a single prop with strict structure is the contribution here: there is no new hard mathematics in the theorem, but the assembly is what lets the downstream constructions (logical-lattice, prop-computes, Pauli logic) cash the categorical vocabulary as concrete computation.
+The genuine contribution of this assembly is what the lattice corner brings that the other two do not have: a *graded* model, where subobjects can be priced by lattice divisibility. The two-and-three-qubit dictionaries in the Lean and Haskell sources are concrete; the graded reading of stabilizer codes is the content of the next document.

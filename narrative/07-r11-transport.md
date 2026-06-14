@@ -1,72 +1,45 @@
-# Direct closure of the transport step at $n = 2$ and $n = 3$
+# Closing the transport step directly at *n* = 2 and *n* = 3
 
-## The gap this closes
+The logical-lattice theorem of [`03-logical-lattice.md`](03-logical-lattice.md) has a two-step proof. Step one handles the principal case by free-module decomposition; step two transports to general stabilizer groups by Clifford conjugation. The second step relies on a single external input: every Clifford operator, in the lattice-preserving normalization, maps $\mathrm{BW}\_{n}$ to itself. We cite Kliuchnikov–Schönnenbeck for this fact at general *n*.
 
-The logical-lattice theorem of [`03-logical-lattice.md`](03-logical-lattice.md) has a two-step proof: the pinned case (free-module decomposition) and the Clifford transport step. The transport step relies on the fact that every Clifford operator in the lattice-preserving normalisation maps $\mathrm{BW}\_{n}$ to itself. For general $n$ this is cited from Kliuchnikov–Schönnenbeck 2024, Theorem 4.3.
+This document records that the Kliuchnikov–Schönnenbeck citation can be removed at *n* = 2 and *n* = 3 — the two cases where every theorem in the chapter is exhibited concretely — by direct kernel computation. At these two cases the logical-lattice theorem is therefore kernel-proved with no external dependency for the lattice-automorphism input.
 
-This document records the direct closure of the transport step at $n = 2$ and $n = 3$, by kernel computation, without invoking the cited theorem. The logical-lattice theorem is therefore kernel-proved at its two headline cases with no external dependency for the lattice-automorphism input.
+## Two qubits
 
-## What is checked
+At *n* = 2, eleven generators suffice for the Clifford group: the four Pauli generators $Z_1, Z_2, X_1, X_2$, the two phase gates $S_1, S_2$, both CNOTs $\mathrm{CNOT}_{1,2}$ and $\mathrm{CNOT}_{2,1}$, the controlled-$Z$, and both Hadamards $\mathrm{Had}_1, \mathrm{Had}_2$. We check that each preserves $\mathrm{BW}_2$ as a set.
 
-**At $n = 2$.** Each of the eleven generators
+The check rests on an explicit characterisation of $\mathrm{BW}_2$ in coordinates: a vector $(a, b, c, d) \in \mathbb{Z}[i]^4$ lies in $\mathrm{BW}_2$ if and only if $(1+i) \mid a + b$, $(1+i) \mid c + d$, and $(1+i)^2 \mid (a + b) - (c + d)$. The first two conditions are the free-module decomposition applied to the two halves; the third comes from the recursive step at the outer level. The Lean lemma `inBW2_iff` proves the characterisation, and then `Z1_preserves_BW2` through `Had2_preserves_BW2` apply it to each generator.
 
+A small numerical experiment lives in [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs). It works with the explicit $\mathbb{Z}[i]$-basis $\{v_0, v_1, v_2, v_3\}$ of $\mathrm{BW}_2$ — the four columns of $B^{\otimes 2}$, which are the four scaled basis vectors $\varphi^2|00\rangle$, $\varphi(|0\rangle \otimes (|0\rangle + |1\rangle))$, $\varphi((|0\rangle + |1\rangle) \otimes |0\rangle)$, and $(|0\rangle + |1\rangle)^{\otimes 2}$ — and checks that each named generator preserves all four basis vectors. The Haskell demo in `Main.hs` prints "True" for all eleven.
+
+## Three qubits
+
+At *n* = 3 the analogous fourteen-generator set $\{H_i, S_i, Z_i, \mathrm{CNOT}_{1,2}, \mathrm{CNOT}_{1,3}, \mathrm{CNOT}_{2,3}\}$ preserves $\mathrm{BW}_3$. The proof is by structural lemmas at $\mathrm{BW}_{n+1}$ — lifting a one-qubit generator at depth $n$ to depth $n + 1$, pinning the Z-block, swapping the two children of the outer node, and the outer-level Hadamard and S — together with the witness identity $v - X_i v \in (1+i) \cdot \mathrm{BW}_2$ for $i \in \{1, 2\}$, which is what the recursive coordinate condition demands. Along the way, $\mathrm{BW}\_{n}$ is verified to be an additive subgroup at every *n*: closed under addition, negation, and subtraction.
+
+## Two named consequences
+
+The two concrete transport identities the rest of the chapter relies on are now derived. First,
 ```math
-\{Z_1, Z_2, X_1, X_2, S_1, S_2, \mathrm{CNOT}_{1,2}, \mathrm{CNOT}_{2,1}, CZ, \mathrm{Had}_1, \mathrm{Had}_2\}
+\mathrm{BW}_2^{\langle ZZ \rangle} = \mathrm{CNOT}_{2,1}\bigl(\mathrm{BW}_2^{\langle Z_1 \rangle}\bigr),
 ```
-
-is shown to preserve $\mathrm{BW}\_{2}$. The proof is by direct computation against the explicit characterisation
-
+which is the Bell-theory case stated against the pinned theory. Second, the *n* = 3 analogue,
 ```math
-(a, b, c, d) \in \mathrm{BW}_2 \iff (1+i) \mid a + b, \ (1+i) \mid c + d, \ \text{and}\ (1+i)^2 \mid (a + b) - (c + d),
+\mathrm{BW}_3^{\langle Z_1 Z_2 \rangle} = \mathrm{CNOT}_{1,2}\bigl(\mathrm{BW}_3^{\langle Z_2 \rangle}\bigr),
 ```
+which is the repetition-code identity. A cross-check `bell_minimal_via_transport` reproduces the four Bell minimal vectors of $\mathrm{BW}_2^{\langle ZZ, XX \rangle}$ through the transport identification.
 
-which is itself a one-line consequence of the free-module decomposition. The corresponding Lean lemmas are `inBW2_iff`, `Z1_preserves_BW2`, …, `Had2_preserves_BW2`. The abstract transport theorem `transport_general` composes them.
+## The Hadamard convention, made explicit
 
-**At $n = 3$.** The analogous fourteen-generator set
-
-```math
-\{H_i, S_i, Z_i, \mathrm{CNOT}_{1,2}, \mathrm{CNOT}_{1,3}, \mathrm{CNOT}_{2,3}\}\quad i \in \{1, 2, 3\}
-```
-
-is shown to preserve $\mathrm{BW}\_{3}$, via structural preservation lemmas at $\mathrm{BW}\_{n+1}$ (`lift23_preserves`, `pinZ_preserves`, `swapBlocks_preserves`, `hadOuter_preserves`, `sgateOuter_preserves`) and the witness identity $v - X_i \cdot v \in (1+i) \cdot \mathrm{BW}\_{2}$ for $i \in \{1, 2\}$.
-
-**Subgroup closure at every $n$.** Along the way, $\mathrm{BW}\_{n}$ is verified to be an additive subgroup at every $n$: `InBWn_add`, `InBWn_neg`, `InBWn_sub`.
-
-**Concrete instances.** The chapter's two named transport identities are now kernel-derived:
-
-```math
-\mathrm{BW}_2^{\langle ZZ\rangle} = \mathrm{CNOT}_{2,1}\bigl(\mathrm{BW}_2^{\langle Z_1\rangle}\bigr) \quad (\texttt{ZZ\_lattice\_eq\_transport}),
-```
-
-```math
-\mathrm{BW}_3^{\langle Z_1 Z_2\rangle} = \mathrm{CNOT}_{1,2}\bigl(\mathrm{BW}_3^{\langle Z_2\rangle}\bigr) \quad (\texttt{repetition\_code\_transport}),
-```
-
-plus the cross-check `bell_minimal_via_transport`, which reproduces the four Bell-state minimal vectors of $\mathrm{BW}\_{2}^{\langle ZZ, XX\rangle}$ through the transport identification.
-
-## The Hadamard convention
-
-A modelling note kept honest. The genuine $1/\sqrt 2$ Hadamard
-
+A modelling note worth flagging. The genuine $1/\sqrt 2$ Hadamard
 ```math
 H = \tfrac{1}{\sqrt 2}\begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix}
 ```
-
-is not representable as a lattice map over $\mathbb{Z}[i]$: it has irrational entries. The kernel and the Haskell implementation use the $\sqrt 2$-scaled integer lift
-
+has irrational entries and is not a lattice map over $\mathbb{Z}[i]$. The kernel and the Haskell implementation use the $\sqrt 2$-scaled integer lift
 ```math
 \tilde H_{\mathbb{Z}} = \begin{pmatrix}1 & 1\\ 1 & -1\end{pmatrix},
 ```
-
-which preserves the Barnes–Wall lattice as a set (and is what the transport step needs). The phase is absorbed in the unit prefactor of the minimal-vector formula. Pauli, $S$, $\mathrm{CNOT}$, and $CZ$ are honest $\mathbb{Z}[i]$-unitaries and exact lattice automorphisms. The genuine $1/\sqrt 2$ Hadamard requires the larger ring $\mathbb{Z}[\zeta_8] = \mathbb{Z}[\sqrt 2, i]$, which is also why the general-$n$ statement of the transport step (for $n \ge 4$) continues to cite Kliuchnikov–Schönnenbeck.
-
-## What's proved
-
-* Generator-by-generator preservation at $n = 2$ — [`../lean/LogicalLatticeTransport/BW2Transport.lean`](../lean/LogicalLatticeTransport/BW2Transport.lean).
-* Generator-by-generator preservation at $n = 3$ — [`../lean/LogicalLatticeTransport/BW3Transport.lean`](../lean/LogicalLatticeTransport/BW3Transport.lean).
-* The abstract `transport_general` theorem composing these — [`../lean/LogicalLatticeTransport/LogicalLatticeTransport.lean`](../lean/LogicalLatticeTransport/LogicalLatticeTransport.lean).
-* The Haskell layer reproduces the same check on the explicit four-element $\mathbb{Z}[i]$-basis of $\mathrm{BW}\_{2}$: `preservesBW2` returns true for every member of `twoQubitGenerators`. See [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs).
+which sends $\mathrm{BW}\_{n}$ into itself (as a set, up to a uniform rescaling that does not affect lattice membership). The Pauli gates, *S*, $\mathrm{CNOT}$, and $CZ$ are honest $\mathbb{Z}[i]$-unitaries and exact lattice automorphisms. The genuine $1/\sqrt 2$ Hadamard requires the larger ring $\mathbb{Z}[\zeta_8] = \mathbb{Z}[\sqrt 2, i]$, which is also why the general-*n* statement of the transport step at $n \ge 4$ continues to cite Kliuchnikov–Schönnenbeck.
 
 ## What this does not close
 
-The transport step at $n \ge 4$ continues to use Kliuchnikov–Schönnenbeck for the lattice-automorphism input. The reason is structural: the genuine Hadamard needs $\mathbb{Z}[\zeta_8]$, not $\mathbb{Z}[i]$, and the present development's small-$n$ computations are over the smaller ring. Lifting to general $n$ requires either porting the entire computation to $\mathbb{Z}[\zeta_8]$ (a substantial extension) or replacing the integer-Hadamard convention with the genuine one, where the lattice argument is already in the literature. Neither is in scope here.
+The transport step at $n \ge 4$ still uses the external citation for the lattice-automorphism input. Closing that would require either porting the entire computation to $\mathbb{Z}[\zeta_8]$ — a substantial extension that would generalize a lot more than just transport — or replacing the integer-Hadamard convention with the genuine one, at which point the lattice argument is already in the literature. Neither extension is in scope here.
