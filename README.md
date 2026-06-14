@@ -18,7 +18,6 @@ Read [`narrative/00-overview.md`](narrative/00-overview.md) first. It is a singl
 | [`narrative/05-pauli-logic.md`](narrative/05-pauli-logic.md) | A sequent calculus for stabilizer entailment; cut elimination as tableau update |
 | [`narrative/06-grade.md`](narrative/06-grade.md) | A $\lambda$-adic grade on Clifford+$T$ operators |
 | [`narrative/07-transport.md`](narrative/07-transport.md) | Direct closure of the Clifford-transport step at $n = 2, 3$ |
-| [`narrative/08-genealogy.md`](narrative/08-genealogy.md) | The long view: how three independent traditions converged on one lattice |
 | [`narrative/references.md`](narrative/references.md) | Literature pointers used in the prose |
 
 ## Running things
@@ -74,7 +73,6 @@ stabilizer-bw/
     ├── 05-pauli-logic.md
     ├── 06-grade.md
     ├── 07--transport.md
-    ├── 08-genealogy.md
     └── references.md
 ```
 
