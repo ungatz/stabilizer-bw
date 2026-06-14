@@ -1,0 +1,16 @@
+# Haskell build artefacts
+*.hi
+*.o
+haskell/stab-bw
+
+# Lean build artefacts
+.lake/
+build/
+lake-packages/
+lakefile.olean
+
+# Editor / OS
+*.swp
+*.bak
+.DS_Store
+*~
