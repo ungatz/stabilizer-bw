@@ -24,7 +24,7 @@ The fifth is a sequent calculus, $\mathsf{PL}\_{n}$, whose literals are signed P
 
 The sixth is the one quantitative refinement worth carrying across to Clifford+*T*. There is a $\lambda$-adic valuation on diagonal characters of the level-*n* Barnes–Wall lattice, with $\lambda = 1 - \zeta_8$ the ramified prime above two in $\mathbb{Z}[\zeta_8]$. We call it the grade. It vanishes on Clifford and is at least one on every *T* gate, so it is a certified *T*-count floor; it has an explicit closed form $\max(0, 2d - 2^{\nu_2(c)})$ for single-monomial characters, where *d* is the support size and $\nu_2(c)$ the 2-adic valuation of the eighth-root coefficient. See [`06-grade.md`](06-grade.md).
 
-The seventh is bookkeeping that turns out to matter. The Clifford-transport step in the proof of the logical-lattice theorem cites Kliuchnikov–Schönnenbeck for general *n*. We close it directly, by kernel computation, at *n* = 2 and *n* = 3. See [`07-r11-transport.md`](07-r11-transport.md).
+The seventh is bookkeeping that turns out to matter. The Clifford-transport step in the proof of the logical-lattice theorem cites Kliuchnikov–Schönnenbeck for general *n*. We close it directly, by kernel computation, at *n* = 2 and *n* = 3. See [`07-transport.md`](07-transport.md).
 
 What is new versus what is in the literature, in a sentence: the lattice tower, its free-module decomposition, the kissing-number identification with stabilizer counts, and the Clifford-as-lattice-automorphism theorem are in the literature. The presentation theorem (as an assembly), the logical-lattice theorem, the decoder-as-recursion-scheme reading, the Pauli-logic calculus with cut-elimination-as-tableau, the $\lambda$-adic grade, and the small-*n* direct closure are stated and proved here.
 

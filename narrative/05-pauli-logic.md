@@ -14,9 +14,11 @@ The axiom rule says $\Gamma \vdash \Gamma_k$ for every index *k*: each element o
 
 The commutativity side condition in multiplication is not optional. The product of two anticommuting Hermitian Pauli words is anti-Hermitian (it carries an *i*), so it is not a literal. The calculus refuses to combine them.
 
-## Soundness
+## Soundness and completeness
 
-A literal *P* is *valid* in a theory $\Gamma$ when the codespace of $\Gamma$ is contained in the $+1$-eigenspace of *P*. The four rules above preserve validity in this sense, which is the soundness theorem. Proof is a small finite-dimensional linear algebra exercise; it is mechanized at [`../lean/PauliLogic/Soundness.lean`](../lean/PauliLogic/Soundness.lean).
+A literal *P* is *valid* in a theory $\Gamma$ when the codespace of $\Gamma$ is contained in the $+1$-eigenspace of *P*. The four rules above preserve validity in this sense, which is the soundness theorem. Proof is a small finite-dimensional linear algebra exercise; it is mechanized at [`../lean/StabilizerBW/PauliLogic/Soundness.lean`](../lean/StabilizerBW/PauliLogic/Soundness.lean).
+
+The converse — every valid literal is derivable — is a trace identity. The averaged operator $\sum_a \mathrm{pauliAction}(\mathrm{gen}\,\Gamma\,a)$ over signed subset products of the generators has nonzero basis trace whenever $-I \notin \langle\Gamma\rangle$, which is exactly the consistency hypothesis. When $\Gamma \vdash P$ is valid, the codespace projector is fixed by $P$, so taking traces of $P \cdot \mathrm{stabSum} = \mathrm{stabSum}$ forces $P \in \langle\Gamma\rangle$ — that is exactly derivability. The argument is in [`../lean/StabilizerBW/PauliLogic/Completeness.lean`](../lean/StabilizerBW/PauliLogic/Completeness.lean).
 
 ## Cut elimination is the tableau update
 
@@ -39,10 +41,14 @@ Everything else — derivation normalisation, tableau search, theory update — 
 
 We do not lean on the categorical reading anywhere in the proof. It is the right name for what the Haskell code is doing, and it locates this work inside the Edinburgh–Oxford categorical-QM program; the citation belongs in [`03-logical-lattice.md`](03-logical-lattice.md), where it is sharp.
 
+## A categorical reading
+
+The Lambek third of the Curry–Howard–Lambek correspondence asks for a category whose morphisms are the proofs. For $\mathsf{PL}_n$ this is $\mathrm{Cat}_{\mathsf{PL}_n}$: objects are stabilizer theories and morphisms are equivalence classes of derivations modulo cut. The category is a thin groupoid; the dagger sends a derivation of $\Gamma \vdash P$ to one of $P \vdash \Gamma$ by reversing the tableau steps; every morphism is unitary. Because the order-dependent $i$-phase changes the sign of a Pauli product, $\mathrm{Cat}_{\mathsf{PL}_n}$ is *not* monoidal up to stabilizer equivalence on the nose; the honest dagger compact closed structure lives on the symplectic strictification $\mathrm{SymCat}_{\mathsf{PL}_n}$, where signs are quotiented out and the tensor is XOR of the $\mathbb{F}_2$-coordinates. An interpretation functor takes a theory to its stabilizer codespace, and a Selinger-2011-style universality theorem says a morphism exists in $\mathrm{Cat}_{\mathsf{PL}_n}$ exactly when the two objects receive the same interpretation. The categorical content is in [`../lean/StabilizerBW/PauliLogic/Categorical/`](../lean/StabilizerBW/PauliLogic/Categorical/). The comparison with Backens 2014 — that the stabilizer-fragment of the ZX-calculus equals $\mathrm{Cat}_{\mathsf{PL}_n}$ as dagger compact closed categories — is stated cleanly there, with the ZX side carried as an explicit hypothesis (because the stabilizer ZX-calculus has not been formalised in Lean) and witnessed satisfiable by the interpretation functor itself.
+
 ## What's here and where
 
-Syntax, rules, soundness, the tableau correspondence, and cut elimination as a total recursive function are all in [`../lean/PauliLogic/`](../lean/PauliLogic/). The Aaronson–Gottesman row-multiplication identification `tableau_step_eq_mul` is kernel-checked there. The Haskell library [`../haskell/src/PauliLogic.hs`](../haskell/src/PauliLogic.hs) realises everything as data types and pure functions, plus the measurement free monad and a seedable handler. The demo in `Main.hs` derives $XX$ from $\{XI, IX\}$, runs the certificate through cut elimination, and measures $Z_1$ on the Bell state ten times.
+Syntax, rules, soundness, completeness, the tableau correspondence, cut elimination as a total recursive function, and the categorical reading are all in [`../lean/StabilizerBW/PauliLogic/`](../lean/StabilizerBW/PauliLogic/). The Aaronson–Gottesman row-multiplication identification `tableau_step_eq_mul` is kernel-checked there. The Haskell library [`../haskell/src/PauliLogic.hs`](../haskell/src/PauliLogic.hs) realises everything as data types and pure functions, plus the measurement free monad and a seedable handler. The demo in `Main.hs` derives $XX$ from $\{XI, IX\}$, runs the certificate through cut elimination, and measures $Z_1$ on the Bell state ten times.
 
 ## What's new, what's borrowed
 
-The symplectic representation, the row-multiplication rule, and the stabilizer tableau formalism are Aaronson and Gottesman (2004), with antecedents in Gottesman's thesis. The sequent-calculus presentation, the cut-elimination theorem with its identification as tableau reduction at linear cost, and the measurement-as-algebraic-effect realisation are what we add. The soundness theorem is stated and proved here.
+The symplectic representation, the row-multiplication rule, and the stabilizer tableau formalism are Aaronson and Gottesman (2004), with antecedents in Gottesman's thesis. The sequent-calculus presentation, the cut-elimination theorem with its identification as tableau reduction at linear cost, the measurement-as-algebraic-effect realisation, the trace-identity completeness proof, and the dagger compact closed categorical reading are what we add. Soundness and completeness are stated and proved here.

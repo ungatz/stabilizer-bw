@@ -38,7 +38,7 @@ Combine the decoder with the logical-lattice theorem of [`03-logical-lattice.md`
 
 ## What's here and where
 
-The Lean side is in [`../lean/Decoder/`](../lean/Decoder/) — the base case $n = 1$, the four-candidate reconciliation, the threshold and uniqueness arguments, the fidelity bridge, and the logical-decoding corollary. The Haskell side is the two-function `Decoder` module and the `Fidelity` module that wraps it.
+The Lean side is in [`../lean/StabilizerBW/`](../lean/StabilizerBW/) — the base case $n = 1$, the four-candidate reconciliation, the threshold and uniqueness arguments, the fidelity bridge, and the logical-decoding corollary. The Haskell side is the two-function `Decoder` module and the `Fidelity` module that wraps it.
 
 ## What's new, what's borrowed
 

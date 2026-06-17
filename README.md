@@ -35,7 +35,7 @@ The Lean 4 sources live in [`lean/`](lean/) organised by topic.
 
 In the literature: the Barnes–Wall lattice and its free-module decomposition (Barnes and Wall 1959; Forest, Gosset, Kliuchnikov, McKinnon 2015); the Clifford-as-lattice-automorphism identification (Kliuchnikov and Schönnenbeck 2024); the bounded-distance decoder (Micciancio and Nicolosi 2008); the stabilizer tableau formalism (Aaronson and Gottesman 2004); the standard equational theories of the Clifford fragment (Selinger 2015; Backens 2014).
 
-Contributed here: the presentation theorem as an assembly into a single strict-monoidal prop; the logical-lattice theorem identifying stabilizer codespaces as scaled Barnes–Wall lattices; the reading of the Micciancio–Nicolosi decoder as a hylomorphism, with equivariance as a free theorem; the sequent calculus $\mathsf{PL}_n$ with cut elimination as the tableau update; the $\lambda$-adic grade with its closed-form upper bound and certified $T$-count floor; the direct closure of the Clifford-transport step at the headline cases $n = 2$ and $n = 3$. Each contribution is documented at its own narrative file, with the Lean source for the proof and the Haskell module for the computation cross-referenced.
+Contributed here: the presentation theorem as an assembly into a single strict-monoidal prop; the logical-lattice theorem identifying stabilizer codespaces as scaled Barnes–Wall lattices; the reading of the Micciancio–Nicolosi decoder as a hylomorphism, with equivariance as a free theorem; the sequent calculus $\mathsf{PL}_n$ with soundness, cut elimination as the tableau update, a trace-identity completeness theorem, and a dagger compact closed categorical reading; the $\lambda$-adic grade with its closed-form upper bound, certified $T$-count floor, multi-monomial Möbius closed form, and the closed-form $G_m(z) = 8 \cdot 4^m \cdot (1+z)^m$ on linear phases; a Reed–Muller-based Barnes–Wall CSS family that recovers that same enumerator on its weight side; the direct closure of the Clifford-transport step at the headline cases $n = 2$ and $n = 3$; and the one-qubit unitary $\mathrm{Aut}(L_3)$ converse over $\mathbb{Z}[\zeta_8]$, with a denominator-change companion that restores the full single-qubit Clifford count of 24. Each contribution is documented at its own narrative file, with the Lean source for the proof and the Haskell module for the computation cross-referenced.
 
 ## Layout
 
@@ -58,12 +58,19 @@ stabilizer-bw/
 │       └── Transport.hs
 ├── lean/
 │   ├── README.md
-│   ├── BarnesWall/
-│   ├── Stabilizer/
-│   ├── LogicalLatticeTransport/
-│   ├── Decoder/
-│   ├── PauliLogic/
-│   └── Arithmetic/Roots/
+│   └── StabilizerBW/
+│       ├── BarnesWall.lean
+│       ├── BWFreeModule.lean
+│       ├── Stab2CHSHBridge.lean
+│       ├── LogicalLatticeTransport.lean, LogicalLatticeTransport/
+│       ├── Decoder*.lean
+│       ├── PauliLogic/                  syntax, rules, soundness,
+│       │                                 cut elimination, tableau,
+│       │                                 completeness, Categorical/
+│       ├── Roots/                       λ-adic grade, BW2-BW4, all-n,
+│       │                                 multi-monomial Möbius, AutL3
+│       ├── T1A/                         closed-form grade enumerator
+│       └── BWCss/                       Reed-Muller CSS family
 └── narrative/
     ├── 00-overview.md
     ├── 01-bw-family.md
@@ -72,7 +79,7 @@ stabilizer-bw/
     ├── 04-prop-computes.md
     ├── 05-pauli-logic.md
     ├── 06-grade.md
-    ├── 07--transport.md
+    ├── 07-transport.md
     └── references.md
 ```
 

@@ -40,7 +40,7 @@ with entries in $\mathbb{Q}(i)$. Paired with $S = \mathrm{diag}(1, i)$ and $\mat
 
 ## What's here and where
 
-The free-module decomposition with uniqueness, the membership predicate, and the explicit basis live in the Lean source at [`../lean/BarnesWall/BWFreeModule.lean`](../lean/BarnesWall/BWFreeModule.lean). The single-qubit minimal-vector enumeration — the 24-element kissing structure — is in [`../lean/BarnesWall/BarnesWall.lean`](../lean/BarnesWall/BarnesWall.lean). The Haskell module [`../haskell/src/BW.hs`](../haskell/src/BW.hs) implements the membership predicate directly from the recursion, and the orbit enumeration in [`../haskell/src/Prop.hs`](../haskell/src/Prop.hs) reproduces the $24/240/4320$ counts by walking the Clifford orbit from a single seed vector.
+The free-module decomposition with uniqueness, the membership predicate, and the explicit basis live in the Lean source at [`../lean/StabilizerBW/BWFreeModule.lean`](../lean/StabilizerBW/BWFreeModule.lean). The single-qubit minimal-vector enumeration — the 24-element kissing structure — is in [`../lean/StabilizerBW/BarnesWall.lean`](../lean/StabilizerBW/BarnesWall.lean). The Haskell module [`../haskell/src/BW.hs`](../haskell/src/BW.hs) implements the membership predicate directly from the recursion, and the orbit enumeration in [`../haskell/src/Prop.hs`](../haskell/src/Prop.hs) reproduces the $24/240/4320$ counts by walking the Clifford orbit from a single seed vector.
 
 ## What's new here, what's in the literature
 

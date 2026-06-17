@@ -46,7 +46,7 @@ This is a single connection at one point. We do not believe it extends to the Pa
 
 ## What's here and where
 
-The pinned case at $m = 1$ and the free-module decomposition that powers it are kernel-checked in [`../lean/BarnesWall/BWFreeModule.lean`](../lean/BarnesWall/BWFreeModule.lean). The Bell-theory case at *m* = *n* = 2 is there too, with the four minimal vectors classified. The Clifford-transport step — step two of the proof — is closed by direct computation at *n* = 2 and *n* = 3 in [`../lean/LogicalLatticeTransport/`](../lean/LogicalLatticeTransport/); see [`07-r11-transport.md`](07-r11-transport.md) for what is checked there. A Haskell realisation of the eleven two-qubit Clifford generators and the $\mathrm{BW}_2$-preservation test sits in [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs).
+The pinned case at $m = 1$ and the free-module decomposition that powers it are kernel-checked in [`../lean/StabilizerBW/BWFreeModule.lean`](../lean/StabilizerBW/BWFreeModule.lean). The Bell-theory case at *m* = *n* = 2 is there too, with the four minimal vectors classified. The Clifford-transport step — step two of the proof — is closed by direct computation at *n* = 2 and *n* = 3 in [`../lean/StabilizerBW/LogicalLatticeTransport/`](../lean/StabilizerBW/LogicalLatticeTransport/); see [`07-transport.md`](07-transport.md) for what is checked there. A Haskell realisation of the eleven two-qubit Clifford generators and the $\mathrm{BW}_2$-preservation test sits in [`../haskell/src/Transport.hs`](../haskell/src/Transport.hs).
 
 ## What's new, what's borrowed
 
