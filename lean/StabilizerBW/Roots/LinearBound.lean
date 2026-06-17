@@ -11,7 +11,7 @@ concrete levels `n ≤ 3` already mechanized in `Roots.BW2` / `Roots.BW3`.
 
 For every two-qubit diagonal character `D` that has been tabulated, attaching a fresh
 idle qubit (`D ↦ D ⊗ I`, the level `2 → 3` embedding) leaves the grade unchanged.
-This is the `n → n+1` invariance tested ad hoc in round R3, here stated as the exact
+This is the `n → n+1` invariance tested ad hoc, here stated as the exact
 equalities `g_{BW₃}(D ⊗ I) = g_{BW₂}(D)`.
 
 ## T2.1 — the linear closed form `w(d, ν) = max(0, 2d − 2^ν)` (monomial case, audited d ≤ 3)

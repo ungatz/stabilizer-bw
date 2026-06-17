@@ -2,7 +2,7 @@ import StabilizerBW.Roots.BWn
 import StabilizerBW.Roots.BW3
 
 /-!
-# The all-`n` upper bound of the linear closed form, for every `ν` (Target T1)
+# The all-`n` upper bound of the linear closed form, for every `ν`
 
 This file kernel-checks the hand-proved upper bound
 

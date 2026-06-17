@@ -5,7 +5,7 @@ import StabilizerBW.LogicalLatticeTransport.BW2Transport
 /-!
 # General-Clifford transport of the logical lattice at `n = 3`
 
-This file formalises **Target T2** of round R11: the general-Clifford transport
+This file formalises the general-Clifford transport
 step of Theorem 17.6 at `n = 3`, by direct computation through a small generating
 set of the three-qubit Clifford group.
 

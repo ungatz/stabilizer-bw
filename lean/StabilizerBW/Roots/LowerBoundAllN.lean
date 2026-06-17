@@ -2,7 +2,7 @@ import StabilizerBW.Roots.UpperBoundAllN
 import StabilizerBW.Roots.Lattice
 
 /-!
-# The all-`n` lower bound for the `ν = 0` maximal monomial (Target T2)
+# The all-`n` lower bound for the `ν = 0` maximal monomial
 
 This file proves the matching lower bound for the maximal-degree `ν = 0` single
 monomial `bwT n = D_{x_{1⋯n}}` at **every** `n`:
@@ -241,7 +241,7 @@ theorem bwT_not_inBW (n : ℕ) :
  grind +suggestions;
  exact absurd ( corner_inOneIL_iff n ( 2 * n + 1 ) |>.1 h_witness ) ( by norm_num )
 
-/-- **Target T2 (lower bound).** `λ^{2(n+1)−2} · bwT_{n+1}` does not preserve `BW_{n+1}`. -/
+/-- **Lower bound.** `λ^{2(n+1)−2} · bwT_{n+1}` does not preserve `BW_{n+1}`. -/
 theorem bwT_not_gradeLE (n : ℕ) : ¬ gradeLEn (n + 1) (bwT (n + 1)) (2 * (n + 1) - 2) := by
  intro h
  have hkey := h (bwId (n + 1)) (bwId_inBW (n + 1))
@@ -250,7 +250,7 @@ theorem bwT_not_gradeLE (n : ℕ) : ¬ gradeLEn (n + 1) (bwT (n + 1)) (2 * (n + 
  rw [he] at hkey
  exact bwT_not_inBW n hkey
 
-/-- **Target T2 (exact grade).** `graden (bwT_{n+1}) = 2(n+1) − 1`. -/
+/-- **Exact grade.** `graden (bwT_{n+1}) = 2(n+1) − 1`. -/
 theorem graden_bwT_eq (n : ℕ) : graden (n + 1) (bwT (n + 1)) = 2 * (n + 1) - 1 := by
  have hle : graden (n + 1) (bwT (n + 1)) ≤ 2 * (n + 1) - 1 := graden_bwT_le (n + 1)
  have hge : 2 * (n + 1) - 1 ≤ graden (n + 1) (bwT (n + 1)) := by
@@ -263,7 +263,7 @@ theorem graden_bwT_eq (n : ℕ) : graden (n + 1) (bwT (n + 1)) = 2 * (n + 1) - 1
  exact bwT_not_gradeLE n this
  omega
 
-/-! ## The all-`n` lower bound for every `ν` (Target T3), maximal monomial `d = n`
+/-! ## The all-`n` lower bound for every `ν`, maximal monomial `d = n`
 
 The same corner machinery gives the matching lower bound for *every* valuation class,
 not just `ν = 0`: the all-ones witness reduces `λ^{2n−p−1}·(topMon n n s)` to a corner

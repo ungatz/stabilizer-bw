@@ -2,7 +2,7 @@ import StabilizerBW.Roots.Grades
 import StabilizerBW.Roots.Level4
 
 /-!
-# Cross-level self-similarity of the Barnes–Wall grade (Target T3)
+# Cross-level self-similarity of the Barnes–Wall grade
 
 The level-raising identity `(1 − ζ₁₆)² = (1 − ζ₈)·u'` (`Z16.lam16_sq`, i.e. `λ₁₆² ∼ λ₈`)
 says that one cyclotomic level is a single ramified quadratic step: a `λ₈`-step at level 3

@@ -1,7 +1,7 @@
 import StabilizerBW.Roots.LowerBoundAllN
 
 /-!
-# The general-`n` strict-subset lower bound (Target T1)
+# The general-`n` strict-subset lower bound
 
 This file extends the corner-valuation lower bound of `LowerBoundAllN.lean` from the
 maximal monomial `D_{x_{1⋯n}}` (support `S = {1,…,n}`, `d = n`) to **every** subset

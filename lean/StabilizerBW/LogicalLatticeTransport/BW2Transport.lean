@@ -4,7 +4,7 @@ import StabilizerBW.BWFreeModule
 /-!
 # General-Clifford transport of the logical lattice at `n = 2`
 
-This file formalises **Target T1** of round R11: the general-Clifford transport
+This file formalises the general-Clifford transport
 step of Theorem 17.6 () at `n = 2`, *by direct
 computation*, sidestepping the external lattice-automorphism citation
 (Kliuchnikov–Schönnenbeck 2024, Thm 4.3) needed for general `n`.

@@ -52,9 +52,37 @@ Single monomials are the cleanest case. The general diagonal character $e(x)$ is
 
 ## A closed-form enumerator on linear phases
 
-On the linear-phase stratum — phase polynomials of degree at most one — the grade collapses to the per-monomial $T$-count $g(D_P) = \\#\\{i : c_i\text{ odd}\\}$. The bivariate generating function over linear phases at level *m* factorises as $8 \cdot 4^m \cdot (1 + z)^m$, recovered from the per-qubit count of even versus odd coefficients. The same closed form is reached independently from coding theory through the Barnes–Wall CSS construction: the Reed–Muller pair $\mathrm{RM}(1, m) \supseteq \mathrm{RM}(0, m)$ gives a CSS family $\mathrm{BWCss}(m, r_1, r_2)$ that recovers the extended Hamming–CSS code at $(3, 1, 0)$ and the $[[16, 10, 4]]$ code at $(4, 2, 0)$, with the same generating function $8 \cdot 4^m \cdot (1 + X)^m$ on its weight enumerator. The two paths to the same closed form sit in [`../lean/StabilizerBW/T1A/`](../lean/StabilizerBW/T1A/) and [`../lean/StabilizerBW/BWCss/`](../lean/StabilizerBW/BWCss/).
+On the *linear-phase stratum* — phase polynomials of degree at most one in the input bits — the grade collapses to the per-monomial *T*-count. Writing $P(x) = c_0 + \sum_i c_i x_i$ with $c_i \in \mathbb{Z}/8$, the grade $g(D_P)$ equals the count of *T*-flavoured generators, i.e. the number of coefficients $c_i$ that are odd modulo two:
+```math
+g(D_P) = \#\{i : c_i \text{ is odd}\}.
+```
+The bivariate generating function over all linear phases at level *m* factorises along the qubits: each $c_0 \in \mathbb{Z}/8$ contributes a factor of 8 (eight choices, all of grade 0); each $c_i \in \mathbb{Z}/8$ contributes $4 + 4z$ (four even choices and four odd, weighted by $z^0$ and $z^1$). Multiplying through,
+```math
+\sum_{P : \deg P \le 1} z^{g(D_P)} = 8 \cdot (4 + 4z)^m = 8 \cdot 4^m \cdot (1 + z)^m.
+```
+This is the kernel-checked headline of [`../lean/StabilizerBW/T1A/`](../lean/StabilizerBW/T1A/).
 
-The $T$-count $\\#\\{i : c_i\text{ odd}\\}$ and the Barnes–Wall grade do *not* agree off the linear stratum. The Möbius cancellation example $x_1 x_2 + x_1 x_3$ at three qubits has per-monomial $T$-count $6$ but grade $4$; the missing two units of $T$-count are absorbed by the inclusion–exclusion correction in the Möbius transform.
+## Off the linear stratum: grade is not the *T*-count
+
+A natural conjecture extrapolates the linear identity to all phase polynomials: the grade should equal the syntactic per-monomial *T*-count, summed over all monomial supports $S \subseteq \{1, \dots, n\}$. This is *false*. The smallest disagreement sits at *n* = 3 with the phase polynomial $x_1 x_2 + x_1 x_3$: the per-monomial *T*-count is six, but the Barnes–Wall grade is four. Two units of *T*-count are absorbed by the overlap on $x_1$. The correct invariant is the Möbius/finite-difference transform of the previous section, which weighs the down-set of overlapping monomials with alternating signs and recovers the true grade on the full multi-monomial cube.
+
+## The same closed form from coding theory
+
+The factorised $8 \cdot 4^m \cdot (1 + z)^m$ also appears on the *coding-theory* side of the Barnes–Wall tower, where there are no phase polynomials at all. We build a small CSS-code family from a Reed–Muller pair.
+
+A binary Reed–Muller code $\mathrm{RM}(r, m)$ has block length $2^m$, dimension $\sum_{i \le r} \binom{m}{i}$, and minimum distance $2^{m - r}$. The duality identity $\mathrm{RM}(r, m)^\perp = \mathrm{RM}(m - r - 1, m)$ implies that for any pair $r_2 < r_1$ with $r_1 + r_2 \le m - 1$, the inclusion
+```math
+\mathrm{RM}(r_2, m) \subseteq \mathrm{RM}(r_1, m)^\perp
+```
+is satisfied. This is exactly the *CSS condition* that turns two classical codes into a quantum stabilizer code. We take the Calderbank–Shor–Steane construction with $C_2 := \mathrm{RM}(r_2, m)$ as the *X*-stabilizer and $C_1 := \mathrm{RM}(r_1, m)$ as the *Z*-stabilizer, and call the resulting code $\mathrm{BWCss}(m, r_1, r_2)$. Its parameters are
+```math
+n = 2^m, \quad k = \sum_{r_2 < i \le r_1} \binom{m}{i}, \quad d = 2^{m - r_1}.
+```
+Setting $(m, r_1, r_2) = (3, 1, 0)$ recovers the extended Hamming-CSS code $[[8, 3, 4]]$ (parent of the Steane code by one puncture); $(4, 2, 0)$ recovers the standard $[[16, 10, 4]]$; $(4, 2, 1)$ and $(5, 2, 1)$ give $[[16, 6, 4]]$ and $[[32, 10, 8]]$.
+
+The grade-refined enumerator of the family — counting logical-X representatives by their grade rather than their Hamming weight — factorises into the same closed form $8 \cdot 4^m \cdot (1 + X)^m$ that we derived combinatorially above. Two independent paths reach the same expression: one from the $\lambda$-adic arithmetic of $\mathbb{Z}[\zeta_8]$, one from binary linear algebra in $\mathbb{F}_2^{2^m}$.
+
+The arithmetic and coding-theoretic readings are not the same proof. The Lean module [`../lean/StabilizerBW/BWCss/Grade.lean`](../lean/StabilizerBW/BWCss/Grade.lean) closes the closed-form identity unconditionally on the grade enumerator of phase polynomials of degree at most one; the *logical*-operator enumerator of $\mathrm{BWCss}(m, r_1, r_2)$ equals the same expression provided one accepts the standard identification of the CSS logical-X coset structure with the grade-1 phase-polynomial stratum, carried in that file as a named hypothesis. The structural convergence is the substantive thing: same closed form, different objects, same combinatorial skeleton.
 
 ## What's here and where
 
@@ -62,4 +90,4 @@ The arithmetic of $\mathbb{Z}[\zeta_8]$ and $\lambda$ — the addition, multipli
 
 ## What's new, what's borrowed
 
-The cyclotomic ring $\mathbb{Z}[\zeta_8]$ and its use in exact synthesis are standard, going back to Forest–Gosset–Kliuchnikov–McKinnon (2015) and Amy–Glaudell–Ross (2020). Certified *T*-count floors via stabilizer-rank or unitary-stabilizer-nullity invariants appear in Beverland et al. (2020) and Jiang–Wang (2023). What we add is the $\lambda$-adic grade itself, the explicit closed form for single-monomial characters, the all-*n* upper bound, the level-raising identity (one cyclotomic doubling = one ramified step), and the cross-level table; the Möbius closed form, the maximal-monomial lower bound at every $\nu$, and the strict-subset lower bound are recorded with the kernel proofs that establish them.
+The cyclotomic ring $\mathbb{Z}[\zeta_8]$ and its use in exact synthesis are standard, going back to Forest–Gosset–Kliuchnikov–McKinnon (2015) and Amy–Glaudell–Ross (2020). Certified *T*-count floors via stabilizer-rank or unitary-stabilizer-nullity invariants appear in Beverland et al. (2020) and Jiang–Wang (2023). What we add is the $\lambda$-adic grade itself, the explicit closed form for single-monomial characters, the all-*n* upper bound, the level-raising identity (one cyclotomic doubling = one ramified step), and the cross-level table; the Möbius closed form, the maximal-monomial lower bound at every $\nu$, and the strict-subset lower bound, all of which are recorded with the kernel proofs that establish them; the closed-form generating function on linear phases and its CSS-side recovery from a Reed–Muller pair.

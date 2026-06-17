@@ -1,7 +1,7 @@
 import StabilizerBW.Roots.BWModel
 
 /-!
-# Multi-monomial grade: data table and refutation of candidate closed forms (Target T2)
+# Multi-monomial grade: data table and refutation of candidate closed forms
 
 The single-monomial grade is the proven linear law `g(D_{c·x_S}) = 2|S| − 2^{ν₂(c)}`
 (see `UpperBoundAllN.lean`, `LowerBoundAllN.lean`, `StrictSubsetLowerBoundAllN.lean`).
