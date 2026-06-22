@@ -14,7 +14,7 @@ single-qubit composite word `w`, **conditional** on the named carrier
   T-free (Clifford) fragment `{tcount w = 0}`, which needs no carrier.
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -47,4 +47,4 @@ theorem phi3_composite_grade_le_of_tcount_zero (w : SqWord) (hw : SqWord.tcount 
   rw [hw, Nat.cast_zero] at h
   exact le_trans h (zero_le _)
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

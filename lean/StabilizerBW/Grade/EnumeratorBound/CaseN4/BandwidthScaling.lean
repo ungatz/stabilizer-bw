@@ -1,11 +1,11 @@
 import StabilizerBW.Grade.EnumeratorBound.CaseN4.GradeEnumeratorBound
 
 /-!
-# MenuBandwidthN4 / BandwidthScaling — T4: closed-form bandwidth scaling at `n = 4`
+# BandwidthN4 / BandwidthScaling — T4: closed-form bandwidth scaling at `n = 4`
 
 Combining the bridge identity `Facet.gap_eq` (the un-compiled gap equals
 `V/N`, `N = 2S`) with the grade-enumerator bound `S ≤ gradeEnumeratorBound 4 g`
-(T3) gives the **closed-form lower bound on the bandwidth gap** at `n = 4`:
+gives the **closed-form lower bound on the bandwidth gap** at `n = 4`:
 
 ```
 gap(ρ) = V(ρ)/N ≥ V(ρ) / (2 · gradeEnumeratorBound 4 g),    g = grade4 (lift).

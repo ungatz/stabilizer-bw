@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.EnumeratorBound.GradeEnumeratorAllN
 
 /-!
-# MenuBandwidthAllN / BandwidthScalingAllN — T3: closed-form bandwidth scaling at all `n`
+# BandwidthScaling / BandwidthScalingAllN — T3: closed-form bandwidth scaling at all `n`
 
 Combining the bridge identity `MenuBridge.Facet.gap_eq` (the un-compiled gap
 equals `V/N`, `N = 2S`) with the grade-enumerator bound
@@ -16,17 +16,17 @@ For the all-ones facet (grade `0`) this is `gap ≥ V / (12 n)`.
 
 ## Main results
 
-* `MenuBandwidthAllN.facetGap` — the un-compiled bandwidth gap
+* `BandwidthScaling.facetGap` — the un-compiled bandwidth gap
   `quantumValue − classicalValue`.
-* `MenuBandwidthAllN.bandwidth_scaling_allN_general` — the closed-form scaling for
+* `BandwidthScaling.bandwidth_scaling_allN_general` — the closed-form scaling for
   any facet with a valid grade-enumerator correspondence and nonnegative violation.
-* `MenuBandwidthAllN.bandwidth_scaling_allN` — the headline unconditional instance
+* `BandwidthScaling.bandwidth_scaling_allN` — the headline unconditional instance
   for the all-ones facet: `gap ≥ V / (12 n)` for all `n ≥ 2`.
 -/
 
 open scoped BigOperators
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 /-- The un-compiled **bandwidth gap** of a facet on a profile:
 `quantumValue − classicalValue` (equal to `V/N` by `MenuBridge.Facet.gap_eq`). -/
@@ -63,4 +63,4 @@ theorem bandwidth_scaling_allN (n : ℕ) (hn : 2 ≤ n) (E : Fin (3 * n) → ℝ
   rw [MenuBridge.Facet.gap_eq, cliffordFacetN_N]
   exact div_le_div_of_nonneg_left hV (by linarith) (by linarith)
 
-end MenuBandwidthAllN
+end BandwidthScaling

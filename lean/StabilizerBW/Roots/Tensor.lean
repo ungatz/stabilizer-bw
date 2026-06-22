@@ -2,9 +2,7 @@ import StabilizerBW.Roots.Filtration
 import StabilizerBW.Roots.BW2
 
 /-!
-# Tensor subadditivity of the grade (Target T1) and the product bound (T3)
-
-This file mechanizes the structural results of round R4:
+# Tensor subadditivity of the grade (Target T1) and the product bound This file mechanizes the structural results of round R4:
 
 * **T1.1 (the main prize).** For arbitrary integral `2×2` operators `U, V` over
   `R = ℤ[ζ₈]`, the two-qubit grade of the tensor `U ⊗ V` (acting on `BW₂ = L₄`) is

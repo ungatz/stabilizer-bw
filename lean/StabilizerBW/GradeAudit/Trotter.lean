@@ -3,7 +3,7 @@ import StabilizerBW.GradeAudit.CircuitGrade
 /-!
 # Grade (= T-count) of a single Heisenberg Trotter step (exact, dyadic angle)
 
-## Honesty note (fixing r1's fabricated-grade error)
+## Honesty note (fixing the original fabricated-grade error)
 
 For the 1D Heisenberg Hamiltonian
 `H = ∑_i (X_i X_{i+1} + Y_i Y_{i+1} + Z_i Z_{i+1})` on an open chain of `L` sites,
@@ -26,9 +26,7 @@ conjugation framing has grade `0`.
 dyadic precision `tPerRot`).  The step size `δ` enters only through `tPerRot`
 (the gate *types* are fixed once `δ` is dyadic), so it appears as a parameter.
 
-(Re-check versus r1: r1 charged `2` tokens per bond by counting only the `XX+YY`
-terms and pricing each at one token, omitting the `ZZ` term and any per-rotation
-synthesis cost.  The honest count keeps all three Pauli terms and the explicit
+(The honest count keeps all three Pauli terms and the explicit
 exact synthesis cost `tPerRot`, giving `3 · tPerRot` per bond.)
 -/
 

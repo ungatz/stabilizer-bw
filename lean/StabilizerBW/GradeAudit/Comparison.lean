@@ -6,9 +6,9 @@ import StabilizerBW.GradeAudit.Trotter
 /-!
 # Comparison of the Barnes–Wall grade against the Jiang–Wang and Beverland bounds
 
-## Honesty note (fixing r1's tautological-comparison error)
+## Honesty note (fixing the original tautological-comparison error)
 
-r1 hardcoded `JiangWangBound("QFT", _) = JiangWangBound("Shor", _) =
+an earlier draft hardcoded `JiangWangBound("QFT", _) = JiangWangBound("Shor", _) =
 JiangWangBound("Grover", _) = 0`, then "proved" each comparison theorem
 `grade ≥ bound` by `Nat.zero_le`.  That is a tautology, and worse, the reasoning
 conflated the **state nullity** of a canonical output state with the

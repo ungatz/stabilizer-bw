@@ -1,7 +1,7 @@
 import StabilizerBW.SqrtPi.Z8Ring
 
 /-!
-# T3 — Catalytic embedding and the level-raising grade-doubling engine
+# Catalytic embedding and the level-raising grade-doubling engine
 
 The conjectured catalytic-embedding grade preservation `Γ(g) = 2g` (CHKRS SI Def. S12 / Lemma S13,
 specialised to `Φ₃ : Π₃ → Π₂`) is driven by the **level-raising identity**: the cyclotomic prime

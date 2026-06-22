@@ -3,7 +3,7 @@ import StabilizerBW.GradeAudit.CircuitGrade
 /-!
 # Grade (= T-count) of the approximate quantum Fourier transform `AQFT_n^ε`
 
-## Honesty note (fixing r1's exact-QFT error)
+## Honesty note (fixing the original exact-QFT error)
 
 The **exact** unitary `QFT_n` is *not* in the Clifford+T fragment for `n ≥ 3`:
 it contains the controlled rotation `R_3 = controlled-T` (and finer `R_k`), which
@@ -36,7 +36,7 @@ i.e. `g(AQFT_n^ε) = Θ(n² · log (1/ε))` (and `Θ(n²)` for fixed precision).
 
 (Arithmetic re-check, per the standard convention: the per-qubit gadget counts
 are `n-1, n-2, …, 1, 0` as `q` runs `0 … n-1`; their sum is the triangular number
-`∑_{j=0}^{n-1} j = n(n-1)/2`.  This replaces r1's first-qubit-only count
+`∑_{j=0}^{n-1} j = n(n-1)/2`.  This replaces the original first-qubit-only count
 `∑_{j∈range(n-1)} j = (n-1)(n-2)/2`, which under-counted by omitting the rotation
 blocks on qubits `1 … n-1`.)
 -/

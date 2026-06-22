@@ -2,7 +2,7 @@ import Mathlib
 import StabilizerBW.Roots.Core
 
 /-!
-# T1 — Concrete Pauli matrices over the computable ring `ℤ[ζ₈]`
+# Concrete Pauli matrices over the computable ring `ℤ[ζ₈]`
 
 This file gives concrete, **computable** matrix representations of the `n`-qubit
 projective Pauli group (the Pauli group modulo the phase subgroup `{±1, ±i}`),
@@ -37,7 +37,7 @@ As `(a, b)` range over `{0,…,N-1}²` this enumerates the `4^n` projective Paul
 every nonzero entry is `±1`).
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Roots
 
@@ -117,4 +117,4 @@ def smulM (N : ℕ) (φ : Z8) (Q : Matrix (Fin N) (Fin N) Z8) :
 /-- The four global phases of the projective Pauli group: `1, -1, i, -i`. -/
 def phasesZ : List Z8 := [1, -1, ⟨0, 0, 1, 0⟩, ⟨0, 0, -1, 0⟩]
 
-end GradeAuditIncomparable
+end GradeNullityComparison

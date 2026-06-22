@@ -28,9 +28,9 @@ it as `gradeLE3 D k := MapsToL3 (scale8 (λ^k) D)`, mirroring `Roots.BW2`.
 
 ## Results (all kernel-checked)
 
-Transport (T2): `g(CZ⊗I)=0`, `g(T⊗I⊗I)=1`, `g(CS⊗I)=2`, `g(cT⊗I)=3`, `g(T⊗T⊗I)=2`.
+Transport : `g(CZ⊗I)=0`, `g(T⊗I⊗I)=1`, `g(CS⊗I)=2`, `g(cT⊗I)=3`, `g(T⊗T⊗I)=2`.
 
-New three-qubit column (T3):
+New three-qubit column :
 * `g(CCZ) = 2`   (`e = 4·x₁x₂x₃`, `(d,ν) = (3,2)`),
 * `g(CCS) = 4`   (`e = 2·x₁x₂x₃`, `(d,ν) = (3,1)`),
 * `g(ccT) = 5`   (`e = 1·x₁x₂x₃`, `(d,ν) = (3,0)`),

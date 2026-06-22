@@ -1,10 +1,10 @@
 import StabilizerBW.Grade.StratifiedMonotone.PhysicalDensity
 
 /-!
-# T2 — the Pauli-weight enumerator `(1 + 3z)^m`
+# the Pauli-weight enumerator `(1 + 3z)^m`
 
 This is the **corrected** generating function for the corrected construction.  The original construction wrongly transported
-`T1A.grade_GF_linear_factorises = 8·4^m·(1+z)^m`, which enumerates *linear phase polynomials*
+`ReedMuller.grade_GF_linear_factorises = 8·4^m·(1+z)^m`, which enumerates *linear phase polynomials*
 graded by T-count, NOT the Pauli strings graded by Pauli weight that the Dutta–Tushar `ℓ¹`
 functional actually sees.
 
@@ -16,7 +16,7 @@ the factor `3 = |{X, Y, Z}|` being the number of non-identity single-qubit Pauli
 of `z^g` is the **weight-`g` stratum cardinality** `C(m,g)·3^g`.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -64,4 +64,4 @@ theorem pauliWeightStratumCardinality (m g : ℕ) :
     rw [ Finset.sum_comm, Finset.sum_congr rfl ] ; aesop;
   simp_all +decide [ Finset.sum_powersetCard ]
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

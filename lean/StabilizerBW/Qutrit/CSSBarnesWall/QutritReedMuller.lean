@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# T1 — Qutrit Reed–Muller codes `QRM(m, r)` over `𝔽₃`
+# Qutrit Reed–Muller codes `QRM(m, r)` over `𝔽₃`
 
 The genuine qutrit-CSS Barnes–Wall lattice is built from a pair of **qutrit
 Reed–Muller codes** over `𝔽₃ = ZMod 3`, the `q = 3` specialisation of the
@@ -32,7 +32,7 @@ Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by
 open scoped BigOperators
 open Classical
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 /-- The qutrit evaluation-point model `𝔽₃^m → 𝔽₃`, of dimension `3 ^ m`. -/
 abbrev QFun (m : ℕ) := (Fin m → ZMod 3) → ZMod 3
@@ -234,4 +234,4 @@ theorem QRM_params (r m : ℕ) :
   refine ⟨?_, QRM_dim r m⟩
   simp
 
-end QutritCSSBarnesWall
+end QutritCSSBW

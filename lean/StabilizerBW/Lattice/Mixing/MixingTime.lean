@@ -3,17 +3,17 @@ import StabilizerBW.Lattice.Mixing.SpectralGapReuse
 import StabilizerBW.Lattice.Mixing.LevinPeresWilmer
 
 /-!
-# T4 — HEADLINE: the explicit BW-grade mixing-time bound
+# HEADLINE: the explicit BW-grade mixing-time bound
 
 Composing
 
-* T1 (`EhrenfestProjection`) — the mixing-time / TV-distance definitions,
-* T2 (`SpectralGapReuse`) — the spectral gap `gap = 2/m` at `p = 1/2`
-  (Layer-92 carrier `LaRacuenteSpectralGapBound`), and
-* T3 (`LevinPeresWilmer`) — the textbook spectral-gap mixing-time bound,
+* (`EhrenfestProjection`) — the mixing-time / TV-distance definitions,
+* (`SpectralGapReuse`) — the spectral gap `gap = 2/m` at `p = 1/2`
+  (the development carrier `SymmetricChainSpectralGapBound`), and
+* (`LevinPeresWilmer`) — the textbook spectral-gap mixing-time bound,
 
 we obtain the **primary headline**: the BW linear-stratum grade distribution
-under LaRacuente's symmetric-transitions chain mixes in at most
+under the symmetric Ehrenfest urn chain mixes in at most
 `⌈ m · log(2^m / ε) / 2 ⌉` steps to total-variation distance `≤ ε` from the
 stationary `Binomial(m, 1/2)`.
 
@@ -21,7 +21,7 @@ The Levin–Peres–Wilmer minimum stationary probability for `Binomial(m, 1/2)`
 `π_min = C(m,0)/2^m = 1/2^m`, so LPW Eq. 12.12 gives
 `t_mix(ε) ≤ ⌈ gap⁻¹ · log(1/(π_min·ε)) ⌉ = ⌈ (m/2) · log(2^m/ε) ⌉`, exactly the
 original bound.  The genuine Markov input enters only through the named
-Layer-92 carrier `LaRacuenteSpectralGapBound` (hypothesis `hGap`); the headline
+the development carrier `SymmetricChainSpectralGapBound` (hypothesis `hGap`); the headline
 is therefore **unconditional modulo that carrier**.
 
 The hypothesis `ε < 1` is pre-registered; it is not needed for
@@ -29,24 +29,24 @@ this bound (it is used by the asymptotic refinement T5), so it is kept here only
 to match the pre-registered signature.
 -/
 
-namespace BWParityChainMixingTime.MixingTime
+namespace MixingTime.MixingTime
 
 open Real
-open BWParityChainMixingTime.EhrenfestProjection
-open ParityChainBWGradeMixing.SpectralGapCarrier
+open MixingTime.EhrenfestProjection
+open ParityChainBWGrade.SpectralGapCarrier
 
 /-- **PRIMARY HEADLINE — `bw_grade_mixing_time_bound`.**
 For every `m ≥ 1` and `ε ∈ (0,1)`, the BW-grade chain (with step-`t`
 grade distribution `D t`) whose total-variation distance to the stationary
-`Binomial(m, 1/2)` obeys the Layer-92 spectral-gap carrier
-`LaRacuenteSpectralGapBound (1/2) m` mixes within
+`Binomial(m, 1/2)` obeys the development spectral-gap carrier
+`SymmetricChainSpectralGapBound (1/2) m` mixes within
 `⌈ m · log(2^m / ε) / 2 ⌉` steps:
 
 `t_mix_BW_grade D m ε ≤ ⌈ m · log(2^m / ε) / 2 ⌉`. -/
 theorem bw_grade_mixing_time_bound
     (m : ℕ) (hm : 1 ≤ m) (ε : ℝ) (hε : 0 < ε) (hε_lt : ε < 1)
     (D : ℕ → ℕ → ℝ)
-    (hGap : LaRacuenteSpectralGapBound (1 / 2) m
+    (hGap : SymmetricChainSpectralGapBound (1 / 2) m
               (fun t => tv_distance_from_stationary (D t) (BinomialMHalf m))) :
     t_mix_BW_grade D m ε ≤ Nat.ceil ((m : ℝ) * Real.log ((2 : ℝ) ^ m / ε) / 2) := by
   set dist : ℕ → ℝ := fun t => tv_distance_from_stationary (D t) (BinomialMHalf m) with hdist
@@ -56,8 +56,8 @@ theorem bw_grade_mixing_time_bound
     calc (m : ℝ) ≤ ((2 ^ m : ℕ) : ℝ) := by exact_mod_cast le_of_lt hlt
       _ = (2 : ℝ) ^ m := by push_cast; ring
   -- The LPW separation decay with `π_min = 1/2^m` and `gap = 2/m`.
-  have hgap_eq : laracuenteGap (1 / 2) m = 2 / (m : ℝ) :=
-    ParityChainBWGradeMixing.SpectralGapCarrier.bwGrade_spectral_gap_at_pHalf m
+  have hgap_eq : symmetricChainGap (1 / 2) m = 2 / (m : ℝ) :=
+    ParityChainBWGrade.SpectralGapCarrier.bwGrade_spectral_gap_at_pHalf m
   have hdecay : ∀ t : ℕ,
       dist t ≤ (1 / (1 / (2 : ℝ) ^ m)) * Real.exp (- (2 / (m : ℝ)) * (t : ℝ)) := by
     intro t
@@ -73,7 +73,7 @@ theorem bw_grade_mixing_time_bound
     exact le_trans h1 hmul
   have hgap_pos : (0 : ℝ) < 2 / (m : ℝ) := by positivity
   have hpi_pos : (0 : ℝ) < 1 / (2 : ℝ) ^ m := by positivity
-  have hbound := BWParityChainMixingTime.LevinPeresWilmer.mixing_time_le_of_spectral_decay
+  have hbound := MixingTime.LevinPeresWilmer.mixing_time_le_of_spectral_decay
     dist (2 / (m : ℝ)) (1 / (2 : ℝ) ^ m) ε hgap_pos hpi_pos hε hdecay
   -- Rewrite the LPW ceiling argument into the structural strawman's exact form.
   have harg : (2 / (m : ℝ))⁻¹ * Real.log (1 / ((1 / (2 : ℝ) ^ m) * ε))
@@ -84,4 +84,4 @@ theorem bw_grade_mixing_time_bound
   rw [harg] at hbound
   exact hbound
 
-end BWParityChainMixingTime.MixingTime
+end MixingTime.MixingTime

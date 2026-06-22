@@ -1,7 +1,7 @@
 import StabilizerBW.Lattice.Mixing.MixingTime
 
 /-!
-# T6 — Mandated falsification test points
+# Mandated falsification test points
 
 The development pre-registers three `(m, ε)` falsification witnesses (§3, §5):
 `(2, 0.01)`, `(4, 0.001)`, `(8, 0.0001)`.  For each, the explicit headline
@@ -16,12 +16,12 @@ counts, i.e. `t_mix_BW_grade D m ε ≤ N` for the three pairs.  No falsificatio
 occurs: every test point passes.
 -/
 
-namespace BWParityChainMixingTime.TestPoints
+namespace MixingTime.TestPoints
 
 open Real
-open BWParityChainMixingTime.EhrenfestProjection
-open BWParityChainMixingTime.MixingTime
-open ParityChainBWGradeMixing.SpectralGapCarrier
+open MixingTime.EhrenfestProjection
+open MixingTime.MixingTime
+open ParityChainBWGrade.SpectralGapCarrier
 
 /-! ## Numerical log bounds underlying the three integer thresholds -/
 
@@ -53,7 +53,7 @@ theorem log2560000_le : Real.log 2560000 ≤ 15 := by
 `6 = ⌈ log 400 ⌉` steps. -/
 theorem testpoint_m2
     (D : ℕ → ℕ → ℝ)
-    (hGap : LaRacuenteSpectralGapBound (1 / 2) 2
+    (hGap : SymmetricChainSpectralGapBound (1 / 2) 2
               (fun t => tv_distance_from_stationary (D t) (BinomialMHalf 2))) :
     t_mix_BW_grade D 2 (1 / 100) ≤ 6 := by
   refine le_trans
@@ -69,7 +69,7 @@ theorem testpoint_m2
 `20 = ⌈ 2·log 16000 ⌉` steps. -/
 theorem testpoint_m4
     (D : ℕ → ℕ → ℝ)
-    (hGap : LaRacuenteSpectralGapBound (1 / 2) 4
+    (hGap : SymmetricChainSpectralGapBound (1 / 2) 4
               (fun t => tv_distance_from_stationary (D t) (BinomialMHalf 4))) :
     t_mix_BW_grade D 4 (1 / 1000) ≤ 20 := by
   refine le_trans
@@ -85,7 +85,7 @@ theorem testpoint_m4
 `60 = ⌈ 4·log 2560000 ⌉` steps. -/
 theorem testpoint_m8
     (D : ℕ → ℕ → ℝ)
-    (hGap : LaRacuenteSpectralGapBound (1 / 2) 8
+    (hGap : SymmetricChainSpectralGapBound (1 / 2) 8
               (fun t => tv_distance_from_stationary (D t) (BinomialMHalf 8))) :
     t_mix_BW_grade D 8 (1 / 10000) ≤ 60 := by
   refine le_trans
@@ -97,4 +97,4 @@ theorem testpoint_m8
   push_cast
   nlinarith [this]
 
-end BWParityChainMixingTime.TestPoints
+end MixingTime.TestPoints

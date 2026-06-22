@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.TightWitnesses.Roster
 
 /-!
-# T2 — The tightness theorems
+# The tightness theorems
 
 For the three roster gates whose published ancilla-free T-count is *provably optimal*
 (Selinger 2013), the BW grade equals that optimal T-count exactly.  Each is a
@@ -13,7 +13,7 @@ These are the chapter's "where the grade is tight" instances: on `T`, `CS`, `cT`
 grade is not merely a lower bound on the T-count but matches the Selinger-optimal value.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 open Roots
 
@@ -32,4 +32,4 @@ equals its optimal ancilla-free T-count. -/
 theorem grade_cT_tight : Roots.grade2 Roots.cT = selingerTOpt SmallGate.cT := by
   rw [Roots.grade2_cT]; rfl
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

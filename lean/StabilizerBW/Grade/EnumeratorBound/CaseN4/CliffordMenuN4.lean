@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# MenuBandwidthN4 / CliffordMenuN4 — T1: the `n = 4` Clifford menu and its stabilizer bound
+# BandwidthN4 / CliffordMenuN4 — T1: the `n = 4` Clifford menu and its stabilizer bound
 
 This file lifts the three-qubit Clifford-menu construction of
 ``StabilizerBW.Compilation.ContextGame`` to **four qubits**: the menu is the
@@ -19,7 +19,7 @@ is *proved* here directly via the octahedron-norm argument lifted to four qubits
   product of fixed-axis Pauli eigenstates).
 
 The development is entirely over `ℝ` (the convex-geometry layer), mirroring
-Layer 13: a profile `e : Idx4 → ℝ` records the menu expectation values
+the development: a profile `e : Idx4 → ℝ` records the menu expectation values
 `⟨M_i⟩ ∈ [-1,1]`, and the stabilizer side uses the (proved) fact that the
 realisable profiles form the convex hull of the deterministic octahedron-vertex
 profiles.

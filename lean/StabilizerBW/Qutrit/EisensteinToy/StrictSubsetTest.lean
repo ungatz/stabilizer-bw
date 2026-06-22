@@ -1,7 +1,7 @@
 import StabilizerBW.Qutrit.EisensteinToy.BW3
 
 /-!
-# T4 — TEST 1: the strict-subset closed form
+# TEST 1: the strict-subset closed form
 
 The qubit chapter's single-monomial law is `g(D_{c·x_S}) = max(0, 2·|S| − p)`, where `p` is the
 `λ₂`-adic valuation of the corner phase `c − 1`; the coefficient `2` is the `λ₂`-valuation of the

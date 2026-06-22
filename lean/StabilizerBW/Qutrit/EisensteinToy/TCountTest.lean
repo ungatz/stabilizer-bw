@@ -1,7 +1,7 @@
 import StabilizerBW.Qutrit.EisensteinToy.BW3
 
 /-!
-# T6 — TEST 3: the qutrit T-gate vs the Eisenstein grade
+# TEST 3: the qutrit T-gate vs the Eisenstein grade
 
 The qubit story is clean *because the T-gate phase lives in the base ring*: `T = diag(1, ζ₈)`
 with `ζ₈ ∈ ℤ[ζ₈]`, the very ring the Barnes–Wall lattice is built over.  The literature qutrit

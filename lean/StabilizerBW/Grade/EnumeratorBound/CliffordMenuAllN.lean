@@ -2,10 +2,10 @@ import Mathlib
 import StabilizerBW.MenuBridge
 
 /-!
-# MenuBandwidthAllN / CliffordMenuAllN — T1: the `n`-qubit Clifford menu and its stabilizer bound
+# BandwidthScaling / CliffordMenuAllN — T1: the `n`-qubit Clifford menu and its stabilizer bound
 
 This file lifts the four-qubit Clifford-menu construction of
-`StabilizerBW.MenuBandwidthN4.CliffordMenuN4` to **all** `n`: the menu is the
+`StabilizerBW.BandwidthN4.CliffordMenuN4` to **all** `n`: the menu is the
 `3n` single-qubit Pauli observables `{X_q, Y_q, Z_q : q ∈ Fin n}`, indexed by
 `Idx n = Fin n × Fin 3` (`(qubit, axis)`).
 
@@ -14,16 +14,16 @@ structural fact — the all-`n` analogue of
 `CliffordMenuN4.octahedron_facet_stab_bound4` — is proved here directly via the
 octahedron-norm argument lifted to `n` qubits:
 
-* `MenuBandwidthAllN.octahedron_facet_stab_boundN` — every `n`-qubit stabilizer
+* `BandwidthScaling.octahedron_facet_stab_boundN` — every `n`-qubit stabilizer
   state satisfies `W ≤ n`.  Thus `classicalBound = n` is a genuine valid bound,
   matching the per-qubit ℓ¹ Bloch bound summed over `n` qubits.
 
 We also package the all-ones facet as a `MenuBridge.Facet (3 * n)`:
 
-* `MenuBandwidthAllN.cliffordFacetN` — coefficient `1` on each of the `3n`
+* `BandwidthScaling.cliffordFacetN` — coefficient `1` on each of the `3n`
   observables, classical bound `n`.
-* `MenuBandwidthAllN.cliffordFacetN_S` — `S = ∑_k |α_k| = 3n`.
-* `MenuBandwidthAllN.cliffordFacetN_N` — `N = 2S = 6n`.
+* `BandwidthScaling.cliffordFacetN_S` — `S = ∑_k |α_k| = 3n`.
+* `BandwidthScaling.cliffordFacetN_N` — `N = 2S = 6n`.
 
 The development is entirely over `ℝ` (the convex-geometry layer): a profile
 `e : Idx n → ℝ` records the menu expectation values `⟨M_i⟩ ∈ [-1,1]`, and the
@@ -33,7 +33,7 @@ the deterministic octahedron-vertex profiles.
 
 open scoped BigOperators
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 /-! ## §1  Menu facet functionals and the stabilizer polytope (generic) -/
 
@@ -201,4 +201,4 @@ theorem cliffordFacetN_violation_le_zero_of_stab (n : ℕ) {E : Idx n → ℝ}
   have := octahedron_facet_stab_boundN n he
   linarith
 
-end MenuBandwidthAllN
+end BandwidthScaling

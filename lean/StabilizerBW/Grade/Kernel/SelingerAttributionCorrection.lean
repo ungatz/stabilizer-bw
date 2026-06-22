@@ -1,7 +1,7 @@
 /-!
-# T6 — Selinger 2013 attribution corrigendum (internal note)
+# Selinger 2013 attribution corrigendum (internal note)
 
-This file records, as an internal corrigendum surfaced by the Phase 0.5 audit, a citation
+This file records, as an internal corrigendum surfaced by the the audit step, a citation
 correction for the corpus's `T`-count attributions.  It does **not** modify the
 standardStabilizerBW.Grade.TightWitnesses.`Roster.lean`; it only documents the
 correction for a separate corpus pass.
@@ -27,10 +27,10 @@ This corrigendum is internal: the operative roster constants are unchanged, and 
 theorems are unaffected.
 -/
 
-namespace BWGradeKernelClassification.SelingerAttributionCorrection
+namespace KernelClassification.SelingerAttributionCorrection
 
 /-- No-op carrier for the Selinger 2013 attribution corrigendum (see module docstring).
 The correction is documentary; it changes no operative constant. -/
 theorem selinger_attribution_corrigendum : True := trivial
 
-end BWGradeKernelClassification.SelingerAttributionCorrection
+end KernelClassification.SelingerAttributionCorrection

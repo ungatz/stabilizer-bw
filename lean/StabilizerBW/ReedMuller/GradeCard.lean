@@ -1,7 +1,7 @@
-import StabilizerBW.T1A.GradeEnumerator
+import StabilizerBW.ReedMuller.GradeEnumerator
 
 /-!
-# T1A — the pure-linear grade enumerator in cardinality form
+# ReedMuller — the pure-linear grade enumerator in cardinality form
 
 Coefficient extraction from the generating function gives the per-grade operator
 counts:
@@ -13,7 +13,7 @@ We prove a generic (any commutative semiring) version of the generating-function
 factorisation, specialise it to `ℤ[X]`, and read off the coefficient at `z^k`.
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open scoped Classical
 open Finset
@@ -54,7 +54,7 @@ theorem grade_GF_poly (m : ℕ) :
     (∑ P : LinPhase m, (Polynomial.X : Polynomial ℤ) ^ gradeOf P)
       = (8 * 4 ^ m : ℤ) • (1 + Polynomial.X) ^ m := by
   -- Now use `tcount_GF_generic` to rewrite the sum in terms of `(4 + 4 * Polynomial.X)^m`.
-  have h_sum : ∑ P : T1A.LinPhase m, Polynomial.X ^ tCountLin P = 8 * (4 + 4 * (Polynomial.X : Polynomial ℤ)) ^ m := by
+  have h_sum : ∑ P : ReedMuller.LinPhase m, Polynomial.X ^ tCountLin P = 8 * (4 + 4 * (Polynomial.X : Polynomial ℤ)) ^ m := by
     convert tcount_GF_generic m ( Polynomial.X : Polynomial ℤ ) using 1;
   rw [ Finset.sum_congr rfl fun _ _ => by rw [ gradeOf_eq_tCount ] ];
   rw [ h_sum, show ( 4 + 4 * Polynomial.X : Polynomial ℤ ) = 4 * ( 1 + Polynomial.X ) by ring, mul_pow ] ; norm_num [ mul_assoc, mul_comm, mul_left_comm, Polynomial.smul_eq_C_mul ]
@@ -73,4 +73,4 @@ theorem grade_GF_linear (m k : ℕ) :
   simp_all +decide [ Polynomial.finset_sum_coeff, Polynomial.coeff_X_pow ];
   exact h_contra <| by rw [ Finset.filter_congr fun x hx => eq_comm ] at h_card; exact_mod_cast h_card;
 
-end T1A
+end ReedMuller

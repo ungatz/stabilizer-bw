@@ -3,7 +3,7 @@ import StabilizerBW.Roots.Z8Valuation
 import Mathlib
 
 /-!
-# T1A — per-coefficient arithmetic facts in `R = ℤ[ζ₈]`
+# ReedMuller — per-coefficient arithmetic facts in `R = ℤ[ζ₈]`
 
 This file packages the single-variable (`d = 1`) arithmetic underlying the
 pure-linear Barnes–Wall grade enumerator.
@@ -18,7 +18,7 @@ where `ecoef c = 1` if `c` is odd, `2` if `c ≡ 2 (mod 4)`, `4` if `c ≡ 4 (mo
 This is the `d = 1` row of the per-monomial grade table.
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open Roots Roots.Z8
 open scoped Classical
@@ -103,4 +103,4 @@ theorem emult_lam_pow_mul_unit (E : ℕ) (w : Z8) (hw : IsUnit w) :
     linear_combination hk
   exact lam_not_isUnit (isUnit_of_dvd_unit hcancel hw)
 
-end T1A
+end ReedMuller

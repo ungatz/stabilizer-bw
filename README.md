@@ -87,7 +87,7 @@ stabilizer-barnes-wall/
 │       │                                 completeness, Categorical/
 │       ├── Roots/                       λ-adic grade, BW2-BW4, all-n,
 │       │                                 multi-monomial Möbius, AutL3, AutL4
-│       ├── T1A/                         closed-form grade enumerator (linear stratum)
+│       ├── ReedMuller/                         closed-form grade enumerator (linear stratum)
 │       ├── BWCss/                       Reed-Muller CSS family
 │       ├── Grade/                       grade-stratified content:
 │       │     ├── Kernel/                kernel = lattice stabilizer

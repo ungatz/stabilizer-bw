@@ -2,12 +2,12 @@ import Mathlib
 import StabilizerBW.Qutrit.EisensteinToy.TCountTest
 
 /-!
-# T5 — The extended Clifford-phase ring `ℤ[ζ₉]` and the Howard–Vala T-gate
+# The extended Clifford-phase ring `ℤ[ζ₉]` and the Howard–Vala T-gate
 
-Layer 90's TEST 3 found a genuine obstruction: the Howard–Vala qutrit T-gate
+the development's TEST 3 found a genuine obstruction: the Howard–Vala qutrit T-gate
 `T₃ = diag(1, ζ₉, ζ₉⁴)` has phases that are **primitive 9th roots of unity**,
 and *there is no primitive 9th root of unity in the Eisenstein integers*
-`ℤ[ω] = ℤ[ζ₃]` (`QutritEisensteinAnalogue.TCountTest.no_isPrimitiveRoot_nine`).
+`ℤ[ω] = ℤ[ζ₃]` (`EisensteinToy.TCountTest.no_isPrimitiveRoot_nine`).
 So `T₃` is *not* representable over the base cyclotomic ring `ℤ[ζ₃]`.
 
 The PLAYBOOK §14 design pattern for prime-`d` cyclotomic-lattice analogues is to
@@ -25,7 +25,7 @@ the obstruction was specific to the *base* ring `ℤ[ζ₃]`; in the extended ri
 Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by]`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 open Polynomial
 
@@ -77,4 +77,4 @@ theorem qutrit_T_gate_representable :
   · rfl
   · rfl
 
-end QutritCSSBarnesWall
+end QutritCSSBW

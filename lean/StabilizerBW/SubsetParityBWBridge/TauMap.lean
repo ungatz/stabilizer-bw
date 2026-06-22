@@ -20,7 +20,7 @@ open Finset SubsetParityBWBridge.ParityBit
 
 /-- The parity-tag map: `τ P i` is the parity bit of the `i`-th linear
 coefficient `P.2 i`. -/
-def tau {m : ℕ} (P : T1A.LinPhase m) : Fin m → Bool := fun i => parityBit (P.2 i)
+def tau {m : ℕ} (P : ReedMuller.LinPhase m) : Fin m → Bool := fun i => parityBit (P.2 i)
 
 /-- **Per-coordinate fiber.** For each tag `b̄ : Fin m → Bool`, exactly `4^m`
 coefficient vectors `f : Fin m → ZMod 8` have parity profile `b̄`. -/
@@ -43,9 +43,9 @@ theorem fiber_card {m : ℕ} (b : Fin m → Bool) :
 `8·4^m`; the pushforward of uniform measure on `LinPhase m` is uniform on
 `Fin m → Bool`. -/
 theorem tau_fiber_card {m : ℕ} (b : Fin m → Bool) :
-    (Finset.univ.filter (fun P : T1A.LinPhase m => tau P = b)).card = 8 * 4 ^ m := by
+    (Finset.univ.filter (fun P : ReedMuller.LinPhase m => tau P = b)).card = 8 * 4 ^ m := by
   classical
-  have hset : (Finset.univ.filter (fun P : T1A.LinPhase m => tau P = b))
+  have hset : (Finset.univ.filter (fun P : ReedMuller.LinPhase m => tau P = b))
       = (Finset.univ : Finset (ZMod 8)) ×ˢ
           (Finset.univ.filter (fun f : Fin m → ZMod 8 => (fun i => parityBit (f i)) = b)) := by
     ext ⟨c, f⟩

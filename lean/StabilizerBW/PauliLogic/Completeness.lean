@@ -466,7 +466,7 @@ theorem stab_trace_eq {n : ℕ} {Γ : List (Pauli n)} {Q : Pauli n}
   · convert mtrace_stabSum.symm using 1
 
 /-
-**The trace identity (T1).**  If `Γ ⊢ Q` is valid, `Γ` is
+**The trace identity .**  If `Γ ⊢ Q` is valid, `Γ` is
     commuting, and `-I ∉ ⟨Γ⟩`, then `Q` is a signed subset product of `Γ`.
 -/
 theorem trace_identity {n : ℕ} {Γ : List (Pauli n)} {Q : Pauli n}
@@ -509,7 +509,7 @@ theorem gen_derivation_nonempty {n : ℕ} {Γ : List (Pauli n)} (hcomm : Commuti
     (a : Fin Γ.length → Bool) : Nonempty (Derivation Γ (gen Γ a)) :=
   genOn_derivation_nonempty hcomm _ a
 
-/-! ## The `V(Γ) = 0` case (T2) -/
+/-! ## The `V(Γ) = 0` case -/
 
 /-- **T2.**  If the code space of `Γ` is trivial (`V Γ = {0}`), then the
     theory is contradictory: `Γ ⊢ ⊥` is derivable.  Either `Γ` contains an
@@ -541,7 +541,7 @@ theorem bottom_from_zero_space {n : ℕ} {Γ : List (Pauli n)}
 
 /-! ## Completeness -/
 
-/-- **Completeness of PL_n** (T3), `Nonempty` form. -/
+/-- **Completeness of PL_n** , `Nonempty` form. -/
 theorem completeness_nonempty {n : ℕ} {Γ : List (Pauli n)} {Q : Pauli n}
     (hvalid : Valid Γ Q) : Nonempty (Derivation Γ Q) := by
   by_cases hcomm : Commuting Γ
@@ -567,7 +567,7 @@ theorem completeness_nonempty {n : ℕ} {Γ : List (Pauli n)} {Q : Pauli n}
       | true => exact absurd h hij
     exact ⟨Derivation.botElim Q (BotDerivation.clash hf (Derivation.ax i) (Derivation.ax j))⟩
 
-/-- **Completeness of PL_n** (T3): every valid sequent has a derivation. -/
+/-- **Completeness of PL_n** : every valid sequent has a derivation. -/
 noncomputable def completeness {n : ℕ} {Γ : List (Pauli n)} {Q : Pauli n}
     (hvalid : Valid Γ Q) : Derivation Γ Q :=
   (completeness_nonempty hvalid).some

@@ -4,9 +4,9 @@ import StabilizerBW.Roots.Tcount
 import StabilizerBW.Roots.Filtration
 
 /-!
-# T2 — The literal kernel is the grade-`0` lattice stabilizer (Clifford-type sector)
+# The literal kernel is the grade-`0` lattice stabilizer (Clifford-type sector)
 
-**Branch A (positive).**  The literal BW-grade kernel at every `n` has a finitely
+** (positive).**  The literal BW-grade kernel at every `n` has a finitely
 described, algebraic form: it is exactly the set of diagonal operators that preserve the
 Barnes–Wall lattice `BW_n` (no `λ`-adic depth).  This is the all-`n` statement
 
@@ -35,13 +35,13 @@ generators `S`, `X` and the identity `II` lie in it, while the non-Clifford `T` 
 exactly the `g(T) = 1` separation of `Roots.grade_T`.
 -/
 
-namespace BWGradeKernelClassification.LiteralKernel
+namespace KernelClassification.LiteralKernel
 
-open Roots BWGradeKernelClassification
+open Roots KernelClassification
 
-/-! ## Branch A — the all-`n` closed form -/
+/-! ## the all-`n` closed form -/
 
-/-- **Branch A, all `n`.** The literal BW-grade kernel equals the grade-`0` lattice
+/-- **, all `n`.** The literal BW-grade kernel equals the grade-`0` lattice
 stabilizer (the Clifford-type, lattice-automorphism sector). -/
 theorem bwGradeKernel_eq_latticeStabilizer (n : ℕ) :
     bwGradeKernel n = bwLatticeStabilizer n := by
@@ -114,4 +114,4 @@ theorem T_not_mem_mat2GradeKernel : Mat2.T ∉ mat2GradeKernel := by
   rw [mem_mat2GradeKernel, grade_T]
   omega
 
-end BWGradeKernelClassification.LiteralKernel
+end KernelClassification.LiteralKernel

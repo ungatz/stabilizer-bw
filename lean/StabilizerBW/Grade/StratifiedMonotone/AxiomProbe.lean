@@ -4,14 +4,14 @@ import StabilizerBW.Grade.StratifiedMonotone.FalsifiedBranch
 import StabilizerBW.Grade.StratifiedMonotone.MagicStateCheck
 
 /-!
-# T9 — axiom probe
+# axiom probe
 
 `#print axioms` on the headline and supporting results.  Target: every headline rests only on the
 standard `{propext, Classical.choice, Quot.sound}` base (no `sorry`, no custom `axiom`, no
 `native_decide`).
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 #print axioms C_ub_PauliWeight
 #print axioms C_ub_PauliWeight_via_HW
@@ -28,4 +28,4 @@ namespace BWGradeStratifiedMonotoneR2
 #print axioms wState_satisfies_bound
 #print axioms stratState_satisfies_bound
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

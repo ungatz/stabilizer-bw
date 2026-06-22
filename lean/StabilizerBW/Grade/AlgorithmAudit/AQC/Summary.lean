@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.AlgorithmAudit.AQC.Carries
 
 /-!
-# T6 — The AQC grade-audit summary table
+# The AQC grade-audit summary table
 
 `gradeAudit_summary_AQC` collects, in one place, the four headline closed-form
 grades (= T-counts) of the audited AQC algorithms, each a genuine `T`-count of an
@@ -15,7 +15,7 @@ honest Clifford+T circuit with its synthesis carries explicit:
 | VQE  `vqe L n tPerRot tPerTrotterRot`              | `L · (n · tPerRot) + 3 · tPerTrotterRot · (n-1)` | `Θ(L · n log 1/ε + n log 1/ε)` |
 
 This is the publishable summary for the AQC half of the chapter's positioning,
-extending Layer 60 (QFT / Shor / Grover / Trotter) and Layer 65 (incomparability
+extending the development (QFT / Shor / Grover / Trotter) and the development (incomparability
 witnesses).
 -/
 

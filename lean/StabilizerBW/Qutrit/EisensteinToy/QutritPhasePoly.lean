@@ -1,7 +1,7 @@
 import StabilizerBW.Qutrit.EisensteinToy.EisensteinIntegers
 
 /-!
-# T2 — Qutrit phase polynomials and the down-set Möbius transform
+# Qutrit phase polynomials and the down-set Möbius transform
 
 The qubit arithmetic view encodes a diagonal operator by its phase function and analyses it via
 the **down-set Möbius transform** (finite differences) of the phases.  We provide the qutrit

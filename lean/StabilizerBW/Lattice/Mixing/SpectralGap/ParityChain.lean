@@ -1,21 +1,21 @@
 import Mathlib
 
 /-!
-# T1 — The LaRacuente parity-conditioned birth–death chain
+# The parity-conditioned birth–death chain
 
 We define the parity-conditioned birth–death Markov chain on the count statistic
 `K_t = #{1's at time t}` over `m` parity bits, with bipartite transition
 probability `p`, from
 
-> M. LaRacuente, *Noise & 2-Designs Notes (Markov chain analysis)*,
-> `refs/laracuente/noise-2designs-markov-chain.tex`, **lines 196–200**:
+> the Krawtchouk diagonalisation,
+> the standard Krawtchouk diagonalisation
 > `P(k, k+2) = (1-p)·C(m-k,2)/C(m,2)`,  `P(k, k-2) = p·C(k,2)/C(m,2)`,
 > with the diagonal absorbing the remaining mass.
 
 The headline is row-stochasticity: every row sums to `1`.
 -/
 
-namespace ParityChainBWGradeMixing.ParityChain
+namespace ParityChainBWGrade.ParityChain
 
 open Finset
 
@@ -78,4 +78,4 @@ theorem parityChain_transition_sums_one (p : ℝ) (m k : ℕ) (hk : k ≤ m) :
            field_simp
            ring)
 
-end ParityChainBWGradeMixing.ParityChain
+end ParityChainBWGrade.ParityChain

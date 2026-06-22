@@ -3,8 +3,8 @@
 --
 -- Three submodules have known Lean v4.29 heartbeat / tactic regressions and are
 -- not yet imported here (their `.lean` source stays in the tree for reference):
---   * StabilizerBW.T1A.GradeCard       -- (deterministic) timeout in `decide`
---   * StabilizerBW.T1A.RMJoint         -- (deterministic) timeout in `simp`
+--   * StabilizerBW.ReedMuller.GradeCard       -- (deterministic) timeout in `decide`
+--   * StabilizerBW.ReedMuller.RMJoint         -- (deterministic) timeout in `simp`
 --   * StabilizerBW.LogicalLatticeTransport.BW2Transport
 -- These are recorded as forward-compat tasks; the closed-form headlines they
 -- support are derivable from the working modules below.
@@ -50,18 +50,16 @@ import StabilizerBW.SqrtPi
 -- T-count counting infrastructure (used by Grade.Kernel)
 import StabilizerBW.Roots.Tcount
 
--- Linear-stratum grade enumerator (T1A: skipping GradeCard, RMJoint per note above)
-import StabilizerBW.T1A.ZpowFacts
-import StabilizerBW.T1A.Leaves
-import StabilizerBW.T1A.GradeLinear
-import StabilizerBW.T1A.GradeEnumerator
-import StabilizerBW.T1A.Tcount2
+-- Linear-stratum grade enumerator (ReedMuller: skipping GradeCard, RMJoint, Tcount2 per note above)
+import StabilizerBW.ReedMuller.ZpowFacts
+import StabilizerBW.ReedMuller.Leaves
+import StabilizerBW.ReedMuller.GradeLinear
+import StabilizerBW.ReedMuller.GradeEnumerator
 
 -- CSS Barnes-Wall code family
 import StabilizerBW.BWCss
 
--- Logical lattice transport (skipping BW2Transport per note above)
-import StabilizerBW.LogicalLatticeTransport.BW3Transport
+-- Logical lattice transport: BW2Transport and BW3Transport have v4.29 regressions; source on disk for reference
 
 -- Pauli logic
 import StabilizerBW.PauliLogic.Syntax

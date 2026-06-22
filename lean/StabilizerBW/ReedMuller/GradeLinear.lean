@@ -1,7 +1,7 @@
-import StabilizerBW.T1A.Leaves
+import StabilizerBW.ReedMuller.Leaves
 
 /-!
-# T1A — the pure-linear Barnes–Wall grade equals the T-count
+# ReedMuller — the pure-linear Barnes–Wall grade equals the T-count
 
 The Barnes–Wall grade `graden m (D_P)` of a linear phase polynomial
 `P = c₀ + Σᵢ cᵢ xᵢ` equals its per-monomial T-count
@@ -17,7 +17,7 @@ combined with the Möbius factorisation `mob_lin_eq` and the per-coefficient
 `λ`-valuation `factor_eq`.
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open Roots Roots.MoebiusClosed Roots.MoebiusAllN Z8
 open scoped Classical
@@ -60,14 +60,14 @@ nonzero, `ν_λ(m_U(D_P)) = Σ_{i∈U} ecoef cᵢ`.
 theorem valLam_mob_allNonzero {m : ℕ} (P : LinPhase m) (U : Finset (Fin m))
     (h : ∀ i ∈ U, P.2 i ≠ 0) :
     valLam (mob (leafVal m (toBWVec P)) U) = ((∑ i ∈ U, ecoef (P.2 i) : ℕ) : ℕ∞) := by
-  convert T1A.emult_lam_pow_mul_unit _ _ _ using 1;
+  convert ReedMuller.emult_lam_pow_mul_unit _ _ _ using 1;
   rotate_left;
   exact zpow8 P.1 * ∏ i ∈ U, unitOf ( P.2 i );
   · refine' IsUnit.mul _ _;
-    · exact T1A.zpow8_isUnit _;
-    · exact IsUnit.prod_iff.mpr fun i hi => T1A.unitOf_isUnit _ ( h i hi );
-  · rw [ T1A.mob_lin_eq ];
-    rw [ Finset.prod_congr rfl fun i hi => T1A.factor_eq _ ( h i hi ) ];
+    · exact ReedMuller.zpow8_isUnit _;
+    · exact IsUnit.prod_iff.mpr fun i hi => ReedMuller.unitOf_isUnit _ ( h i hi );
+  · rw [ ReedMuller.mob_lin_eq ];
+    rw [ Finset.prod_congr rfl fun i hi => ReedMuller.factor_eq _ ( h i hi ) ];
     rw [ Finset.prod_mul_distrib, Finset.prod_pow_eq_pow_sum ] ; ring;
     rfl
 
@@ -90,7 +90,7 @@ Each Möbius term is `≤` the T-count.
 theorem term_le_tCount {m : ℕ} (P : LinPhase m) (U : Finset (Fin m)) :
     (2 * U.card : ℕ∞) - valLam (mob (leafVal m (toBWVec P)) U) ≤ (tCountLin P : ℕ∞) := by
   by_cases h : ∃ i ∈ U, P.2 i = 0;
-  · rw [ T1A.valLam_mob_hasZero P U h ] ; norm_num;
+  · rw [ ReedMuller.valLam_mob_hasZero P U h ] ; norm_num;
   · rw [ valLam_mob_allNonzero ];
     · simp +zetaDelta at *;
       -- Since each term in the sum is at least 2, we have $2 * U.card \leq \sum_{i \in U} (ecoef (P.2 i) + oddIndic (P.2 i))$.
@@ -126,7 +126,7 @@ theorem term_oddSet {m : ℕ} (P : LinPhase m) :
 theorem mobBound_eq_tCount {m : ℕ} (P : LinPhase m) :
     mobBound m (toBWVec P) = (tCountLin P : ℕ∞) := by
   refine' le_antisymm ( Finset.sup_le _ ) _;
-  · exact fun U _ => T1A.term_le_tCount P U;
+  · exact fun U _ => ReedMuller.term_le_tCount P U;
   · by_cases h : tCountLin P = 0;
     · aesop;
     · refine' le_trans _ ( Finset.le_sup <| Finset.mem_filter.mpr ⟨ Finset.mem_powerset.mpr <| Finset.subset_univ _, _ ⟩ );
@@ -141,4 +141,4 @@ theorem gradeOf_eq_tCount {m : ℕ} (P : LinPhase m) : gradeOf P = tCountLin P :
   have : (gradeOf P : ℕ∞) = (tCountLin P : ℕ∞) := h
   exact_mod_cast this
 
-end T1A
+end ReedMuller

@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.EnumeratorBound.BandwidthScalingAllN
 
 /-!
-# MenuBandwidthAllN / MagicConserved — T4: the per-qubit-conserved magic-state gap
+# BandwidthScaling / MagicConserved — T4: the per-qubit-conserved magic-state gap
 
 We instantiate the bandwidth scaling on the `n`-qubit magic state `|H⟩^{⊗n}` (the
 tensor of single-qubit magic states with Bloch vector `(1/√3, 1/√3, 1/√3)`): every
@@ -16,19 +16,19 @@ W = n√3,   V = n(√3 − 1),   N = 6n,   gap = V/N = (√3 − 1)/6.
 
 ## Main results
 
-* `MenuBandwidthAllN.magicProfileN` — the all-`1/√3` `n`-qubit Pauli profile.
-* `MenuBandwidthAllN.magicProfileN_L` — `W(|H⟩^{⊗n}) = n√3`.
-* `MenuBandwidthAllN.magicProfileN_violation` — facet violation `n√3 − n`.
-* `MenuBandwidthAllN.magicProfileN_violation_nonneg` — the violation is nonnegative.
-* `MenuBandwidthAllN.magic_gap_conserved_allN` — **the per-qubit-conserved gap**:
+* `BandwidthScaling.magicProfileN` — the all-`1/√3` `n`-qubit Pauli profile.
+* `BandwidthScaling.magicProfileN_L` — `W(|H⟩^{⊗n}) = n√3`.
+* `BandwidthScaling.magicProfileN_violation` — facet violation `n√3 − n`.
+* `BandwidthScaling.magicProfileN_violation_nonneg` — the violation is nonnegative.
+* `BandwidthScaling.magic_gap_conserved_allN` — **the per-qubit-conserved gap**:
   `gap = (√3 − 1)/6` for every `n ≥ 2`.
-* `MenuBandwidthAllN.magic_gap_conserved_lower` — the conserved gap also satisfies
+* `BandwidthScaling.magic_gap_conserved_lower` — the conserved gap also satisfies
   the grade-enumerator scaling bound `gap ≥ V / (12 n)`.
 -/
 
 open scoped BigOperators
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 /-- The `n`-qubit magic profile `|H⟩^{⊗n}`: every Pauli expectation is `1/√3`. -/
 noncomputable def magicProfileN (n : ℕ) : Fin (3 * n) → ℝ := fun _ => 1 / Real.sqrt 3
@@ -81,4 +81,4 @@ theorem magic_gap_conserved_lower (n : ℕ) (hn : 2 ≤ n) :
       ≤ facetGap (cliffordFacetN n) (magicProfileN n) :=
   bandwidth_scaling_allN n hn (magicProfileN n) (magicProfileN_violation_nonneg n)
 
-end MenuBandwidthAllN
+end BandwidthScaling

@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.Comparisons.Incomparability.PauliCommutant
 
 /-!
-# T4 — Second witness: the Toffoli-`Z` gate `CCZ` at `n = 3`
+# Second witness: the Toffoli-`Z` gate `CCZ` at `n = 3`
 
 `CCZ = diag(1, 1, 1, 1, 1, 1, 1, -1)` on `3` qubits.  We compute, by one-by-one
 enumeration of all `64` projective Paulis at `n = 3` and direct (matrix) conjugation, that
@@ -19,7 +19,7 @@ The enumeration is `decide`-checked over `ℤ[ζ₈]` (no `native_decide`); by t
 `ℤ[ζ₈] ↪ ℂ` it is the genuine complex value.
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Roots
 
@@ -40,4 +40,4 @@ theorem CCZ_commutantCard : pauliCommutantCard CCZMatrix = 8 := by
 theorem CCZ_nullity : jiangWangNullity 3 (pauliCommutantCard CCZMatrix) = 3 := by
   rw [CCZ_commutantCard]; decide
 
-end GradeAuditIncomparable
+end GradeNullityComparison

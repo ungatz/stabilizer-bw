@@ -3,10 +3,10 @@ import StabilizerBW.Grade.Comparisons.Incomparability.CCZAnalysis
 import StabilizerBW.GradeAudit.Comparison
 
 /-!
-# T6 — Concrete instances of the audit's `JiangWangCarry` structure
+# Concrete instances of the audit's `JiangWangCarry` structure
 
 We plug the `decide`-checked Pauli-image cardinalities (`cT_commutantCard = 4`,
-`CCZ_commutantCard = 8`) into Layer 60's `GradeAudit.JiangWangCarry` structure, producing
+`CCZ_commutantCard = 8`) into the development's `GradeAudit.JiangWangCarry` structure, producing
 **concrete numerical instances** of the audit's carried Jiang–Wang data.
 
 The carrier requires a genuine `n`-qubit complex unitary (`U` together with a unitarity
@@ -27,7 +27,7 @@ cardinality rather than from an asserted number.
   to match the ancilla-free regime of `cT_JiangWangCarry`.
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Matrix Complex
 
@@ -110,4 +110,4 @@ theorem CCZ_JiangWangCarry_nullity : CCZ_JiangWangCarry.nullity = 3 := by
   show GradeAudit.stabilizerNullity 3 (pauliCommutantCard CCZMatrix) = 3
   rw [CCZ_commutantCard]; decide
 
-end GradeAuditIncomparable
+end GradeNullityComparison

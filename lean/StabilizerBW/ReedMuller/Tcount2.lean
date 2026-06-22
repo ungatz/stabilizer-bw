@@ -1,9 +1,9 @@
-import StabilizerBW.T1A.GradeCard
+import StabilizerBW.ReedMuller.GradeCard
 import StabilizerBW.Roots.BWModel
 import StabilizerBW.Roots.MultimonomialClosedForm
 
 /-!
-# T1A — degree-`≤ 2` syntactic T-count enumerator (stretch target 1 & 2)
+# ReedMuller — degree-`≤ 2` syntactic T-count enumerator (stretch target 1 & 2)
 
 For phase polynomials of degree `≤ 2` we enumerate the **syntactic per-monomial
 T-count** `tCount` (NOT the Barnes–Wall grade `g`; they differ on overlapping
@@ -19,7 +19,7 @@ example `x₁x₂ + x₁x₃` on `3` qubits: `tCount = 6` but the Barnes–Wall 
 `4` (the latter via the project's kernel-computable grade model `BWModel.grade`).
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open scoped Classical
 open Finset
@@ -46,10 +46,10 @@ def tCount {m : ℕ} (P : PhasePoly m 2) : ℕ :=
 def pmGF (z : ℤ) (d : ℕ) : ℤ := ∑ c : ZMod 8, z ^ (perMonomialGrade c d)
 
 theorem pmGF_zero (z : ℤ) : pmGF z 0 = 8 := by
-  convert T1A.constant_GF z
+  convert ReedMuller.constant_GF z
 
 theorem pmGF_one (z : ℤ) : pmGF z 1 = 4 + 4 * z := by
-  convert T1A.perLinearMonomial_GF z using 1
+  convert ReedMuller.perLinearMonomial_GF z using 1
 
 theorem pmGF_two (z : ℤ) : pmGF z 2 = 2 + 2 * z ^ 2 + 4 * z ^ 3 := by
   unfold pmGF;
@@ -80,7 +80,7 @@ theorem card_filter_card_eq (m j : ℕ) :
 theorem tCount_GF_deg2_factorises (m : ℕ) (z : ℤ) :
     (∑ P : PhasePoly m 2, z ^ tCount P)
       = 8 * (4 + 4 * z) ^ m * (2 + 2 * z ^ 2 + 4 * z ^ 3) ^ Nat.choose m 2 := by
-  rw [ T1A.tCount_GF_prod ];
+  rw [ ReedMuller.tCount_GF_prod ];
   -- We can split the product into three parts: one for each possible cardinality.
   have h_split : (∏ S : {S : Finset (Fin m) // S.card ≤ 2}, pmGF z S.val.card) =
     (∏ S ∈ Finset.univ.filter (fun S : Finset (Fin m) => S.card = 0), pmGF z S.card) *
@@ -115,4 +115,4 @@ theorem tCount_ne_grade_overlap_example :
     tCount overlapExample = 6 ∧ BWModel.grade 3 overlapDeVec = 4 :=
   ⟨by decide, Roots.Multimonomial.g_P3⟩
 
-end T1A
+end ReedMuller

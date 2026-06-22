@@ -1,7 +1,7 @@
 import StabilizerBW.GradeAudit
 
 /-!
-# T2 — Grade (= T-count) of amplitude amplification `AA_m`
+# Grade (= T-count) of amplitude amplification `AA_m`
 
 ## Honesty note
 

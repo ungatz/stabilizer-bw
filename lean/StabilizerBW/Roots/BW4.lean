@@ -28,10 +28,10 @@ package it as `gradeLE4 D k := MapsToL4 (scale16 (λ^k) D)`, mirroring `Roots.BW
 
 ## Results (all kernel-checked)
 
-Transport (T2): `g(CCZ⊗I)=2`, `g(ccT⊗I)=5`, etc., all equal to the lower-dimensional
+Transport : `g(CCZ⊗I)=2`, `g(ccT⊗I)=5`, etc., all equal to the lower-dimensional
 grade.
 
-New four-qubit column (T3):
+New four-qubit column :
 * `g(CCCZ) = 4`     (`e = 4·x₁x₂x₃x₄`, `(d,ν) = (4,2)`),
 * `g(CCCS) = 6`     (`e = 2·x₁x₂x₃x₄`, `(d,ν) = (4,1)`),
 * `g(cccT) = 7`     (`e = 1·x₁x₂x₃x₄`, `(d,ν) = (4,0)`),

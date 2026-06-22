@@ -1,13 +1,13 @@
 import StabilizerBW.Qutrit.EisensteinToy.EisensteinIntegers
 
 /-!
-# T3 — The *genuine* qutrit Barnes–Wall grade over `ℤ[ω]`
+# The *genuine* qutrit Barnes–Wall grade over `ℤ[ω]`
 
 This is the corrected qutrit analogue of the qubit level-3 Barnes–Wall lattice
 `L₃ = {(x,y) ∈ ℤ[ζ₈]² : (1+i) ∣ (x+y)}` (`StabilizerBW.Roots/Lattice.lean`).
 
-The decisive arithmetic point that Layer 90's *toy* lattice
-(`StabilizerBW.QutritEisensteinAnalogue/BW3.lean`) got wrong is the choice of
+The decisive arithmetic point that the development's *toy* lattice
+(`StabilizerBW.EisensteinToy/BW3.lean`) got wrong is the choice of
 **lattice modulus**.  In the qubit case the modulus is `1+i`, which is *not* the
 ramified prime `λ₂ = 1-ζ₈` above the dimension `d = 2`, but its **square**:
 `1+i = λ₂²·unit`, equivalently `(1+i)` and `(2)` have the same `λ₂`-valuation up
@@ -15,7 +15,7 @@ to the unit, with `ν_{λ₂}(2) = 2`.  The grade scaling, by contrast, is by th
 single prime `λ₂`.  The "`2`" in the qubit closed form `g = 2·d − p` is exactly
 `ν_{λ₂}(2) = 2`.
 
-Layer 90's toy lattice used the *prime* `λ₃ = 1-ω` itself as the modulus
+the development's toy lattice used the *prime* `λ₃ = 1-ω` itself as the modulus
 (`inL v ↔ λ₃ ∣ (x+y)`), the analogue of taking the qubit modulus to be `λ₂`
 rather than `λ₂² = 1+i`.  That collapses the coefficient to `ν_{λ₃}(λ₃) = 1`.
 
@@ -39,7 +39,7 @@ automorphism) and rescaling by the unit `ω` leave the grade unchanged
 Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by]`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 open QutritEis QutritEis.Eis
 
@@ -473,4 +473,4 @@ theorem gradeQ_invariant_under_qutrit_clifford (M : EMat3) :
   -- X₃² · X₃ = I
   decide
 
-end QutritCSSBarnesWall
+end QutritCSSBW

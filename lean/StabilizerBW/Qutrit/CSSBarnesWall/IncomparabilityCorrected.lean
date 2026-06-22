@@ -2,11 +2,11 @@ import StabilizerBW.Qutrit.CSSBarnesWall.StrictSubsetCorrected
 import StabilizerBW.Qutrit.CSSBarnesWall.ExtendedCyclotomicRing
 
 /-!
-# T6 — TEST 4 re-run: cT vs CCZ incomparability over the genuine lattice
+# TEST 4 re-run: cT vs CCZ incomparability over the genuine lattice
 
-Layer 65's qubit witnesses compare the Barnes–Wall **grade** against a second
+the development's qubit witnesses compare the Barnes–Wall **grade** against a second
 diagnostic order on the controlled-`T` (`cT`) and doubly-controlled-`Z` (`CCZ`)
-gates and find them *order-incomparable*.  Layer 90's qutrit attempt produced
+gates and find them *order-incomparable*.  the development's qutrit attempt produced
 **no** witnesses at all: the diagnostic `T`-bearing phases are `ζ₉`, which is not
 an Eisenstein integer, so the gates were unrepresentable over `ℤ[ω]`.
 
@@ -28,19 +28,19 @@ Two things change here:
 
    So `grade(ω) = 1 < 2 = grade(−1)` while `defect(−1) = 0 < defect(ω)`: the two
    orders **disagree**, exactly the incomparability phenomenon — now with
-   kernel-checked witnesses, which Layer 90 lacked.
+   kernel-checked witnesses, which the development lacked.
 
 **Honest scope.** The witnesses are at the single-qutrit (local) diagonal level
 of the genuine lattice; the full `9×9`/`27×27` `cT`/`CCZ` grade comparison would
 require the corresponding higher-rank extended lattices and is not carried out
-here.  What is established is that the obstruction that made Layer 90's TEST 4
+here.  What is established is that the obstruction that made the development's TEST 4
 *vacuous* (unrepresentability + no genuine grade) is removed, and the
 incomparability of the two diagnostic orders is realized by concrete grades.
 
 Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by]`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 open QutritEis QutritEis.Eis
 
@@ -79,7 +79,7 @@ incomparable, with kernel-checked witnesses.**
 * The genuine-grade order ranks the `CCZ`-type `ω`-phase below the Clifford
   `−1`-phase (`1 < 2`), whereas the corner-defect order ranks them the other way
   (`defect(−1) = 0`, `defect(ω) ≥ 1`).  The two orders disagree — the
-  incomparability lifts, now with concrete witnesses (Layer 90 had none). -/
+  incomparability lifts, now with concrete witnesses (the development had none). -/
 theorem qutrit_cT_CCZ_incomparability :
     -- (1) representability restored over the extended ring
     ((∃ z : ℤζ₉, IsPrimitiveRoot z 9) ∧ ¬ (∃ z : Eis, IsPrimitiveRoot z 9)) ∧
@@ -90,4 +90,4 @@ theorem qutrit_cT_CCZ_incomparability :
   ⟨⟨exists_primitiveRoot_nine_extended, no_isPrimitiveRoot_nine⟩,
    grade_order_omega_lt_negOne, cornerDefect_omega, cornerDefect_negOne⟩
 
-end QutritCSSBarnesWall
+end QutritCSSBW

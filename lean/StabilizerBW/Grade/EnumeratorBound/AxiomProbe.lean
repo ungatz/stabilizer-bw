@@ -1,14 +1,14 @@
 import StabilizerBW.Grade.EnumeratorBound.Summary
 
 /-!
-# MenuBandwidthAllN / AxiomProbe — T7: axiom audit
+# BandwidthScaling / AxiomProbe — T7: axiom audit
 
 We confirm that the all-`n` bandwidth headlines depend only on the standard
 foundational axioms `{propext, Classical.choice, Quot.sound}` (no `native_decide`,
 no `sorry`, no custom axioms).
 -/
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 -- T1: the n-qubit menu and stabilizer bound
 #print axioms octahedron_facet_stab_boundN
@@ -27,11 +27,7 @@ namespace MenuBandwidthAllN
 #print axioms magic_gap_conserved_allN
 #print axioms magic_gap_conserved_lower
 
--- T5: cross-validation
-#print axioms cross_n3_contextgame
-#print axioms cross_n4_layer68
-
 -- T6: the combined summary
 #print axioms bandwidth_allN_summary
 
-end MenuBandwidthAllN
+end BandwidthScaling

@@ -9,7 +9,7 @@ import StabilizerBW.Qutrit.EisensteinToy.Summary
 import StabilizerBW.Qutrit.EisensteinToy.AxiomProbe
 
 /-!
-# QutritEisensteinAnalogue — qutrit (`d = 3`) stress-test of the arithmetic-view machinery
+# EisensteinToy — qutrit (`d = 3`) stress-test of the arithmetic-view machinery
 
 Aggregator for the qutrit Eisenstein analogue.  See `Summary.lean` for the headline verdict
 (**PARTIALLY GENERAL**) and the four test outcomes.

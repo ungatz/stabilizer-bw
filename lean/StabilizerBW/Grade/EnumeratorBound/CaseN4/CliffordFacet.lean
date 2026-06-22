@@ -2,7 +2,7 @@ import StabilizerBW.MenuBridge
 import StabilizerBW.Grade.EnumeratorBound.CaseN4.CliffordMenuN4
 
 /-!
-# MenuBandwidthN4 / CliffordFacet — T2: the all-ones facet at `n = 4`
+# BandwidthN4 / CliffordFacet — T2: the all-ones facet at `n = 4`
 
 We package the four-qubit all-ones Clifford-menu facet as a `MenuBridge.Facet 12`
 (twelve single-qubit Pauli observables, coefficient `1` on each, classical bound

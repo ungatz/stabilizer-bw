@@ -1,7 +1,7 @@
 import StabilizerBW.SqrtPi.Lattice
 
 /-!
-# T5 — The two-qubit Barnes–Wall lattice `BW₂` and the grade table
+# The two-qubit Barnes–Wall lattice `BW₂` and the grade table
 
 The level-3 two-qubit Barnes–Wall lattice is built by the squaring (`(u | u+v)`) construction
 from the single-qubit lattice `L₃`:

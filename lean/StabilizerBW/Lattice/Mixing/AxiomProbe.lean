@@ -6,25 +6,25 @@ import StabilizerBW.Lattice.Mixing.SpectralGapReuse
 import StabilizerBW.Lattice.Mixing.TestPoints
 
 /-!
-# T7 — Axiom probe
+# Axiom probe
 
 `#print axioms` on every headline.  Each must reduce to the standard kernel
 axioms `{propext, Classical.choice, Quot.sound}`.  The two literature-attributed
-carriers — `LaRacuenteSpectralGapBound` (Layer 92) and
-`LaRacuenteSymmetricEquilibriumMarginal` (Layer 89) — are named `Prop`s /
+carriers — `SymmetricChainSpectralGapBound` (the development) and
+`SymmetricEquilibriumMarginal` (the development) — are named `Prop`s /
 hypotheses, **not** axioms, so they do not appear below.
 -/
 
-namespace BWParityChainMixingTime.AxiomProbe
+namespace MixingTime.AxiomProbe
 
-#print axioms BWParityChainMixingTime.MixingTime.bw_grade_mixing_time_bound
-#print axioms BWParityChainMixingTime.Asymptotic.bw_grade_mixing_explicit_constant
-#print axioms BWParityChainMixingTime.EhrenfestProjection.bw_grade_mixing_time_via_ehrenfest
-#print axioms BWParityChainMixingTime.EhrenfestProjection.bwGrade_stationary_eq_laracuente
-#print axioms BWParityChainMixingTime.LevinPeresWilmer.mixing_time_le_of_spectral_decay
-#print axioms BWParityChainMixingTime.SpectralGapReuse.lpw_gap_at_pHalf
-#print axioms BWParityChainMixingTime.TestPoints.testpoint_m2
-#print axioms BWParityChainMixingTime.TestPoints.testpoint_m4
-#print axioms BWParityChainMixingTime.TestPoints.testpoint_m8
+#print axioms MixingTime.MixingTime.bw_grade_mixing_time_bound
+#print axioms MixingTime.Asymptotic.bw_grade_mixing_explicit_constant
+#print axioms MixingTime.EhrenfestProjection.bw_grade_mixing_time_via_ehrenfest
+#print axioms MixingTime.EhrenfestProjection.bwGrade_stationary_eq_symmetric_equilibrium
+#print axioms MixingTime.LevinPeresWilmer.mixing_time_le_of_spectral_decay
+#print axioms MixingTime.SpectralGapReuse.lpw_gap_at_pHalf
+#print axioms MixingTime.TestPoints.testpoint_m2
+#print axioms MixingTime.TestPoints.testpoint_m4
+#print axioms MixingTime.TestPoints.testpoint_m8
 
-end BWParityChainMixingTime.AxiomProbe
+end MixingTime.AxiomProbe

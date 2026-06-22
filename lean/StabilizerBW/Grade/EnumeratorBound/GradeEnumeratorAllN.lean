@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.EnumeratorBound.CliffordMenuAllN
 
 /-!
-# MenuBandwidthAllN / GradeEnumeratorAllN — T2: the all-`n` grade-enumerator bound
+# BandwidthScaling / GradeEnumeratorAllN — T2: the all-`n` grade-enumerator bound
 
 The diagonal-character lift of a facet of the `n`-qubit stabilizer polytope has a
 Barnes–Wall grade `g`.  This file packages the **closed-form upper bound on a
@@ -15,19 +15,19 @@ This is the all-`n` generalisation of `CliffordMenuN4.gradeEnumeratorBound`.
 
 ## Main results
 
-* `MenuBandwidthAllN.gradeEnumeratorBound` — the closed-form bound `6n + 2g`.
-* `MenuBandwidthAllN.gradeEnumeratorBound_grade0` — at grade `0` it equals `6n`,
+* `BandwidthScaling.gradeEnumeratorBound` — the closed-form bound `6n + 2g`.
+* `BandwidthScaling.gradeEnumeratorBound_grade0` — at grade `0` it equals `6n`,
   the `N(n) = 6n` ceiling of the all-ones facet.
-* `MenuBandwidthAllN.gradeEnumeratorBound_pos` — strict positivity at `n ≥ 1`.
-* `MenuBandwidthAllN.GradeEnumeratorBoundFacetCorrespondence` — the correspondence
+* `BandwidthScaling.gradeEnumeratorBound_pos` — strict positivity at `n ≥ 1`.
+* `BandwidthScaling.GradeEnumeratorBoundFacetCorrespondence` — the correspondence
   Prop: `f.S ≤ gradeEnumeratorBound n g` for a facet `f` with grade `g`.
-* `MenuBandwidthAllN.cliffordFacetN_correspondence` — the correspondence holds
+* `BandwidthScaling.cliffordFacetN_correspondence` — the correspondence holds
   **unconditionally** for the all-ones facet (grade `0`): `S = 3n ≤ 6n`.
 -/
 
 open scoped BigOperators
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 /-- **T2: the closed-form grade-enumerator bound** on a facet's coefficient
 ℓ¹-norm: `6n + 2g`, where `n` is the qubit count and `g` the Barnes–Wall grade of
@@ -72,4 +72,4 @@ theorem coeff_l1_le_grade_enumerator (n : ℕ) (f : MenuBridge.Facet (3 * n)) (g
     (hcorr : GradeEnumeratorBoundFacetCorrespondence n f g) :
     f.S ≤ gradeEnumeratorBound n g := hcorr
 
-end MenuBandwidthAllN
+end BandwidthScaling

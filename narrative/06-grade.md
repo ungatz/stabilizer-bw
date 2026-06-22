@@ -60,7 +60,7 @@ The bivariate generating function over all linear phases at level *m* factorises
 ```math
 \sum_{P : \deg P \le 1} z^{g(D_P)} = 8 \cdot (4 + 4z)^m = 8 \cdot 4^m \cdot (1 + z)^m.
 ```
-This is the kernel-checked headline of [`../lean/StabilizerBW/T1A/`](../lean/StabilizerBW/T1A/).
+This is the kernel-checked headline of [`../lean/StabilizerBW/ReedMuller/`](../lean/StabilizerBW/ReedMuller/).
 
 ## Off the linear stratum: grade is not the *T*-count
 
@@ -86,7 +86,7 @@ The arithmetic and coding-theoretic readings are not the same proof. The Lean mo
 
 ## What's here and where
 
-The arithmetic of $\mathbb{Z}[\zeta_8]$ and $\lambda$ — the addition, multiplication, $\lambda$-adic valuation — is the Haskell module [`../haskell/src/Cyclotomic.hs`](../haskell/src/Cyclotomic.hs). The closed-form upper bound and the named-character table are [`../haskell/src/Grade.hs`](../haskell/src/Grade.hs); the demo in `Main.hs` cross-checks every row of the table against the formula. The Lean side carries the formal proofs: single-qubit grade infrastructure in [`Matrices.lean`](../lean/StabilizerBW/Roots/Matrices.lean), the two-qubit kernel-verified diagonal table in `BW2.lean`, the three- and four-qubit grades in `BW3.lean` and `BW4.lean`, the all-*n* upper bound in `UpperBoundAllN.lean`, the lower-bound machinery in `LowerBoundAllN.lean` and `StrictSubsetLowerBoundAllN.lean`, the cross-level self-similarity in `CrossLevelSelfSimilarity.lean`, the multi-monomial Möbius closed form in `MultimonomialClosedForm.lean` and `MoebiusClosedFormAllN.lean`, the linear-phase grade enumerator in `T1A/`, and the Reed–Muller CSS construction in `BWCss/`.
+The arithmetic of $\mathbb{Z}[\zeta_8]$ and $\lambda$ — the addition, multiplication, $\lambda$-adic valuation — is the Haskell module [`../haskell/src/Cyclotomic.hs`](../haskell/src/Cyclotomic.hs). The closed-form upper bound and the named-character table are [`../haskell/src/Grade.hs`](../haskell/src/Grade.hs); the demo in `Main.hs` cross-checks every row of the table against the formula. The Lean side carries the formal proofs: single-qubit grade infrastructure in [`Matrices.lean`](../lean/StabilizerBW/Roots/Matrices.lean), the two-qubit kernel-verified diagonal table in `BW2.lean`, the three- and four-qubit grades in `BW3.lean` and `BW4.lean`, the all-*n* upper bound in `UpperBoundAllN.lean`, the lower-bound machinery in `LowerBoundAllN.lean` and `StrictSubsetLowerBoundAllN.lean`, the cross-level self-similarity in `CrossLevelSelfSimilarity.lean`, the multi-monomial Möbius closed form in `MultimonomialClosedForm.lean` and `MoebiusClosedFormAllN.lean`, the linear-phase grade enumerator in `ReedMuller/`, and the Reed–Muller CSS construction in `BWCss/`.
 
 ## The kernel of the grade homomorphism
 

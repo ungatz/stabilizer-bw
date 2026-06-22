@@ -1,7 +1,7 @@
 import StabilizerBW.Qutrit.CSSBarnesWall.QutritReedMuller
 
 /-!
-# T2 — The genuine qutrit-CSS Barnes–Wall lattice `BWCssQutrit(m, r₁, r₂)`
+# The genuine qutrit-CSS Barnes–Wall lattice `BWCssQutrit(m, r₁, r₂)`
 
 We package the classical-code data of a qutrit (`𝔽₃`) CSS code and build the
 Reed–Muller-pair member, the `q = 3` analogue of the chapter's
@@ -28,7 +28,7 @@ Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by
 open scoped BigOperators
 open Classical
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 /-- The classical-code data of a qutrit (`𝔽₃`) CSS code, in the evaluation-point
 model, together with the CSS containment condition `CX ≤ CZ^⊥`. -/
@@ -115,4 +115,4 @@ theorem BWCssQutrit_3_1_0 :
   rw [hCX]
   decide
 
-end QutritCSSBarnesWall
+end QutritCSSBW

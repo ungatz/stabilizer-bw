@@ -2,9 +2,9 @@ import StabilizerBW.Grade.Kernel.StratumEquivalence
 import StabilizerBW.Grade.Comparisons.Incomparability.Incomparability
 
 /-!
-# T5 — Cross-link to Layer 65 (Jiang–Wang nullity) and Layer 76 (tight roster)
+# Cross-link to the development (Jiang–Wang nullity) and the development (tight roster)
 
-Layer 65 (`GradeAuditIncomparable`) established that the BW grade `g` and the Jiang–Wang
+the development (`GradeNullityComparison`) established that the BW grade `g` and the Jiang–Wang
 unitary stabilizer nullity `ν` are **incomparable** lower bounds on `T`-count.  Their two
 kernels are nonetheless not disjoint; this file identifies operators in **both** kernels
 and operators in **neither**.
@@ -17,22 +17,22 @@ and operators in **neither**.
 
 * **In neither kernel** — the controlled-`T` gate `cT = diag(1,1,1,ζ₈)` at `n = 2`:
   - `g(cT) = 3 ≠ 0` (`Roots.grade2_cT`);
-  - `ν(cT) = 2 ≠ 0` (`GradeAuditIncomparable.cT_nullity`).
+  - `ν(cT) = 2 ≠ 0` (`GradeNullityComparison.cT_nullity`).
 
 The commutant cardinality of `CZ` is `decide`-checked over `ℤ[ζ₈]` (no `native_decide`),
-mirroring the `cT`/`CCZ` enumerations of Layer 65.
+mirroring the `cT`/`CCZ` enumerations of the development.
 
-## Layer 76 cross-link
+## the development cross-link
 
-The Layer 76 tight roster (`BWGradeTightWitnesses`) records that on the `(CS, CCZ)` pair
+The the development tight roster (`TightWitnessRoster`) records that on the `(CS, CCZ)` pair
 the grade and the published `T`-count diverge (`T(CCZ) − T(CS) = 7 − 2 = 5`); see
 `StratumEquivalence.stratum_witness_explicit`.  Both `CS` and `CCZ` sit *outside* the BW
 kernel (grade `2 ≠ 0`), consistent with the kernel being exactly the grade-`0` sector.
 -/
 
-namespace BWGradeKernelClassification.CrossLinkLayer65Layer76
+namespace KernelClassification.CrossLinkLayer65Layer76
 
-open Roots GradeAuditIncomparable
+open Roots GradeNullityComparison
 
 /-- The diagonal of the controlled-`Z` gate on `2` qubits: `(1, 1, 1, −1)`. -/
 def dCZ : Fin 4 → Z8 := fun i => if i = 3 then (-1) else 1
@@ -65,11 +65,11 @@ theorem cT_in_neither_kernel :
   · rw [Roots.grade2_cT]; omega
   · rw [cT_nullity]; omega
 
-/-! ## Layer 76 cross-link: the tight roster `(CS, CCZ)` sit outside the BW kernel -/
+/-! ## the development cross-link: the tight roster `(CS, CCZ)` sit outside the BW kernel -/
 
-/-- The Layer 76 `(CS, CCZ)` pair is outside the BW-grade kernel (both have grade `2`). -/
+/-- The the development `(CS, CCZ)` pair is outside the BW-grade kernel (both have grade `2`). -/
 theorem CS_CCZ_outside_bwKernel :
     Roots.grade2 Roots.CS ≠ 0 ∧ Roots.grade3 Roots.CCZ ≠ 0 :=
   ⟨StratumEquivalence.grade2_CS_ne_zero, StratumEquivalence.grade3_CCZ_ne_zero⟩
 
-end BWGradeKernelClassification.CrossLinkLayer65Layer76
+end KernelClassification.CrossLinkLayer65Layer76

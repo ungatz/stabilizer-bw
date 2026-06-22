@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.AlgorithmAudit.AQC.Summary
 
 /-!
-# T7 — Axiom probe
+# Axiom probe
 
 `#print axioms` for the AQC audit headlines.  Each must depend only on the standard
 kernel axioms `{propext, Classical.choice, Quot.sound}` (or a subset) — no `sorry`,

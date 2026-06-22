@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.TightWitnesses.Summary
 
 /-!
-# T6 — Non-vacuity / non-tautology certificate
+# Non-vacuity / non-tautology certificate
 
 The tightness theorems (`Tight.lean`) are only meaningful if the literature T-counts in
 `selingerTOpt` are **independently sourced** constants — not values mechanically chosen to
@@ -22,7 +22,7 @@ equal the BW grades.  This file certifies that.
   makes the *tight* coincidences on `T`, `CS`, `cT` substantive.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 open Roots
 
@@ -57,4 +57,4 @@ theorem selingerTOpt_independent_of_grade :
   · rw [Roots.grade3_CCS]; decide
   · rw [Roots.grade3_ccT]; decide
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

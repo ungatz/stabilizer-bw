@@ -3,7 +3,7 @@ import StabilizerBW.GradeAudit.CircuitGrade
 /-!
 # Grade (= T-count) of a concrete Grover oracle via Toffoli decomposition
 
-## Honesty note (fixing r1's fabricated-grade error)
+## Honesty note (fixing the original fabricated-grade error)
 
 Rather than positing an abstract "one T per marked item" oracle, we audit a
 **concrete** predicate: the AND-of-bits predicate `f(x) = (x = 1…1)`, marking the

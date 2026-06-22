@@ -2,7 +2,7 @@ import StabilizerBW.Qutrit.EisensteinToy.QutritPhasePoly
 import StabilizerBW.Qutrit.EisensteinToy.BW3
 
 /-!
-# T5 — TEST 2: the multi-monomial Möbius closed form
+# TEST 2: the multi-monomial Möbius closed form
 
 The qubit closed form (`Roots.mobius_eq_grade_allN`) reads
 

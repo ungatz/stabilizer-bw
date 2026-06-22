@@ -2,7 +2,7 @@ import StabilizerBW.Qutrit.CSSBarnesWall.QutritGrade
 import StabilizerBW.Qutrit.EisensteinToy.BW3
 
 /-!
-# T4 — TEST 1 re-run: the strict-subset closed form over the *genuine* lattice
+# TEST 1 re-run: the strict-subset closed form over the *genuine* lattice
 
 The qubit chapter's single-coordinate strict-subset law
 (`StabilizerBW.Roots/StrictSubsetLowerBoundAllN.lean`) is
@@ -10,8 +10,8 @@ The qubit chapter's single-coordinate strict-subset law
 valuation of the corner phase defect, and the **coefficient `2 = ν_{λ₂}(2)`**:
 the dimension `d = 2` is `λ₂²·unit`.
 
-Layer 90's *toy* lattice gave the wrong coefficient `1`
-(`QutritEisensteinAnalogue/StrictSubsetTest.lean`): it used the prime `λ₃`
+the development's *toy* lattice gave the wrong coefficient `1`
+(`EisensteinToy/StrictSubsetTest.lean`): it used the prime `λ₃`
 itself as the lattice modulus (instead of its square), collapsing the constant
 to `ν_{λ₃}(λ₃) = 1`.  The DISPATCH's naive lift proposed coefficient `3`.
 
@@ -29,7 +29,7 @@ The toy lattice's coefficient `1` and the naive `3` are both refuted.
 Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by]`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 open QutritEis QutritEis.Eis
 
@@ -68,7 +68,7 @@ def naivePredict (d m : ℕ) : ℕ := 3 * d - 3 ^ m
 /-- The qubit prediction `max(0, 2·d − 2^m)`. -/
 def qubitPredict (d m : ℕ) : ℕ := 2 * d - 2 ^ m
 
-/-- Layer 90's toy-lattice prediction (coefficient `1`): `max(0, 1·d − p)`. -/
+/-- the development's toy-lattice prediction (coefficient `1`): `max(0, 1·d − p)`. -/
 def toyPredict (d p : ℕ) : ℕ := 1 * d - p
 
 /-- The **corrected** genuine-lattice prediction (coefficient `2 = ν_{λ₃}(3)`):
@@ -129,4 +129,4 @@ theorem qutrit_strict_subset_coefficient_eq_2 :
   ⟨gradeQ_diagNegOne, strict_subset_corrected_negOne, coefficient_is_nu_lam_three,
    strict_subset_toy_coefficient_refuted, strict_subset_naive_refuted⟩
 
-end QutritCSSBarnesWall
+end QutritCSSBW

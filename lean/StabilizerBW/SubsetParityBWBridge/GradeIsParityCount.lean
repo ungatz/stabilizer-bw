@@ -15,14 +15,14 @@ open Finset SubsetParityBWBridge.ParityBit SubsetParityBWBridge.TauMap
 
 /-- **T3 headline.** The Barnes–Wall grade equals the number of odd parity
 coordinates of the tag `τ P`. -/
-theorem gradeOf_eq_tau_countOnes {m : ℕ} (P : T1A.LinPhase m) :
-    T1A.gradeOf P = (Finset.univ.filter (fun i => tau P i = true)).card := by
-  rw [T1A.gradeOf_eq_tCount]
-  unfold T1A.tCountLin
+theorem gradeOf_eq_tau_countOnes {m : ℕ} (P : ReedMuller.LinPhase m) :
+    ReedMuller.gradeOf P = (Finset.univ.filter (fun i => tau P i = true)).card := by
+  rw [ReedMuller.gradeOf_eq_tCount]
+  unfold ReedMuller.tCountLin
   rw [Finset.card_filter]
   apply Finset.sum_congr rfl
   intro i _
-  unfold tau T1A.oddIndic parityBit
+  unfold tau ReedMuller.oddIndic parityBit
   by_cases h : (P.2 i).val % 2 = 1 <;> simp [h]
 
 end SubsetParityBWBridge.GradeIsParityCount

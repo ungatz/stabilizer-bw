@@ -7,7 +7,7 @@ import StabilizerBW.Grade.Comparisons.Incomparability.BridgeToAudit
 import StabilizerBW.Grade.Comparisons.Incomparability.AxiomProbe
 
 /-!
-# GradeAuditIncomparable — concrete Pauli-image witnesses that the Barnes–Wall grade and
+# GradeNullityComparison — concrete Pauli-image witnesses that the Barnes–Wall grade and
 the Jiang–Wang stabilizer nullity are GENUINELY INCOMPARABLE lower bounds on `T`-count
 
 This directory operationalises the companion narrative chapter's claim that the chapter's BW grade `g`

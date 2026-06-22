@@ -1,9 +1,9 @@
 import StabilizerBW.Grade.Kernel.LiteralKernel
 
 /-!
-# T3 — The closed-form (algebraic) description of the literal kernel
+# The closed-form (algebraic) description of the literal kernel
 
-**Branch A confirmation.**  The literal BW-grade kernel is finitely/algebraically
+** confirmation.**  The literal BW-grade kernel is finitely/algebraically
 described as the grade-`0` lattice stabilizer, and it is closed under the algebraic
 operations of the diagonal `Cliff+T` sector:
 
@@ -12,7 +12,7 @@ operations of the diagonal `Cliff+T` sector:
   sub-additivity `Roots.graden_bwMul_le` (`g(D·E) ≤ g(D) + g(E)`).
 
 Hence the kernel is a **submonoid** of the diagonal-operator monoid under composition —
-the algebraic closed-form description promised by Branch A.  On the full single-qubit
+the algebraic closed-form description promised by .  On the full single-qubit
 `Mat2` model the same closure holds via the grade sub-multiplicativity `Roots.grade_mul`.
 
 The development headline `bwGradeKernel_closed_form_n1` records the `n = 1` instance: the
@@ -26,9 +26,9 @@ algebraic description (identity-containing, composition-closed, equal to the lat
 stabilizer); it is **confirmed** for every `n` by `bwGradeKernel_finitelyPresented`.
 -/
 
-namespace BWGradeKernelClassification.ClosedForm
+namespace KernelClassification.ClosedForm
 
-open Roots BWGradeKernelClassification
+open Roots KernelClassification
 
 /-! ## Closure of the diagonal kernel under composition -/
 
@@ -48,7 +48,7 @@ theorem bwMul_mem_kernel (n : ℕ) {D E : BWVec n}
 
 /-! ## The closed-form proposition -/
 
-/-- **Branch A's carried proposition.** The kernel at `n` admits a finite algebraic
+/-- **'s carried proposition.** The kernel at `n` admits a finite algebraic
 description: it equals the grade-`0` lattice stabilizer, contains the identity, and is
 closed under composition. -/
 def BWGradeKernelFinitelyPresented (n : ℕ) : Prop :=
@@ -57,7 +57,7 @@ def BWGradeKernelFinitelyPresented (n : ℕ) : Prop :=
   (∀ D E : BWVec n, D ∈ bwGradeKernel n → E ∈ bwGradeKernel n →
       bwMul n D E ∈ bwGradeKernel n)
 
-/-- **Branch A confirmed (all `n`).** The kernel is finitely/algebraically presented. -/
+/-- ** confirmed (all `n`).** The kernel is finitely/algebraically presented. -/
 theorem bwGradeKernel_finitelyPresented (n : ℕ) : BWGradeKernelFinitelyPresented n :=
   ⟨LiteralKernel.bwGradeKernel_eq_latticeStabilizer n, bwId_mem_kernel n,
     fun _ _ hD hE => bwMul_mem_kernel n hD hE⟩
@@ -84,4 +84,4 @@ theorem mat2_mul_mem_kernel {M N : Mat2}
   show grade (M * N) = 0
   omega
 
-end BWGradeKernelClassification.ClosedForm
+end KernelClassification.ClosedForm

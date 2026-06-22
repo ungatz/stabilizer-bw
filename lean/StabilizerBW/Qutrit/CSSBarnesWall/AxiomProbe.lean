@@ -8,7 +8,7 @@ standard kernel axioms `{propext, Classical.choice, Quot.sound}` — no `sorry`,
 `axiom`, and no `native_decide` (which would introduce `Lean.ofReduceBool`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 -- T1: qutrit Reed–Muller codes
 #print axioms QRM_params
@@ -37,4 +37,4 @@ namespace QutritCSSBarnesWall
 #print axioms qutrit_arithmetic_view_fully_general
 #print axioms toy_partial_vs_genuine_full
 
-end QutritCSSBarnesWall
+end QutritCSSBW

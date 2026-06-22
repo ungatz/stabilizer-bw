@@ -1,6 +1,9 @@
+import StabilizerBW.Grade.EnumeratorBound.CliffordMenuAllN
+import StabilizerBW.Grade.EnumeratorBound.BandwidthScalingAllN
+import StabilizerBW.Grade.EnumeratorBound.MagicConserved
 
 /-!
-# MenuBandwidthAllN / Summary — T6: the combined all-`n` statement
+# BandwidthScaling / Summary — the combined all-`n` statement
 
 A single statement combining the all-`n` closed-form bandwidth scaling and the
 per-qubit-conserved magic-state gap.
@@ -8,7 +11,7 @@ per-qubit-conserved magic-state gap.
 
 open scoped BigOperators
 
-namespace MenuBandwidthAllN
+namespace BandwidthScaling
 
 /-- **T6: the all-`n` bandwidth headline.**  For every `n ≥ 2`, at the `n`-qubit
 all-ones Clifford menu:
@@ -23,4 +26,4 @@ theorem bandwidth_allN_summary (n : ℕ) (hn : 2 ≤ n) :
       ∧ facetGap (cliffordFacetN n) (magicProfileN n) = (Real.sqrt 3 - 1) / 6 := by
   refine ⟨fun E hV => bandwidth_scaling_allN n hn E hV, magic_gap_conserved_allN n hn⟩
 
-end MenuBandwidthAllN
+end BandwidthScaling

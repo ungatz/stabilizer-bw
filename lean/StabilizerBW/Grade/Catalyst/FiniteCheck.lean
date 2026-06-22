@@ -10,7 +10,7 @@ we discharge the literal inequality on the whole T-free (Clifford) fragment unco
 composite witnesses.
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -42,4 +42,4 @@ theorem CompositeS13Discharge_well_defined :
     ∃ P : Prop, P = (∀ w : SqWord, Pi2.grade2 (toPi2 w) ≤ grade2obj (toPi3 w)) :=
   ⟨_, rfl⟩
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

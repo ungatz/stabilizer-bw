@@ -9,21 +9,21 @@ import StabilizerBW.Grade.StratifiedMonotone.FalsifiedBranch
 import StabilizerBW.Grade.StratifiedMonotone.AxiomProbe
 
 /-!
-# BWGradeStratifiedMonotoneR2 — corrected Pauli-weight-stratified upper bound on `C(ρ)`
+# StratifiedMonotone — corrected Pauli-weight-stratified upper bound on `C(ρ)`
 
-Aggregator for the **r2-corrective** module: a physical-density-operator, closed-form,
+Aggregator for the **corrected** module: a physical-density-operator, closed-form,
 Pauli-weight-stratified upper bound on Dutta–Tushar's magic functional `C(ρ)`.
 
-## The two r1 failures and their corrections
+## Two corrections
 
-1. **Wrong enumerator.**  r1 transported the *linear-phase* grade GF `8·4^m·(1+z)^m`.  The correct
+1. **Wrong enumerator.**  the original draft transported the *linear-phase* grade GF `8·4^m·(1+z)^m`.  The correct
    object the Pauli `ℓ¹` functional sees is the **Pauli-weight enumerator** `(1 + 3z)^m`
    (`pauliWeightEnumerator_factorises`), with weight-`g` stratum cardinality `C(m,g)·3^g`
    (`pauliWeightStratumCardinality`).
 
-2. **Vacuous carrier.**  r1's unrestricted `QubitState` admitted `ρ_X = 1000`.  Here the state space
+2. **Vacuous carrier.**  the original unrestricted `QubitState` admitted `ρ_X = 1000`.  Here the state space
    is the **physical density operator** `PhysicalDensity m` (bounded characteristic coefficients
-   `|χ_P| ≤ 1`, trace-one `χ_I = 1`), and the r1 falsifier is provably excluded
+   `|χ_P| ≤ 1`, trace-one `χ_I = 1`), and the original falsifier is provably excluded
    (`r1_counterexample_excluded`).
 
 ## Headline
@@ -39,13 +39,13 @@ constant is the cumulative weight-stratum cardinality `cUB_pw`.  The single load
 
 ## Contents
 
-* `PhysicalDensity` (T1): state space, `duttaTusharC`, Bloch–Pauli bridge, `|a_P| ≤ 1/2^m`.
-* `PauliWeightEnumerator` (T2): `(1+3z)^m` and stratum cardinality `C(m,g)·3^g`.
-* `PauliWeightSupportStratum` (T3): the weight-`≤ g` support stratification.
-* `UpperBound` (T4): `cUB_pw`, closed form, the Heisenberg–Weyl carriers.
-* `Headline` (T5): `C_ub_PauliWeight` (+ conditional `_via_HW`).
-* `MagicStateCheck` (T6): T-, GHZ-, W-state and a strict-stratum example.
-* `ComparisonBCHK` (T7): sharper than the unstratified BCHK dyadic bound.
-* `FalsifiedBranch` (T8): refutation hook and r1-counterexample exclusion.
-* `AxiomProbe` (T9): axiom hygiene.
+* `PhysicalDensity` : state space, `duttaTusharC`, Bloch–Pauli bridge, `|a_P| ≤ 1/2^m`.
+* `PauliWeightEnumerator` : `(1+3z)^m` and stratum cardinality `C(m,g)·3^g`.
+* `PauliWeightSupportStratum` : the weight-`≤ g` support stratification.
+* `UpperBound` : `cUB_pw`, closed form, the Heisenberg–Weyl carriers.
+* `Headline` : `C_ub_PauliWeight` (+ conditional `_via_HW`).
+* `MagicStateCheck` : T-, GHZ-, W-state and a strict-stratum example.
+* `ComparisonBCHK` : sharper than the unstratified BCHK dyadic bound.
+* `FalsifiedBranch` : refutation hook and the naive-counterexample exclusion.
+* `AxiomProbe` : axiom hygiene.
 -/

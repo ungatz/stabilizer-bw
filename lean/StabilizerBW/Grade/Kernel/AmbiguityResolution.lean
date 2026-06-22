@@ -1,20 +1,20 @@
 import StabilizerBW.Roots.UpperBoundAllN
 
 /-!
-# T1 — Resolving the kernel-vs-stratum ambiguity, and the core kernel object
+# Resolving the kernel-vs-stratum ambiguity, and the core kernel object
 
 The development asks for an algebraic characterization of the kernel of the Barnes–Wall
-grade homomorphism `g_n : Cliff+T_n → ℕ`.  Per the Phase 0.5 audit the codomain is `ℕ`
+grade homomorphism `g_n : Cliff+T_n → ℕ`.  Per the the audit step the codomain is `ℕ`
 (the `λ`-adic valuation of the down-set Möbius transform, `Roots.graden`), **not** `ℤ/8`.
 
 There are two readings of "the kernel":
 
 * **(a) Literal kernel** — `ker(g_n) = {U : g_n(U) = 0}`.  This is the subset of operators
-  with no `λ`-adic depth.  It is handled in `LiteralKernel.lean` (T2) and `ClosedForm.lean`
-  (T3).
+  with no `λ`-adic depth.  It is handled in `LiteralKernel.lean` and `ClosedForm.lean`
+  .
 * **(b) Grade-`g` stratum equivalence** — the equivalence classes of operators sharing a
-  fixed non-zero grade `g`, up to `T`-count.  This is where the Layer 88 `(CS, CCZ)`
-  phenomenon lives and is handled in `StratumEquivalence.lean` (T4).
+  fixed non-zero grade `g`, up to `T`-count.  This is where the development `(CS, CCZ)`
+  phenomenon lives and is handled in `StratumEquivalence.lean` .
 
 This file fixes the **core object** for reading (a): the grade-`0` kernel
 `bwGradeKernel n` of the all-`n` diagonal grade `Roots.graden`, together with its basic
@@ -27,7 +27,7 @@ developed in `Roots/BWn.lean` and `Roots/UpperBoundAllN.lean`.  Every diagonal o
 has finite grade (`gradeLEn_top`), so the defining set is always non-empty.
 -/
 
-namespace BWGradeKernelClassification
+namespace KernelClassification
 
 open Roots
 
@@ -52,7 +52,7 @@ def bwLatticeStabilizer (n : ℕ) : Set (BWVec n) := {D | gradeLEn n D 0}
 @[simp] theorem mem_bwLatticeStabilizer (n : ℕ) (D : BWVec n) :
     D ∈ bwLatticeStabilizer n ↔ gradeLEn n D 0 := Iff.rfl
 
-/-- **Core characterization (T1).** A diagonal operator lies in the grade kernel iff its
+/-- **Core characterization .** A diagonal operator lies in the grade kernel iff its
 grade is `0` iff `λ^0·D = D` already preserves the lattice `BW_n`.  Equivalently the
 kernel is the grade-`0` lattice-stabilizer (Clifford-type) sector. -/
 theorem mem_bwGradeKernel_iff (n : ℕ) (D : BWVec n) :
@@ -72,4 +72,4 @@ theorem mem_bwLatticeStabilizer_iff (n : ℕ) (D : BWVec n) :
   unfold bwLatticeStabilizer gradeLEn
   rw [Set.mem_setOf_eq, pow_zero, bwSmul_one]
 
-end BWGradeKernelClassification
+end KernelClassification

@@ -1,7 +1,7 @@
 import StabilizerBW.Qutrit.EisensteinToy.EisensteinIntegers
 
 /-!
-# T3 — The qutrit Barnes–Wall analogue at level 1 over `ℤ[ω]`
+# The qutrit Barnes–Wall analogue at level 1 over `ℤ[ω]`
 
 The qubit level-3 Barnes–Wall lattice is `L₃ = {(x,y) ∈ ℤ[ζ₈]² : (1+i) ∣ (x+y)}`, where the
 "doubling prime" `1+i` is the prime above the dimension `d = 2`.  The natural qutrit analogue

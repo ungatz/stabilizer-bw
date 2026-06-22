@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.StratifiedMonotone.Headline
 
 /-!
-# T6 — finite-`m` magic-state verification
+# finite-`m` magic-state verification
 
 We instantiate the headline bound on three standard families plus one genuinely weight-stratified
 example, encoded by their Pauli characteristic vectors `χ_P = Tr(ρ · P)`:
@@ -18,7 +18,7 @@ T-tensor), so the check is run at `g = m`; the stratified example exercises a st
 Each check applies the unconditional headline `C_ub_PauliWeight`.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -125,4 +125,4 @@ theorem stratState_support : PauliWeightSupportLE 2 1 stratState := by
 theorem stratState_satisfies_bound : duttaTusharC stratState ≤ cUB_pw 2 1 :=
   C_ub_PauliWeight 2 1 stratState stratState_support
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

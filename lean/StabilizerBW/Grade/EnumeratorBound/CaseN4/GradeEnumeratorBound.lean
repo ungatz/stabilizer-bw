@@ -2,12 +2,12 @@ import StabilizerBW.Grade.EnumeratorBound.CaseN4.CliffordFacet
 import StabilizerBW.Roots.BW4
 
 /-!
-# MenuBandwidthN4 / GradeEnumeratorBound — T3: the grade-enumerator bound on facet ℓ¹-norm
+# BandwidthN4 / GradeEnumeratorBound — T3: the grade-enumerator bound on facet ℓ¹-norm
 
 The diagonal-character lift of a facet of the four-qubit stabilizer polytope
 `Stab₄` is a diagonal operator `D : Roots.Vec16` (the Pauli–Markov rotation
 correspondence).  Its Barnes–Wall grade `Roots.grade4 D` is the closed-form
-enumerator of Layer 5/BW4.  This file packages the **closed-form upper bound on a
+enumerator of the development/BW4.  This file packages the **closed-form upper bound on a
 facet's coefficient ℓ¹-norm** in terms of that grade:
 
 ```

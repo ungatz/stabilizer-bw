@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# T3 — The Levin–Peres–Wilmer eigenvalue / spectral-gap mixing-time bound
+# The Levin–Peres–Wilmer eigenvalue / spectral-gap mixing-time bound
 
 This file states and **kernel-proves** the textbook spectral-gap mixing-time
 bound
@@ -21,7 +21,7 @@ analysis, proved here from scratch (no Mathlib Markov-chain theory is required,
 matching the Tier-C fallback of the development).
 -/
 
-namespace BWParityChainMixingTime.LevinPeresWilmer
+namespace MixingTime.LevinPeresWilmer
 
 open Real
 
@@ -62,4 +62,4 @@ theorem mixing_time_le_of_spectral_decay
       _ = ε := by field_simp
   exact Nat.sInf_le hmem
 
-end BWParityChainMixingTime.LevinPeresWilmer
+end MixingTime.LevinPeresWilmer

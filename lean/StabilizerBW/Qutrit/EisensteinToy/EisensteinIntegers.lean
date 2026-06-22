@@ -1,7 +1,7 @@
 import Mathlib
 
 /-!
-# T1 — The Eisenstein integers `ℤ[ω]` and the `λ₃`-adic valuation
+# The Eisenstein integers `ℤ[ω]` and the `λ₃`-adic valuation
 
 This file builds a concrete, computable model of the ring of Eisenstein integers
 

@@ -1,17 +1,17 @@
 import Mathlib
-import StabilizerBW.SubsetParityBWBridge.LaRacuenteCarry
+import StabilizerBW.SubsetParityBWBridge.SymmetricEquilibrium
 
 /-!
-# T1 — Ehrenfest projection and the core mixing-time definitions
+# Ehrenfest projection and the core mixing-time definitions
 
-LaRacuente's symmetric-transitions chain acts on the `m`-bit parity vector
+the symmetric Ehrenfest urn chain acts on the `m`-bit parity vector
 `b̄ ∈ {0,1}^m`.  Its projection onto the **Hamming weight** `Σ_j b_j` is the
 classical **Ehrenfest urn** chain on the `m+1` weight states (Saloff-Coste,
 *Random walks on finite groups*, §3; Levin–Peres–Wilmer §20.4).  Because the
-Barnes–Wall grade *is* the Hamming weight of the parity tag (Layer 89/90:
+Barnes–Wall grade *is* the Hamming weight of the parity tag (the development/90:
 `gradeOf = tCountLin = #{odd coordinates}`), the BW-grade chain coincides with
 the Ehrenfest urn projection, and its stationary distribution is
-`Binomial(m, 1/2)` (Layer 89 `grade_distribution_BW`).
+`Binomial(m, 1/2)` (the development `grade_distribution_BW`).
 
 This file fixes the core objects used by the rest of the development:
 
@@ -25,7 +25,7 @@ Ehrenfest urn mixing time, because the two step-`t` distributions coincide
 (the projection identity).
 -/
 
-namespace BWParityChainMixingTime.EhrenfestProjection
+namespace MixingTime.EhrenfestProjection
 
 open Real
 
@@ -58,16 +58,16 @@ theorem bw_grade_mixing_time_via_ehrenfest
   simp only [Set.mem_setOf_eq, hproj t]
 
 /-- The BW-grade stationary distribution `BinomialMHalf` is exactly the marginal
-of LaRacuente's symmetric-transition equilibrium (the named Layer-89 carrier
-`LaRacuenteSymmetricEquilibriumMarginal`).  This identifies the Ehrenfest urn
+of the symmetric Ehrenfest urn equilibrium (the named the development carrier
+`SymmetricEquilibriumMarginal`).  This identifies the Ehrenfest urn
 invariant with `Binomial(m, 1/2)` through the cited carrier. -/
-theorem bwGrade_stationary_eq_laracuente (m k : ℕ) (hk : k ≤ m)
-    (h : SubsetParityBWBridge.LaRacuenteCarry.LaRacuenteSymmetricEquilibriumMarginal m) :
+theorem bwGrade_stationary_eq_symmetric_equilibrium (m k : ℕ) (hk : k ≤ m)
+    (h : SubsetParityBWBridge.SymmetricEquilibrium.SymmetricEquilibriumMarginal m) :
     BinomialMHalf m k =
-      ((SubsetParityBWBridge.LaRacuenteCarry.laracuenteMarginal m k : ℚ) : ℝ) := by
+      ((SubsetParityBWBridge.SymmetricEquilibrium.symmetricEquilibriumMarginal m k : ℚ) : ℝ) := by
   rw [h k hk]
   unfold BinomialMHalf
   push_cast
   ring
 
-end BWParityChainMixingTime.EhrenfestProjection
+end MixingTime.EhrenfestProjection

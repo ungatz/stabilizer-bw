@@ -62,7 +62,7 @@ lean/
     │   ├── MoebiusGradeClosedFormAllN.lean
     │   ├── AutL3Unitary.lean            unitary Aut(L₃) at one qubit, integral over Z[ζ₈]
     │   └── AutL3HalfSqrt2.lean          order 8 → 24 under denominator change
-    ├── T1A/
+    ├── ReedMuller/
     │   ├── ZpowFacts.lean
     │   ├── Leaves.lean
     │   ├── GradeLinear.lean             grade = T-count on linear phases
@@ -95,7 +95,7 @@ A reader who opens any file should be able to navigate from there:
 * `Roots/` is the λ-adic grade infrastructure: single-qubit, BW₂–BW₄, general
   *n*, multi-monomial Möbius closed form, and the one-qubit unitary
   Kliuchnikov–Schönnenbeck converse.
-* `T1A/` and `BWCss/` recover the same closed-form grade enumerator for
+* `ReedMuller/` and `BWCss/` recover the same closed-form grade enumerator for
   linear phases from two independent paths — the Barnes–Wall λ-adic grade and
   a Reed–Muller-based CSS construction.
 * `Stab2CHSHBridge.lean` is the *n* = 2 stabilizer / CHSH bridge.
@@ -125,7 +125,7 @@ it makes sense to be:
   the decoder modules
 * [`../narrative/05-pauli-logic.md`](../narrative/05-pauli-logic.md) ↔
   `PauliLogic/`
-* [`../narrative/06-grade.md`](../narrative/06-grade.md) ↔ `Roots/`, `T1A/`,
+* [`../narrative/06-grade.md`](../narrative/06-grade.md) ↔ `Roots/`, `ReedMuller/`,
   `BWCss/`
 * [`../narrative/07-transport.md`](../narrative/07-transport.md) ↔
   `LogicalLatticeTransport/`

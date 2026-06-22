@@ -1,7 +1,7 @@
 import StabilizerBW.GradeAudit
 
 /-!
-# T1 — Grade (= T-count) of quantum phase estimation `QPE_{k,m}`
+# Grade (= T-count) of quantum phase estimation `QPE_{k,m}`
 
 ## Honesty note
 
@@ -15,7 +15,7 @@ Nielsen–Chuang layout:
    controlled-unitary's classical/quantum description; the per-call `T`-count is
    carried as the explicit structural unknown `tPerControlledU : ℕ → ℕ`);
 3. the inverse QFT on the `k` precision qubits, audited exactly as the approximate
-   `AQFT_k^ε` of Layer 60 (`invQFTCircuit k tPerRot`).
+   `AQFT_k^ε` of the development (`invQFTCircuit k tPerRot`).
 
 Because the `k` Hadamards are Clifford they contribute grade `0`; the closed-form
 grade is therefore

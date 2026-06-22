@@ -3,7 +3,7 @@ import StabilizerBW.SubsetParityBWBridge.Pushforward
 /-!
 # SubsetParityBWBridge — T6: the closed-form Barnes–Wall grade distribution
 
-Normalising the operator-side fiber count (T5) by the size `8^{m+1}` of the
+Normalising the operator-side fiber count by the size `8^{m+1}` of the
 linear stratum gives the closed-form distribution of the Barnes–Wall grade:
 ```
   #{P : LinPhase m | gradeOf P = k} / 8^{m+1} = C(m, k) / 2^m,
@@ -21,7 +21,7 @@ open Finset
 needed — the identity holds for every `k`, since both sides vanish for `k > m`.)
 -/
 theorem grade_distribution_BW {m : ℕ} (k : ℕ) (hk : k ≤ m) :
-    ((Finset.univ.filter (fun P : T1A.LinPhase m => T1A.gradeOf P = k)).card : ℚ) / 8 ^ (m + 1)
+    ((Finset.univ.filter (fun P : ReedMuller.LinPhase m => ReedMuller.gradeOf P = k)).card : ℚ) / 8 ^ (m + 1)
       = (Nat.choose m k : ℚ) / 2 ^ m := by
   rw [SubsetParityBWBridge.Pushforward.grade_fiber_card]
   push_cast

@@ -1,7 +1,7 @@
-import StabilizerBW.T1A.GradeEnumerator
+import StabilizerBW.ReedMuller.GradeEnumerator
 
 /-!
-# T1A — the RM(1, m) bivariate (weight, grade) joint enumerator (stretch target 3)
+# ReedMuller — the RM(1, m) bivariate (weight, grade) joint enumerator (stretch target 3)
 
 Each linear phase polynomial `P` reduces mod 2 to an RM(1, m) codeword
 `x ↦ (c₀ + Σᵢ cᵢ xᵢ) mod 2`; its Hamming weight is `0` (zero function),
@@ -21,7 +21,7 @@ identity, proved here, is
 ```
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open scoped Classical
 open Finset
@@ -81,7 +81,7 @@ Weight in the non-constant (some odd linear coefficient) case.
 -/
 theorem weight_someOdd {m : ℕ} (P : LinPhase m) (h : ¬ allEvenLin P) :
     hammingWeight P = 2 ^ (m - 1) := by
-  convert T1A.count_affine_eq_one ( red P.1 ) ( fun i => red ( P.2 i ) ) _ using 1;
+  convert ReedMuller.count_affine_eq_one ( red P.1 ) ( fun i => red ( P.2 i ) ) _ using 1;
   exact not_forall_not.mp fun h' => h fun i => by have := h' i; have := Fin.exists_fin_two.mp ⟨ red ( P.2 i ), rfl ⟩ ; aesop;
 
 /-
@@ -118,7 +118,7 @@ The number of phase polynomials with all-even linear part is `8·4^m`.
 -/
 theorem card_allEven (m : ℕ) :
     (Finset.univ.filter (fun P : LinPhase m => allEvenLin P)).card = 8 * 4 ^ m := by
-  convert T1A.tcount_GF m 0 using 1;
+  convert ReedMuller.tcount_GF m 0 using 1;
   norm_num [ zero_pow_eq ];
   grind +suggestions
 
@@ -141,8 +141,8 @@ theorem sum_notAllEven_tcount (m : ℕ) (z : ℤ) :
     rw [ Finset.sum_filter_add_sum_filter_not ];
   -- On `filter allEvenLin`, `tCountLin P = 0` (by `allEvenLin_iff_tCount_zero`), so each summand is `z^0 = 1` and the sum is the cardinality `card_allEven = 8*4^m`.
   have h_even : ∑ P ∈ Finset.filter (fun P : LinPhase m => allEvenLin P) Finset.univ, z ^ tCountLin P = 8 * 4 ^ m := by
-    rw [ Finset.sum_congr rfl fun P hP => by rw [ allEvenLin_iff_tCount_zero P |>.1 <| Finset.mem_filter.mp hP |>.2 ] ] ; norm_num [ T1A.card_allEven ];
-  linarith [ T1A.tcount_GF_headline m z ]
+    rw [ Finset.sum_congr rfl fun P hP => by rw [ allEvenLin_iff_tCount_zero P |>.1 <| Finset.mem_filter.mp hP |>.2 ] ] ; norm_num [ ReedMuller.card_allEven ];
+  linarith [ ReedMuller.tcount_GF_headline m z ]
 
 /-
 The number of phase polynomials with all-even linear part and a fixed
@@ -188,15 +188,15 @@ theorem joint_enumerator (m : ℕ) (x y z : ℤ) :
   · have h_even : ∀ P : LinPhase m, allEvenLin P → x ^ (2 ^ m - hammingWeight P) * y ^ hammingWeight P * z ^ gradeOf P = if red P.1 = 0 then x ^ (2 ^ m) else y ^ (2 ^ m) := by
       intros P hP
       have h_even : hammingWeight P = if red P.1 = 0 then 0 else 2 ^ m := by
-        exact T1A.weight_allEven P hP
+        exact ReedMuller.weight_allEven P hP
       have h_grade : gradeOf P = 0 := by
         rw [ gradeOf_eq_tCount, allEvenLin_iff_tCount_zero P |>.1 hP ]
       rw [h_even, h_grade]
       simp [pow_zero];
       split_ifs <;> simp +decide [ * ];
     rw [ Finset.sum_congr rfl fun P hP => h_even P <| Finset.mem_filter.mp hP |>.2 ];
-    rw [ Finset.sum_ite ] ; norm_num [ T1A.card_allEven_redConst ] ; ring;
-    rw [ show ( Finset.filter ( fun P : LinPhase m => red P.1 = 0 ) ( Finset.filter allEvenLin Finset.univ ) ) = Finset.filter ( fun P : LinPhase m => allEvenLin P ∧ red P.1 = 0 ) Finset.univ by ext; aesop, show ( Finset.filter ( fun P : LinPhase m => ¬red P.1 = 0 ) ( Finset.filter allEvenLin Finset.univ ) ) = Finset.filter ( fun P : LinPhase m => allEvenLin P ∧ red P.1 = 1 ) Finset.univ by ext; have := Fin.exists_fin_two.mp ⟨ red ‹LinPhase m›.1, rfl ⟩ ; aesop ] ; norm_num [ T1A.card_allEven_redConst ] ; ring;
+    rw [ Finset.sum_ite ] ; norm_num [ ReedMuller.card_allEven_redConst ] ; ring;
+    rw [ show ( Finset.filter ( fun P : LinPhase m => red P.1 = 0 ) ( Finset.filter allEvenLin Finset.univ ) ) = Finset.filter ( fun P : LinPhase m => allEvenLin P ∧ red P.1 = 0 ) Finset.univ by ext; aesop, show ( Finset.filter ( fun P : LinPhase m => ¬red P.1 = 0 ) ( Finset.filter allEvenLin Finset.univ ) ) = Finset.filter ( fun P : LinPhase m => allEvenLin P ∧ red P.1 = 1 ) Finset.univ by ext; have := Fin.exists_fin_two.mp ⟨ red ‹LinPhase m›.1, rfl ⟩ ; aesop ] ; norm_num [ ReedMuller.card_allEven_redConst ] ; ring;
   · by_cases hm : m = 0;
     · subst hm; simp +decide [ allEvenLin ] ;
     · have h_sum_notAllEven : (∑ P ∈ Finset.univ.filter (fun P : LinPhase m => ¬allEvenLin P), x ^ (2 ^ m - hammingWeight P) * y ^ hammingWeight P * z ^ gradeOf P) = x ^ (2 ^ (m - 1)) * y ^ (2 ^ (m - 1)) * (∑ P ∈ Finset.univ.filter (fun P : LinPhase m => ¬allEvenLin P), z ^ tCountLin P) := by
@@ -205,4 +205,4 @@ theorem joint_enumerator (m : ℕ) (x y z : ℤ) :
       rw [ h_sum_notAllEven, sum_notAllEven_tcount ];
       rw [ binom_Icc ] ; ring
 
-end T1A
+end ReedMuller

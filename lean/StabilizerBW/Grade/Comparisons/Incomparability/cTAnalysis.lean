@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.Comparisons.Incomparability.PauliCommutant
 
 /-!
-# T3 — First witness: the controlled-`T` gate `cT` at `n = 2`
+# First witness: the controlled-`T` gate `cT` at `n = 2`
 
 `cT = diag(1, 1, 1, ζ₈)` on `2` qubits.  We compute, by one-by-one enumeration of all
 `16` projective Paulis at `n = 2` and direct (matrix) conjugation, that
@@ -18,7 +18,7 @@ The enumeration is `decide`-checked over `ℤ[ζ₈]` (no `native_decide`); by t
 `ℤ[ζ₈] ↪ ℂ` it is the genuine complex value.
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Roots
 
@@ -39,4 +39,4 @@ theorem cT_commutantCard : pauliCommutantCard cTMatrix = 4 := by
 theorem cT_nullity : jiangWangNullity 2 (pauliCommutantCard cTMatrix) = 2 := by
   rw [cT_commutantCard]; decide
 
-end GradeAuditIncomparable
+end GradeNullityComparison

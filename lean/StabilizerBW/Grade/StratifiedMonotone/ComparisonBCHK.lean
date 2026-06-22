@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.StratifiedMonotone.Headline
 
 /-!
-# T7 — comparison with the unstratified BCHK dyadic monotone bound
+# comparison with the unstratified BCHK dyadic monotone bound
 
 The Beverland–Campbell–Howard–Kliuchnikov dyadic monotone (= Pauli-spectrum `ℓ¹` at `d = 2`) gives,
 without any weight stratification, the bound `C(ρ) ≤ 4^m − 1` (all `4^m` Paulis can contribute, each
@@ -9,7 +9,7 @@ with `|χ_P| ≤ 1`, minus the identity baseline).  The Pauli-weight-stratified 
 **sharper**: it only counts the `≤ g`-weight strata.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -41,4 +41,4 @@ theorem C_le_BCHK_via_PauliWeight (m g : ℕ) (ρ : PhysicalDensity m)
     duttaTusharC ρ ≤ bchkDyadicUB m :=
   le_trans (C_ub_PauliWeight m g ρ hs) (cUB_pw_sharper_than_BCHK m g h)
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

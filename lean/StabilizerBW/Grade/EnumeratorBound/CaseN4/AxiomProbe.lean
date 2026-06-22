@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.EnumeratorBound.CaseN4.CrossValidation
 
 /-!
-# MenuBandwidthN4 / AxiomProbe — T7: axiom audit
+# BandwidthN4 / AxiomProbe — T7: axiom audit
 
 Confirms that every headline of the n=4 bandwidth-scaling development depends only
 on the standard kernel axioms `{propext, Classical.choice, Quot.sound}` — no

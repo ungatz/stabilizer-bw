@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.StratifiedMonotone.PauliWeightSupportStratum
 
 /-!
-# T4 — the closed-form upper-bound constant and the Heisenberg–Weyl carriers
+# the closed-form upper-bound constant and the Heisenberg–Weyl carriers
 
 ## The corrected upper-bound constant
 
@@ -28,7 +28,7 @@ records the equivalent Heisenberg–Weyl normalisation `|a_P| ≤ 1/2^m` on the 
 coefficients.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -72,4 +72,4 @@ def DensityPauliCoefficientBoundHW : Prop :=
 theorem densityPauliCoefficientBoundHW_holds : DensityPauliCoefficientBoundHW :=
   fun _ ρ P _ => pauli_coefficient_le_one_over_d ρ P
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

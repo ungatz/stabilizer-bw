@@ -1,13 +1,13 @@
 import StabilizerBW.Grade.StratifiedMonotone.PauliWeightEnumerator
 
 /-!
-# T3 — the Pauli-weight-support stratification
+# the Pauli-weight-support stratification
 
 A physical density operator `ρ` lies in the **weight-`≤ g` stratum** when every Pauli string in the
 support of its characteristic vector has weight `≤ g`.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -62,4 +62,4 @@ theorem one_le_pauliWeightLECard (m g : ℕ) : 1 ≤ pauliWeightLECard m g := by
   apply Finset.card_pos.2
   exact ⟨pauliId m, by simp [BWGradeOfPauli, pauliId]⟩
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

@@ -1,7 +1,7 @@
 import StabilizerBW.SqrtPi.Grade
 
 /-!
-# T1 — The graded free model `Π₃`: syntax, congruence, denotation, grade
+# The graded free model `Π₃`: syntax, congruence, denotation, grade
 
 We define the inductive type `Pi3 m n` of morphisms `m → n` of the free bipermutative
 category at level `k = 3` (CHKRS SI Prop. S5), with constructors:
@@ -117,7 +117,7 @@ noncomputable def grade1obj (a : Pi3 1 1) : ℕ∞ := gradeWrt L1 (denote a)
 /-- The grade of a `2 → 2` morphism (single qubit, lattice `L₃`). -/
 noncomputable def grade2obj (a : Pi3 2 2) : ℕ∞ := gradeWrt L3 (denote a)
 
-/-! ### Supporting grade lemmas (T1) -/
+/-! ### Supporting grade lemmas -/
 
 /-- `g(id) = 0` for the identity at object `n`. -/
 lemma grade_id (n : ℕ) (L : Submodule Z8 (Fin n → Z8)) : gradeWrt L (denote (Pi3.idn n)) = 0 := by

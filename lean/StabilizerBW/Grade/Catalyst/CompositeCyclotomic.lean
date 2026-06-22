@@ -14,7 +14,7 @@ collapse to `grade₃(a ⊚ b)` (which is `≤`, not `=`, the sum).  The genuine
 step is therefore conditioned on the carrier.
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -26,4 +26,4 @@ theorem composite_step (h : CompositeS13Discharge) (a b : SqWord)
     Pi2.grade2 (toPi2 (.comp a b)) ≤ grade2obj (toPi3 (.comp a b)) :=
   h.composite a b iha ihb
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

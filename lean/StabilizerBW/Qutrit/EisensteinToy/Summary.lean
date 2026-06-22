@@ -4,7 +4,7 @@ import StabilizerBW.Qutrit.EisensteinToy.TCountTest
 import StabilizerBW.Qutrit.EisensteinToy.IncomparabilityTest
 
 /-!
-# T8 — Summary: classifying the qubit machinery at `d = 3`
+# Summary: classifying the qubit machinery at `d = 3`
 
 This file collects the four test outcomes of the qutrit Eisenstein stress-test into a single
 headline.  The verdict is **PARTIALLY GENERAL**: the combinatorial / valuation *backbone* lifts

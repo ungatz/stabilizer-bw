@@ -4,10 +4,10 @@ import StabilizerBW.Roots.BW3
 import StabilizerBW.Grade.TightWitnesses.Roster
 
 /-!
-# T4 — The grade-`g` stratum is **not** a single `T`-count class (Layer 88 follow-on)
+# The grade-`g` stratum is **not** a single `T`-count class (the development follow-on)
 
 Reading (b) of the development: at a fixed non-zero grade `g`, do all operators share a
-`T`-count?  The Layer 88 regression witness `(CS, CCZ)` already answers **no**, and we
+`T`-count?  The the development regression witness `(CS, CCZ)` already answers **no**, and we
 certify it here as the headline `BWGradeStratumEquivalence`:
 
 * `CS = diag(1,1,1,i)` at `n = 2` has BW grade `2` (`Roots.grade2_CS`) and published
@@ -19,18 +19,18 @@ So `g(CS) = g(CCZ) = 2` while `T(CS) = 2 ≠ 7 = T(CCZ)`: the grade-`2` stratum 
 operators of distinct `T`-count.  The grade does **not** determine the `T`-count on a
 fixed stratum — the stratum equivalence is non-trivial.  This is the Branch-B-flavoured
 outcome **for the stratum reading**: a fixed-grade stratum is not a single `T`-count class
-(while the literal kernel, reading (a), is positively classified in Branch A).
+(while the literal kernel, reading (a), is positively classified in ).
 
 Both `CS` and `CCZ` have grade `2 ≠ 0`, so neither lies in the literal kernel
 (consistent with T2): the stratum phenomenon is genuinely about non-zero grades.
 
 All grade values are imported and kernel-checked in the corpus; the `T`-counts are the
-independently sourced literature constants of `BWGradeTightWitnesses.Roster`.
+independently sourced literature constants of `TightWitnessRoster.Roster`.
 -/
 
-namespace BWGradeKernelClassification.StratumEquivalence
+namespace KernelClassification.StratumEquivalence
 
-open Roots BWGradeTightWitnesses
+open Roots TightWitnessRoster
 
 /-! ## The two grade-`2` witnesses with distinct `T`-counts -/
 
@@ -67,4 +67,4 @@ theorem grade2_CS_ne_zero : Roots.grade2 Roots.CS ≠ 0 := by rw [Roots.grade2_C
 /-- `CCZ` has non-zero grade, hence is outside the literal kernel. -/
 theorem grade3_CCZ_ne_zero : Roots.grade3 Roots.CCZ ≠ 0 := by rw [Roots.grade3_CCZ]; omega
 
-end BWGradeKernelClassification.StratumEquivalence
+end KernelClassification.StratumEquivalence

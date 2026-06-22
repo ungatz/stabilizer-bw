@@ -7,7 +7,7 @@ import StabilizerBW.Grade.TightWitnesses.NonTautology
 import StabilizerBW.Grade.TightWitnesses.AxiomProbe
 
 /-!
-# BWGradeTightWitnesses — the BW grade equals the Selinger-optimal ancilla-free T-count on a
+# TightWitnessRoster — the BW grade equals the Selinger-optimal ancilla-free T-count on a
 roster of concrete Clifford+T gates
 
 This directory closes the chapter's "where the grade is tight" promise: on a roster of
@@ -27,16 +27,16 @@ Barnes–Wall grade `g_n(D)` and the **published ancilla-free T-count** `T_opt(D
 
 ## Files
 
-* `Roster.lean` (T1): the `SmallGate` inductive and `selingerTOpt`/`selingerTOptRef` with
+* `Roster.lean` : the `SmallGate` inductive and `selingerTOpt`/`selingerTOptRef` with
   citation strings.
-* `Tight.lean` (T2): the tightness theorems `g = T_opt` for `T`, `CS`, `cT`.
-* `Loose.lean` (T3): the strict-looseness theorems `g < T_opt` for `CCZ`, `CCS`, `ccT`.
-* `Summary.lean` (T4): the unified roster table.
-* `TightGradeCarrier.lean` (T5): the `TightGrade` structure plus the concrete certificates
+* `Tight.lean` : the tightness theorems `g = T_opt` for `T`, `CS`, `cT`.
+* `Loose.lean` : the strict-looseness theorems `g < T_opt` for `CCZ`, `CCS`, `ccT`.
+* `Summary.lean` : the unified roster table.
+* `TightGradeCarrier.lean` : the `TightGrade` structure plus the concrete certificates
   `T_TightGrade`, `CS_TightGrade`, `cT_TightGrade`.
-* `NonTautology.lean` (T6): the non-vacuity certificate — the literature T-counts are
+* `NonTautology.lean` : the non-vacuity certificate — the literature T-counts are
   positive, are the published constants, and are independent of the grades.
-* `AxiomProbe.lean` (T7): the axiom audit.
+* `AxiomProbe.lean` : the axiom audit.
 
 Everything is kernel-checked (`decide` / `rfl`); **no `native_decide`** is used.  The
 grade values are imported from the corpus (`Roots.grade_T`, `Roots.grade2_CS`,

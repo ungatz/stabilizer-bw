@@ -2,7 +2,7 @@ import StabilizerBW.Grade.EnumeratorBound.CaseN4.ConcreteInstance
 import StabilizerBW.Compilation.ContextGame
 
 /-!
-# MenuBandwidthN4 / CrossValidation — T5: matching the n=2 (CHSH) and n=3 (9-Pauli) cases
+# BandwidthN4 / CrossValidation — T5: matching the n=2 (CHSH) and n=3 (9-Pauli) cases
 
 The only kernel-checked Bandwidth instances prior to this development are the n=2
 CHSH facet (`MenuBridge.CHSH`) and the n=3 9-Pauli Clifford-menu facet

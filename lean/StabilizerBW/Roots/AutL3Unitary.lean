@@ -477,7 +477,7 @@ theorem aut_mem {M : Mat2} (hUni : M.IsUnitary) (hAut : MapsToL M) :
 
 /-! ## foundational round: determinant is a root of unity -/
 
-/-- **foundational round (T1).**  Every unitary integral matrix over `ℤ[ζ₈]` has
+/-- **foundational round .**  Every unitary integral matrix over `ℤ[ζ₈]` has
 determinant equal to a power of `ζ₈`.  (The `MapsToL` hypothesis from the
 the strawman framing as an *automorphism* is not needed for the result and is
 omitted; cf. `det_root_of_unity'` for the stated form.) -/
@@ -552,7 +552,7 @@ theorem su2_set_eq :
 
 /-! ## Finiteness of the integral special-unitary group -/
 
-/-- **Finiteness of integral SU(2) (T2).**  The integral special-unitary lattice-automorphism group
+/-- **Finiteness of integral SU(2) .**  The integral special-unitary lattice-automorphism group
 `{M : unitary, L₃-automorphism, det = 1}` is finite, of cardinality **exactly `16`**.
 
 The strawman's proof sketch anticipated `24` (the order of the full projective
@@ -575,7 +575,7 @@ theorem autFinset_phased_clifford :
     ∀ M ∈ autFinset, ∃ k ∈ List.range 8, ∃ C ∈ cliffFinset,
       M = Z8.zeta ^ k • C := by decide
 
-/-- **Unitary converse (T3).**  Every unitary integral automorphism of `L₃` is a phased
+/-- **Unitary converse .**  Every unitary integral automorphism of `L₃` is a phased
 Clifford: it factors as `ζ₈^k` times an element of the integral Clifford
 group. -/
 theorem aut_L3_unitary_is_phased_clifford

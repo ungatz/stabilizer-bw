@@ -17,7 +17,7 @@ uses it carries it as an explicit argument, so the axiom footprint stays inside
 `{propext, Classical.choice, Quot.sound}`.
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -41,4 +41,4 @@ structure CompositeS13Discharge : Prop where
     Pi2.grade2 (toPi2 b) ≤ grade2obj (toPi3 b) →
     Pi2.grade2 (toPi2 (.comp a b)) ≤ grade2obj (toPi3 (.comp a b))
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

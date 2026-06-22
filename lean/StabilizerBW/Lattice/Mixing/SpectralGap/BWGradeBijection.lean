@@ -1,8 +1,8 @@
-import StabilizerBW.T1A.GradeEnumerator
+import StabilizerBW.ReedMuller.GradeEnumerator
 import Mathlib
 
 /-!
-# T3 — The BW grade distribution under uniform sampling is `Binomial(m, 1/2)`
+# The BW grade distribution under uniform sampling is `Binomial(m, 1/2)`
 
 For a uniformly random degree-`≤ 1` phase polynomial `P : LinPhase m`
 (`= ZMod 8 × (Fin m → ZMod 8)`), the Barnes–Wall grade `gradeOf P` is
@@ -10,17 +10,17 @@ distributed as a (scaled) binomial: the number of `P` with `gradeOf P = k` is
 `8 · 4^m · C(m, k)`, so the normalised distribution is `C(m,k)/2^m`,
 i.e. `Binomial(m, 1/2)`.
 
-This is the `p = 1/2` symmetric-transition equilibrium marginal of LaRacuente's
-parity-conditioned chain, and it is exactly the coefficient form of the T1A
-generating function `8·4^m·(1+z)^m` (`T1A.grade_GF_binomial`).
+This is the `p = 1/2` symmetric-transition equilibrium marginal of the symmetric chain's
+parity-conditioned chain, and it is exactly the coefficient form of the ReedMuller
+generating function `8·4^m·(1+z)^m` (`ReedMuller.grade_GF_binomial`).
 
-The proof routes through the kernel-checked `T1A.gradeOf_eq_tCount`
+The proof routes through the kernel-checked `ReedMuller.gradeOf_eq_tCount`
 (`gradeOf P = tCountLin P = #{i : cᵢ odd}`).
 -/
 
-namespace ParityChainBWGradeMixing.BWGradeBijection
+namespace ParityChainBWGrade.BWGradeBijection
 
-open Finset T1A
+open Finset ReedMuller
 
 /-- For each `i`, exactly four of the eight residues in `ZMod 8` are odd. -/
 theorem card_odd_zmod8 :
@@ -93,4 +93,4 @@ theorem bwGrade_equilibrium_eq_binomial (m k : ℕ) :
   rw [h8]
   field_simp
 
-end ParityChainBWGradeMixing.BWGradeBijection
+end ParityChainBWGrade.BWGradeBijection

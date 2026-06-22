@@ -7,7 +7,7 @@ The generator part of the carrier `CompositeS13Discharge.gen` is discharged unco
 from the corpus's `Pi3.grade2_toPi2_gen_eq` (the corrected rule `Γ(g) = g` on generators).
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -22,4 +22,4 @@ theorem gen_discharged :
   obtain ⟨h1, h2, h3, h4⟩ := Pi3.grade2_toPi2_gen_eq
   exact ⟨h1.le, h2.le, h3.le, h4.le⟩
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

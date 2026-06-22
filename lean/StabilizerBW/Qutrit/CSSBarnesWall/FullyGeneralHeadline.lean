@@ -4,12 +4,12 @@ import StabilizerBW.Qutrit.CSSBarnesWall.IncomparabilityCorrected
 import StabilizerBW.Qutrit.EisensteinToy.MobiusTest
 
 /-!
-# T7 — Headline: the arithmetic view is *fully general* at `d = 3`
+# Headline: the arithmetic view is *fully general* at `d = 3`
 
 This file aggregates the round's results into a single headline upgrading
-Layer 90's verdict.
+the development's verdict.
 
-Layer 90 (the *toy* Eisenstein lattice `L = {λ₃ ∣ x+y}`) graded the chapter's
+the development (the *toy* Eisenstein lattice `L = {λ₃ ∣ x+y}`) graded the chapter's
 machinery **PARTIALLY GENERAL** at `d = 3`: the Möbius/valuation backbone lifted,
 but the strict-subset *coefficient* came out `1` (not the qubit's `2`), the
 Howard–Vala T-gate phase escaped `ℤ[ω]`, and the cT/CCZ incomparability could not
@@ -31,7 +31,7 @@ these two corrections every piece of the qubit `d = 2` machinery lifts:
   lattice's `1` and the naive `3` are refuted.
 * **Clifford invariance.** The genuine grade is invariant under the qutrit shift
   `X₃` and the unit phase `ω` (`gradeQ_invariant_under_qutrit_clifford`).
-* **TEST 2 (Möbius backbone) — lifts verbatim** (Layer 90,
+* **TEST 2 (Möbius backbone) — lifts verbatim** (the development,
   `QutritEis.mobius_machinery_generalises`).
 * **TEST 3 (T-gate) — RESTORED in `ℤ[ζ₉]`.** The Howard–Vala T-gate is
   representable over the extended ring (`qutrit_T_gate_representable`).
@@ -45,7 +45,7 @@ The honest residual scope qualifier ("modulo the extended cyclotomic ring
 Everything is kernel-clean (no `sorry`/`axiom`/`native_decide`/`@[implemented_by]`).
 -/
 
-namespace QutritCSSBarnesWall
+namespace QutritCSSBW
 
 open QutritEis QutritEis.Eis
 
@@ -99,4 +99,4 @@ theorem toy_partial_vs_genuine_full :
     QutritEis.gradeEMat QutritEis.diagNegOne = 1 ∧ gradeQ diagNegOne = 2 :=
   toy_vs_genuine_negOne
 
-end QutritCSSBarnesWall
+end QutritCSSBW

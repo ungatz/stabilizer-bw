@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.AlgorithmAudit.AQC.PhaseEstimation
 
 /-!
-# T3 — Grade (= T-count) of the Harrow–Hassidim–Lloyd algorithm `HHL_{k,m}`
+# Grade (= T-count) of the Harrow–Hassidim–Lloyd algorithm `HHL_{k,m}`
 
 ## Honesty note
 

@@ -3,7 +3,7 @@ import StabilizerBW.SqrtPi.Clifford
 import StabilizerBW.SqrtPi.OplusCost
 
 /-!
-# T3 — The catalytic embedding `Φ₃ : Π₃ → Π₂` and the grade-doubling verification
+# The catalytic embedding `Φ₃ : Π₃ → Π₂` and the grade-doubling verification
 
 Following CHKRS SI Definition S12 (specialised to `k = 3 → 2`), the catalytic embedding doubles
 objects (`n ↦ n + n`) and acts on generators by

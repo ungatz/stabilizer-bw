@@ -1,7 +1,7 @@
 import StabilizerBW.GradeAudit
 
 /-!
-# T4 — Grade (= T-count) of the variational quantum eigensolver `VQE_{L,n}`
+# Grade (= T-count) of the variational quantum eigensolver `VQE_{L,n}`
 
 ## Honesty note
 
@@ -14,7 +14,7 @@ Hamiltonian.  We audit the standard layout:
   each, so `n · tPerRot` `T` gates per layer) followed by a **ladder of `n - 1`
   CNOTs** (Clifford, grade `0`).  Hence each layer contributes `n · tPerRot`,
   exactly the structural strawman's `n · tPerRot + (n-1) · 0`.
-* The Trotterised Hamiltonian evolution is the Layer 60 single Heisenberg Trotter
+* The Trotterised Hamiltonian evolution is the development single Heisenberg Trotter
   step on `n` sites, with per-Pauli-rotation cost `tPerTrotterRot`, contributing
   `3 · tPerTrotterRot · (n - 1)`.
 

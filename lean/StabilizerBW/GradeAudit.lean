@@ -6,9 +6,9 @@ import StabilizerBW.GradeAudit.Comparison
 import StabilizerBW.GradeAudit.Trotter
 
 /-!
-# GradeAudit — a Barnes–Wall λ-adic grade audit of standard quantum algorithms (r2)
+# GradeAudit — a Barnes–Wall λ-adic grade audit of standard quantum algorithms (the corrected)
 
-Aggregator for the corrected gate-level grade audit.  Relative to r1, two
+Aggregator for the corrected gate-level grade audit.  Relative to the original, two
 substantive math errors are fixed:
 
 1. **Grade convention (Option A, strict Clifford+T basis).**  The gate inductive

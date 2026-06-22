@@ -1,11 +1,11 @@
 import StabilizerBW.Roots.BW3
 
 /-!
-# T1 — The roster of small-`n` Clifford+T gates and their literature T-counts
+# The roster of small-`n` Clifford+T gates and their literature T-counts
 
 This file fixes the roster of concrete Clifford+T gates whose Barnes–Wall (BW) grade is
 compared against the **published ancilla-free T-count** in the rest of the
-`BWGradeTightWitnesses` development, and encodes those published T-counts as a total
+`TightWitnessRoster` development, and encodes those published T-counts as a total
 function `selingerTOpt : SmallGate → ℕ` with explicit citation strings.
 
 The grades themselves are kernel-checked elsewhere in the corpus:
@@ -39,7 +39,7 @@ constant from the cited papers.  All theorems downstream are kernel-decidable
 (`decide` / `rfl`); **no `native_decide`** is used anywhere in this directory.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 /-- The roster of small-`n` Clifford+T gates covered by this development. -/
 inductive SmallGate
@@ -73,4 +73,4 @@ def selingerTOptRef : SmallGate → String
   | .CCS => "Amy-Maslov-Mosca-Roetteler 2013, IEEE TCAD 32 818, Table I (Toffoli class)"
   | .ccT => "Amy-Maslov-Mosca-Roetteler 2013, IEEE TCAD 32 818, Table I (Toffoli class)"
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

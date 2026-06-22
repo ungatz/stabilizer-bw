@@ -4,14 +4,14 @@ import StabilizerBW.Grade.AlgorithmAudit.AQC.HHL
 import StabilizerBW.Grade.AlgorithmAudit.AQC.VQE
 
 /-!
-# T5 — The bundled synthesis carries and concrete `JiangWangCarry` instances
+# The bundled synthesis carries and concrete `JiangWangCarry` instances
 
 This file collects the four-algorithm audit's two kinds of carried data.
 
 ## The synthesis-cost bundle
 
 `AQCSynthesisCarry` bundles the per-sub-circuit `T`-count carries of the four
-algorithms into a single record (mirroring Layer 60's `tPerToff = 7` discipline:
+algorithms into a single record (mirroring the development's `tPerToff = 7` discipline:
 honest structural unknowns parameterised by structure, **not** axioms):
 
 * `tPerControlledU`     — `T`-count of one controlled-unitary at a given precision (QPE/HHL);
@@ -23,13 +23,13 @@ honest structural unknowns parameterised by structure, **not** axioms):
 ## The concrete `JiangWangCarry` instances
 
 For each algorithm we produce a concrete `GradeAudit.JiangWangCarry n` instance,
-matching the `cT_JiangWangCarry` / `CCZ_JiangWangCarry` discipline of Layer 65:
+matching the `cT_JiangWangCarry` / `CCZ_JiangWangCarry` discipline of the development:
 a genuine `n`-qubit unitary (with a unitarity proof), the realised `T`-count
 (set to the audited circuit's actual `circuitGrade` at concrete parameters), and
 the carried Jiang–Wang bound `ν(U) ≤ T(U)` discharged by kernel computation
 (`decide`, no `native_decide`).  Each instance has **positive** nullity
 (`ν = 2n > 0`), so the comparison theorems are genuinely substantive — never a
-`Nat.zero_le` tautology.  As in Layer 60's `comparison_is_substantive`, the
+`Nat.zero_le` tautology.  As in the development's `comparison_is_substantive`, the
 register unitary is taken to be the identity with `commutantCard = 1`, certifying
 non-vacuity with the maximal nullity floor `2n`; the algorithm-specific synthesis
 content lives in the realised `tCount`.
@@ -39,7 +39,7 @@ namespace GradeAudit
 
 /-- The bundled per-sub-circuit `T`-count carries of the four AQC algorithms.
 Each field is an honest structural unknown about a specific synthesis choice,
-parameterised by the relevant structure, exactly as Layer 60's `tPerToff = 7`. -/
+parameterised by the relevant structure, exactly as the development's `tPerToff = 7`. -/
 structure AQCSynthesisCarry where
   /-- `T`-count of one controlled-unitary at a given precision (QPE / HHL). -/
   tPerControlledU : ℕ → ℕ

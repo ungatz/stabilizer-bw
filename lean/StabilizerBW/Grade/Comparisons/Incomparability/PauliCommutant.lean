@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.Comparisons.Incomparability.PauliMatrices
 
 /-!
-# T2 — The Pauli commutant cardinality and the Jiang–Wang nullity
+# The Pauli commutant cardinality and the Jiang–Wang nullity
 
 For an `n`-qubit **diagonal** unitary `U = diagonal d`, conjugation by `U` fixes the
 column-support of every Pauli, so the projective Pauli group element `U · P · U†` is
@@ -19,7 +19,7 @@ subgroup entering the Jiang–Wang nullity.
 stabilizer-nullity (`= GradeAudit.stabilizerNullity n c` definitionally).
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Roots
 
@@ -49,4 +49,4 @@ def pauliCommutantCard {N : ℕ} (U : Matrix (Fin N) (Fin N) Z8) : ℕ :=
 `GradeAudit.stabilizerNullity`. -/
 def jiangWangNullity (n c : ℕ) : ℕ := 2 * n - Nat.log2 c
 
-end GradeAuditIncomparable
+end GradeNullityComparison

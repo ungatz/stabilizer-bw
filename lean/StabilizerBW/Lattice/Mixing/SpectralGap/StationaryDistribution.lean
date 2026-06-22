@@ -1,9 +1,9 @@
 import StabilizerBW.Lattice.Mixing.SpectralGap.ParityChain
 
 /-!
-# T2 — The stationary distribution of the parity-conditioned chain
+# The stationary distribution of the parity-conditioned chain
 
-From `refs/laracuente/noise-2designs-markov-chain.tex`, **lines 209–242**, the
+From the standard Krawtchouk diagonalisation, the
 stationary distribution on a parity class is `π_r(k) ∝ C(m,k)·θ^k` with
 `θ = √((1-p)/p)`.  At `p = 1/2`, `θ = 1` and the distribution is uniform on the
 parity class (equivalently `Binomial(m, 1/2)` conditioned on parity).
@@ -12,9 +12,9 @@ We prove the local **detailed-balance** identity for `π`, and then the global
 **stationarity** identity `∑_k π(k)·P(k, j) = π(j)`.
 -/
 
-namespace ParityChainBWGradeMixing.StationaryDistribution
+namespace ParityChainBWGrade.StationaryDistribution
 
-open Finset ParityChainBWGradeMixing.ParityChain
+open Finset ParityChainBWGrade.ParityChain
 
 /-- `θ = √((1-p)/p)`. -/
 noncomputable def theta (p : ℝ) : ℝ := Real.sqrt ((1 - p) / p)
@@ -85,4 +85,4 @@ theorem parityChain_stationary (p : ℝ) (hp : 0 < p ∧ p < 1) (m j : ℕ) (hj 
     · interval_cases m <;> norm_num [ pUp, pDown ];
     · interval_cases m <;> norm_num [ pUp, pDown, stat ]
 
-end ParityChainBWGradeMixing.StationaryDistribution
+end ParityChainBWGrade.StationaryDistribution

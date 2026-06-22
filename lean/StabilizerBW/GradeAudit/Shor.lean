@@ -3,7 +3,7 @@ import StabilizerBW.GradeAudit.CircuitGrade
 /-!
 # Grade (= T-count) of Shor's modular-arithmetic core via Toffoli decomposition
 
-## Honesty note (fixing r1's fabricated-grade error)
+## Honesty note (fixing the original fabricated-grade error)
 
 The resource-dominant subroutine of Shor's algorithm is modular exponentiation,
 built from modular multipliers, built from modular adders.  We model the

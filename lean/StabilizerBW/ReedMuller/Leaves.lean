@@ -1,8 +1,8 @@
-import StabilizerBW.T1A.ZpowFacts
+import StabilizerBW.ReedMuller.ZpowFacts
 import StabilizerBW.Roots.MoebiusGradeClosedFormAllN
 
 /-!
-# T1A — leaf reconstruction and the Möbius factorisation for linear phases
+# ReedMuller — leaf reconstruction and the Möbius factorisation for linear phases
 
 `ofLeaves n f : BWVec n` is the depth-`n` Barnes–Wall tree whose leaf at the
 Boolean point `b` is `f b` (the inverse of `leafB`).  We instantiate it at the
@@ -17,7 +17,7 @@ which (combined with `ZpowFacts.factor_eq`) makes the `λ`-valuation of every
 Möbius coefficient an explicit product of per-coefficient contributions.
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open Roots Roots.MoebiusClosed Roots.MoebiusAllN Z8
 open scoped Classical
@@ -101,4 +101,4 @@ theorem mob_lin_eq {m : ℕ} (P : LinPhase m) (U : Finset (Fin m)) :
   · exact fun b hb => ⟨ U \ b, by aesop_cat, by aesop_cat ⟩;
   · intro a ha; rw [ Finset.inter_eq_left.mpr ha ] ; rw [ leafVal_toBWVec_prod ] ; ring;
 
-end T1A
+end ReedMuller

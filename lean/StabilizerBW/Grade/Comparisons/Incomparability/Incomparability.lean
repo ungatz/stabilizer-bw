@@ -4,7 +4,7 @@ import StabilizerBW.Roots.BW2
 import StabilizerBW.Roots.BW3
 
 /-!
-# T5 — The publishable headline: grade and Jiang–Wang nullity are INCOMPARABLE
+# The publishable headline: grade and Jiang–Wang nullity are INCOMPARABLE
 
 The chapter's Barnes–Wall grade `g` and the Jiang–Wang unitary stabilizer nullity
 `ν(U) = 2n − log₂|U·𝒫ₙ·U† ∩ 𝒫ₙ|` are **genuinely incomparable** lower bounds on
@@ -19,7 +19,7 @@ The grade values are imported, not re-derived: `chapterGrade_cT = Roots.grade2 R
 enumerations `cT_nullity` / `CCZ_nullity`.
 -/
 
-namespace GradeAuditIncomparable
+namespace GradeNullityComparison
 
 open Roots
 
@@ -71,4 +71,4 @@ theorem grade_and_nullity_incomparable :
   rw [chapterGrade_cT_eq, chapterGrade_CCZ_eq, cT_nullity, CCZ_nullity]
   exact ⟨⟨3, by decide, by decide, by decide⟩, ⟨4, by decide, by decide, by decide⟩⟩
 
-end GradeAuditIncomparable
+end GradeNullityComparison

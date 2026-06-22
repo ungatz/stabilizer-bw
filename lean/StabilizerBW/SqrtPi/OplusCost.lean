@@ -1,7 +1,7 @@
 import StabilizerBW.SqrtPi.Lattice
 
 /-!
-# T2 — The local cost of `⊕`
+# The local cost of `⊕`
 
 For a single-qubit conditional phase `id₁ ⊕ a = diag(1, A)` with `A = ⟦a⟧ ∈ ℤ[ζ₈]`,
 the lattice grade is governed by the `λ`-adic valuation of `A - 1`:

@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.TightWitnesses.Roster
 
 /-!
-# T3 — The looseness theorems
+# The looseness theorems
 
 For the three-qubit doubly-controlled gates the BW grade is a *strict* lower bound on the
 published ancilla-free T-count: the grade undershoots the literature value.  This records
@@ -20,7 +20,7 @@ The grade values are imported kernel-checked facts (`Roots.grade3_CCZ`,
 Toffoli-class constants from `Roster.lean`.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 open Roots
 
@@ -39,4 +39,4 @@ confirmed: the grade `5` is strictly below the published ancilla-free T-count `7
 theorem grade_ccT_loose : Roots.grade3 Roots.ccT < selingerTOpt SmallGate.ccT := by
   rw [Roots.grade3_ccT]; decide
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

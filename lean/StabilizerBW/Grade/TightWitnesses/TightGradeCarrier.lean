@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.TightWitnesses.Tight
 
 /-!
-# T5 — The `TightGrade` carrier
+# The `TightGrade` carrier
 
 A structure analogous to `GradeAudit.JiangWangCarry` that bundles, for a concrete gate, the
 kernel-checked BW grade together with the independently-sourced literature T-count and the
@@ -17,7 +17,7 @@ grade together with the literature attribution.
 Each instance is **unconditional**: there are no carried hypotheses.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 open Roots
 
@@ -82,4 +82,4 @@ theorem tight_certificates_correct :
     Roots.grade2 cT_TightGrade.D = cT_TightGrade.tOptLiterature :=
   ⟨T_TightGrade.grade_eq_tOpt, CS_TightGrade.grade_eq_tOpt, cT_TightGrade.grade_eq_tOpt⟩
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

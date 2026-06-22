@@ -1,7 +1,7 @@
-import StabilizerBW.T1A.GradeLinear
+import StabilizerBW.ReedMuller.GradeLinear
 
 /-!
-# T1A — the pure-linear Barnes–Wall grade enumerator (Tier S headline)
+# ReedMuller — the pure-linear Barnes–Wall grade enumerator (Tier S headline)
 
 For diagonal Clifford+T operators on `m` qubits with phase polynomial of degree
 `≤ 1`, the generating function of the Barnes–Wall grade is
@@ -14,7 +14,7 @@ the per-monomial T-count at degree `≤ 1`) and the per-coordinate factorisation
 the operator count.
 -/
 
-namespace T1A
+namespace ReedMuller
 
 open scoped Classical
 open Finset
@@ -49,7 +49,7 @@ theorem tcount_GF (m : ℕ) (z : ℤ) :
     · exact fun b => ⟨ fun i => b i ( Finset.mem_univ i ), rfl ⟩;
     · intro a; rw [ ← Finset.card_image_of_injective _ Subtype.coe_injective ] ; congr; ext; aesop;
   convert h_sum using 2;
-  exact T1A.perLinearMonomial_GF z ▸ rfl
+  exact ReedMuller.perLinearMonomial_GF z ▸ rfl
 
 /-- **Sub-lemma 6 / headline (factored form).** The pure-linear grade generating
 function factorises as `constant × per-qubit-linear^m`. -/
@@ -75,4 +75,4 @@ theorem grade_GF_binomial (m : ℕ) (z : ℤ) :
   rw [ add_comm 1 z, add_pow ];
   rw [ Finset.mul_sum _ _ _ ] ; rw [ Finset.range_eq_Ico ] ; exact Finset.sum_congr rfl fun _ _ => by ring;
 
-end T1A
+end ReedMuller

@@ -1,9 +1,9 @@
 import StabilizerBW.Qutrit.EisensteinToy.TCountTest
 
 /-!
-# T7 — TEST 4: the cT vs CCZ incomparability
+# TEST 4: the cT vs CCZ incomparability
 
-Layer 65's qubit witnesses (`GradeAuditIncomparable`) compare the Barnes–Wall grade against the
+the development's qubit witnesses (`GradeNullityComparison`) compare the Barnes–Wall grade against the
 Jiang–Wang nullity on the **controlled-`T`** gate `cT` and the **doubly-controlled-`Z`** gate
 `CCZ`, finding them order-incomparable.  Both diagnostic gates are non-Clifford and carry genuine
 `T`-type phases.

@@ -1,7 +1,7 @@
 import StabilizerBW.SqrtPi.Pi3
 
 /-!
-# T4 — Grade `0` and the Clifford fragment at `n ≤ 2`
+# Grade `0` and the Clifford fragment at `n ≤ 2`
 
 The single-qubit Clifford prop is generated (inside `Π₃`) by the swap `σ_⊕`, the
 square-root-of-swap `V`, and the phase gate `S = id₁ ⊕ ζ₈² = diag(1, i)`.

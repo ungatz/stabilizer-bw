@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.EnumeratorBound.CaseN4.BandwidthScaling
 
 /-!
-# MenuBandwidthN4 / ConcreteInstance — T6: the concrete `n = 4` magic-state gap
+# BandwidthN4 / ConcreteInstance — T6: the concrete `n = 4` magic-state gap
 
 We instantiate the bandwidth scaling on the four-qubit magic state `|H⟩^{⊗4}`
 (the tensor of single-qubit magic states with Bloch vector `(1/√3,1/√3,1/√3)`):

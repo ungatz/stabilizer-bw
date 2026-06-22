@@ -1,7 +1,7 @@
 import StabilizerBW.Grade.StratifiedMonotone.UpperBound
 
 /-!
-# T5 — the headline closed-form Pauli-weight-stratified upper bound
+# the headline closed-form Pauli-weight-stratified upper bound
 
 For every physical density operator `ρ` on `m` qubits whose Pauli-weight support is `≤ g`, the
 Dutta–Tushar magic functional is bounded by the corrected closed form:
@@ -15,7 +15,7 @@ unconditional form `C_ub_PauliWeight` discharges that carrier via
 `densityPauliCoefficientBound_holds`.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -84,4 +84,4 @@ theorem C_ub_PauliWeight (m g : ℕ) (ρ : PhysicalDensity m)
     (hs : PauliWeightSupportLE m g ρ) : duttaTusharC ρ ≤ cUB_pw m g :=
   C_ub_PauliWeight_via_HW densityPauliCoefficientBound_holds m g ρ hs
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone

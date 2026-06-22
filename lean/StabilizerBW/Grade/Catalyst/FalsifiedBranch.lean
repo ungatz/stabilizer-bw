@@ -10,7 +10,7 @@ level-3 composite case).  This is the kernel-checked structural reduction; it is
 lemma is a genuine refutation hook rather than a refutation.
 -/
 
-namespace CHKRS_S13_CompositeCatalystGrade
+namespace CatalystGrade
 
 open Pi3 SqWord
 
@@ -22,4 +22,4 @@ theorem composite_S13_refuted_of_witness (w₀ : SqWord)
   intro h_discharge
   exact absurd (phi3_composite_grade_le_discharged h_discharge w₀) (not_le.mpr h_counterex)
 
-end CHKRS_S13_CompositeCatalystGrade
+end CatalystGrade

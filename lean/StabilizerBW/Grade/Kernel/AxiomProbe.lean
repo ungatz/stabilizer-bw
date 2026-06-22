@@ -5,14 +5,14 @@ import StabilizerBW.Grade.Kernel.CrossLinkLayer65Layer76
 import StabilizerBW.Grade.Kernel.SelingerAttributionCorrection
 
 /-!
-# T6 — Axiom probe
+# Axiom probe
 
 `#print axioms` for every headline result of the development.  Each must depend only on the
 standard kernel axioms `{propext, Classical.choice, Quot.sound}` (or a subset) — no
 `sorry`, no `native_decide` (which would introduce `Lean.ofReduceBool`), no custom axioms.
 -/
 
-namespace BWGradeKernelClassification
+namespace KernelClassification
 
 -- T1: core characterization
 #print axioms mem_bwGradeKernel_iff
@@ -46,4 +46,4 @@ namespace BWGradeKernelClassification
 -- T6: corrigendum
 #print axioms SelingerAttributionCorrection.selinger_attribution_corrigendum
 
-end BWGradeKernelClassification
+end KernelClassification

@@ -2,14 +2,14 @@ import StabilizerBW.Grade.TightWitnesses.Tight
 import StabilizerBW.Grade.TightWitnesses.Loose
 
 /-!
-# T4 — The summary table
+# The summary table
 
 A single statement collecting the entire roster: the three tight equalities
 (`g = T_opt`) and the three strict-looseness inequalities (`g < T_opt`), all against the
 literature-attested ancilla-free T-counts encoded in `selingerTOpt`.
 -/
 
-namespace BWGradeTightWitnesses
+namespace TightWitnessRoster
 
 open Roots
 
@@ -38,4 +38,4 @@ theorem bw_grade_selinger_tight :
     (Roots.grade2 Roots.cT = 3) :=
   ⟨Roots.grade_T, Roots.grade2_CS, Roots.grade2_cT⟩
 
-end BWGradeTightWitnesses
+end TightWitnessRoster

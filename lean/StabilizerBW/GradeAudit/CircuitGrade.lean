@@ -6,9 +6,9 @@ import Mathlib
 This file develops the *circuit-side* grade counter `circuitGrade` on the strict
 Clifford+T gate set `{H, S, T, CNOT}`.
 
-## Why Option A (and how it fixes the r1 grade-convention error)
+## Why Option A (and how it fixes the original grade-convention error)
 
-The previous round (r1) carried a controlled phase rotation `CRk k` in the gate
+The previous round (an earlier draft) carried a controlled phase rotation `CRk k` in the gate
 inductive and set `gradeOf (CRk k) = k - 2`.  That convention was rejected: it
 disagrees with the chapter's actual Barnes–Wall BW₂ λ-adic grade table
 (Capstone Ch.3, Prop. `prop:av-bw2-grades`), which records `g(CS) = g(CR_2) = 2`

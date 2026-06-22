@@ -1,12 +1,12 @@
 import Mathlib
 
 /-!
-# T1 — the physical-density-operator state space (Pauli-coefficient encoding)
+# the physical-density-operator state space (Pauli-coefficient encoding)
 
-This is the **r2 corrective** state space for the Pauli-weight-stratified upper bound on the
+This is the **corrected** state space for the Pauli-weight-stratified upper bound on the
 Dutta–Tushar magic functional `C(ρ)`.
 
-## The r2 correction (vs the rejected r1 carrier)
+## The the corrected correction (vs the rejected the naive carrier)
 
 The original construction used `QubitState m := PauliIdx m → ℝ` with NO constraint, which made the carrier
 vacuously falsifiable (take `ρ_X = 1000` at `m = g = 1`).  Here we restrict to a genuine
@@ -27,7 +27,7 @@ by `blochPauliCoeff`; the bridge `Bloch_to_Pauli_coefficient_bridge` connects th
 yields the Aaronson–Gottesman / MacWilliams–Sloane per-coefficient bound `|a_P| ≤ 1/2^m`.
 -/
 
-namespace BWGradeStratifiedMonotoneR2
+namespace StratifiedMonotone
 
 open Finset
 
@@ -126,4 +126,4 @@ theorem duttaTusharC_nonneg {m : ℕ} (ρ : PhysicalDensity m) : 0 ≤ duttaTush
   simp only [Finset.mem_filter] at hP
   simp [maximallyMixed, hP.2]
 
-end BWGradeStratifiedMonotoneR2
+end StratifiedMonotone
