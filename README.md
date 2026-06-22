@@ -18,6 +18,11 @@ Read [`narrative/00-overview.md`](narrative/00-overview.md) first. It is a singl
 | [`narrative/05-pauli-logic.md`](narrative/05-pauli-logic.md) | A sequent calculus for stabilizer entailment; cut elimination as tableau update |
 | [`narrative/06-grade.md`](narrative/06-grade.md) | A $\lambda$-adic grade on Clifford+$T$ operators |
 | [`narrative/07-transport.md`](narrative/07-transport.md) | Direct closure of the Clifford-transport step at $n = 2, 3$ |
+| [`narrative/08-cyclotomic-arithmetic.md`](narrative/08-cyclotomic-arithmetic.md) | The cyclotomic tower, the $\lambda$-adic valuation, and the $\sqrt{\Pi}$ dictionary |
+| [`narrative/09-mixing-time.md`](narrative/09-mixing-time.md) | The parity chain on the grade ladder; closed-form mixing time via Levin–Peres–Wilmer |
+| [`narrative/10-decoding.md`](narrative/10-decoding.md) | Closest-stabilizer-state algorithm; single-$T$ branch decoder; verification suite |
+| [`narrative/11-automorphisms.md`](narrative/11-automorphisms.md) | $\mathrm{Aut}(L_3) \cap U(2)$ converse; level-4 diagonal automorphisms |
+| [`narrative/12-css-and-qutrits.md`](narrative/12-css-and-qutrits.md) | Reed–Muller CSS family; qutrit Barnes–Wall analogue at $d = 3$ |
 | [`narrative/references.md`](narrative/references.md) | Literature pointers used in the prose |
 
 ## Running things
@@ -27,9 +32,19 @@ cd haskell
 ghc -O2 -isrc Main.hs -o stab-bw && ./stab-bw
 ```
 
-The `Main.hs` binary exercises every module — lattice membership, kissing-number enumeration, stabilizer-state fidelity, bounded-distance decoding, decoder equivariance, the Pauli-logic simulator, the cyclotomic ring and its $\lambda$-adic valuation, the grade table, and the small-$n$ Clifford-preservation check. Expected output is documented inline.
+The `Main.hs` binary exercises every Haskell module — lattice membership, kissing-number enumeration, stabilizer-state fidelity, bounded-distance decoding, decoder equivariance, the Pauli-logic simulator, the cyclotomic ring and its $\lambda$-adic valuation, the grade table, and the small-$n$ Clifford-preservation check. Expected output is documented inline.
 
-The Lean 4 sources live in [`lean/`](lean/) organised by topic. 
+The Lean 4 sources live in [`lean/`](lean/) organised by topic. The repository ships as a Lake project: from a clean clone,
+
+```
+lake update           # one-time, pulls Mathlib v4.29 via the Azure cache
+lake exe cache get    # fetches precompiled Mathlib oleans
+lake build StabilizerBW
+```
+
+builds the entire library. The umbrella aggregator [`lean/StabilizerBW.lean`](lean/StabilizerBW.lean) imports every public module.
+
+The Python decoder experiments are in [`experiments/bw-decoder/`](experiments/bw-decoder/); see the README in that directory for per-script commands and expected outputs.
 
 ## What is new versus what is in the literature
 
@@ -40,9 +55,11 @@ Contributed here: the presentation theorem as an assembly into a single strict-m
 ## Layout
 
 ```
-stabilizer-bw/
+stabilizer-barnes-wall/
 ├── README.md                       (this file)
 ├── LICENSE
+├── lakefile.toml                   (Lake project, Mathlib v4.29)
+├── lean-toolchain                  (leanprover/lean4:v4.29.0)
 ├── haskell/
 │   ├── README.md
 │   ├── Main.hs                     (demo battery)
@@ -58,6 +75,7 @@ stabilizer-bw/
 │       └── Transport.hs
 ├── lean/
 │   ├── README.md
+│   ├── StabilizerBW.lean           (umbrella aggregator)
 │   └── StabilizerBW/
 │       ├── BarnesWall.lean
 │       ├── BWFreeModule.lean
@@ -68,9 +86,21 @@ stabilizer-bw/
 │       │                                 cut elimination, tableau,
 │       │                                 completeness, Categorical/
 │       ├── Roots/                       λ-adic grade, BW2-BW4, all-n,
-│       │                                 multi-monomial Möbius, AutL3
-│       ├── T1A/                         closed-form grade enumerator
-│       └── BWCss/                       Reed-Muller CSS family
+│       │                                 multi-monomial Möbius, AutL3, AutL4
+│       ├── T1A/                         closed-form grade enumerator (linear stratum)
+│       ├── BWCss/                       Reed-Muller CSS family
+│       ├── Grade/                       grade-stratified content:
+│       │     ├── Kernel/                kernel = lattice stabilizer
+│       │     ├── StratifiedMonotone/    Pauli-weight enumerator
+│       │     ├── TightWitnesses/        T/CS/cT roster + CCZ/CCS/ccT loose triple
+│       │     ├── EnumeratorBound/       closed-form bandwidth at all n
+│       │     ├── Catalyst/              CHKRS S13 catalyst-identity carrier
+│       │     ├── AlgorithmAudit/AQC/    QPE, AA, HHL, VQE grade audits
+│       │     └── Comparisons/Incomparability/  grade vs Jiang-Wang nullity
+│       ├── Lattice/Mixing/              parity-chain mixing time + Levin-Peres-Wilmer
+│       └── Qutrit/                      qutrit Barnes-Wall analogue (d=3)
+├── experiments/
+│   └── bw-decoder/                 Python verification suite + JSON reports
 └── narrative/
     ├── 00-overview.md
     ├── 01-bw-family.md
@@ -80,12 +110,17 @@ stabilizer-bw/
     ├── 05-pauli-logic.md
     ├── 06-grade.md
     ├── 07-transport.md
+    ├── 08-cyclotomic-arithmetic.md
+    ├── 09-mixing-time.md
+    ├── 10-decoding.md
+    ├── 11-automorphisms.md
+    ├── 12-css-and-qutrits.md
     └── references.md
 ```
 
-## Acknowledgments
+## Acknowledgement
 
-Parts of the Lean development used Aristotle (Harmonic) for automated proof search. Drafting and restructuring of the prose was assisted by Claude (Anthropic).
+Some private drafting and proof exploration used AI-assisted tools. All public statements, code, proofs, and errors are the author's responsibility.
 
 ## Licence
 

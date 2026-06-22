@@ -14,9 +14,9 @@ Aggregator for the T1A modules.
 * `T1A.ZpowFacts` — per-coefficient `λ`-factorisation in `ℤ[ζ₈]`.
 * `T1A.Leaves` — leaf reconstruction and the Möbius factorisation for linear phases.
 * `T1A.GradeLinear` — the pure-linear grade equals the per-monomial T-count.
-* `T1A.GradeEnumerator` — the grade generating function `8·4^m·(1+z)^m`.
+* `T1A.GradeEnumerator` — the Tier-S grade generating function `8·4^m·(1+z)^m`.
 * `T1A.GradeCard` — the cardinality (coefficient) form.
 * `T1A.Tcount2` — degree-`≤ 2` syntactic T-count enumerator + tCount/grade
- disagreement witness.
+  disagreement witness.
 * `T1A.RMJoint` — the RM(1, m) bivariate (weight, grade) joint enumerator.
 -/

@@ -1,21 +1,25 @@
 /-
-# Dagger categories
+# PauliLogic/Categorical/Dagger.lean — the Lambek side, Target 1
 
-A dagger category (Selinger 2007; Heunen–Vicary 2019) is a category `C`
+## Dagger categories
+
+A **dagger category** (Selinger 2007, Heunen–Vicary 2019) is a category `C`
 equipped with an involutive, identity-on-objects, contravariant functor
-`† : C → Cᵒᵖ`.  Concretely, a family of maps `dagger : (X ⟶ Y) → (Y ⟶ X)`
+`† : C → Cᵒᵖ`.  Concretely it is a family of maps `dagger : (X ⟶ Y) → (Y ⟶ X)`
 satisfying
 
-  `dagger (𝟙 X) = 𝟙 X`,
-  `dagger (f ≫ g) = dagger g ≫ dagger f`,
-  `dagger (dagger f) = f`.
+* `dagger (𝟙 X) = 𝟙 X`;
+* `dagger (f ≫ g) = dagger g ≫ dagger f`;
+* `dagger (dagger f) = f`.
 
-Mathlib has rich monoidal infrastructure but not a dagger-category typeclass,
-so we define it here, on top of `CategoryTheory.Category`.
+Mathlib (v4.28) does **not** provide a dagger-category typeclass (verified by
+`lean_local_search`); we define it from scratch on top of
+`CategoryTheory.Category`.
 
-This is the scaffolding for the PL_n derivation category (see `PLnCategory`).
-The dagger encodes the reversibility of the Aaronson–Gottesman tableau steps:
-the dagger of a derivation of `[P] ⊢ Q` is a derivation of `[Q] ⊢ P`.
+This is the abstract scaffolding the PL_n derivation category will instantiate
+(see `PLnCategory.lean`).  The dagger encodes the *reversibility* of the
+Aaronson–Gottesman tableau steps: the dagger of a derivation of `[P] ⊢ Q` is a
+derivation of `[Q] ⊢ P`.
 -/
 
 import Mathlib

@@ -1,36 +1,46 @@
 /-
-# The category of PL_n entailments, and its symplectic strictification
+# PauliLogic/Categorical/PLnCategory.lean — the Lambek side, Targets 4–7
 
-This file builds the Lambek side of the Curry-Howard-Lambek correspondence
+## The category of PL_n entailments and its symplectic strictification
+
+This file builds the **Lambek side** of the Curry–Howard–Lambek correspondence
 for stabilizer entailment.  Two related categories are constructed.
 
-## `Cat_PL_n` — the stabilizer-entailment groupoid
+### `Cat_PL_n` — the stabilizer-entailment groupoid (Targets 4, 5)
 
-Objects are signed Pauli words `Pauli n`.  A morphism `P ⟶ Q` is a proof that
-`P` and `Q` are *stabilizer equivalent*, i.e. `V [P] = V [Q]` (their model
-spaces coincide).  By soundness and completeness this is exactly mutual
-derivability `[P] ⊢ Q` and `[Q] ⊢ P`, so a morphism is a derivation modulo
-cut-elimination: distinct cut-equivalent derivations of the same entailment
-collapse to a single morphism (`Hom` is a subsingleton).  Identity and
-composition are reflexivity and transitivity of `=` on model spaces — the
-cut-and-normalise composition viewed under soundness/completeness.  The
-dagger sends `P ⟶ Q` to `Q ⟶ P` by symmetry of `=`, encoding the
-reversibility of the Aaronson-Gottesman tableau steps; every morphism is
-unitary and `Cat_PL_n` is a groupoid.
+* **Objects** (`PLObj n`): signed Pauli words, `Pauli n`.
+* **Morphisms** `P ⟶ Q`: a proof that `P` and `Q` are *stabilizer
+  equivalent*, i.e. `V [P] = V [Q]` (their model spaces coincide).  By
+  soundness + completeness this is exactly mutual derivability `[P] ⊢ Q` and
+  `[Q] ⊢ P`, so a morphism is a derivation *modulo cut-elimination*: distinct
+  cut-equivalent derivations of the same entailment collapse to the unique
+  morphism (`Hom` is a subsingleton).  This realises the design choice of the
+ the convention — "a morphism is a derivation that one Pauli word entails another,
+  modulo cut".
+* **Identity / composition**: reflexivity / transitivity of `=` on model
+  spaces.  This is the *cut-and-normalise* composition viewed under the
+  soundness/completeness dictionary.
+* The **dagger** sends a morphism `P ⟶ Q` to `Q ⟶ P` by symmetry of `=`,
+  encoding the reversibility of the Aaronson–Gottesman tableau steps.  Every
+  morphism is unitary and `Cat_PL_n` is in fact a groupoid.
 
-## `SymCat_PL_n` — the symplectic strictification
+### `SymCat_PL_n` — the symplectic strictification (Targets 6, 7)
 
-The signed product `Pauli.mul` is not associative up to stabilizer equivalence
-(the order-dependent `i`-phase changes the sign, and `+P`/`-P` have disjoint
-model spaces), so `(Pauli n, Pauli.mul)` is not monoidal.  The honest
-monoidal / compact structure lives on the symplectic `F₂`-representation,
-where signs are quotiented out: objects are `Multiplicative ((Fin n → ZMod 2)²)`,
-an elementary abelian 2-group under XOR.  The discrete category on this group
-is dagger symmetric monoidal (tensor = XOR) and self-dual dagger compact
-closed: each object squares to the unit, giving the self-pairing `η_x : I ⟶ x ⊗ x`,
-with snake and dagger-compatibility equations holding by subsingleton homs.
+The signed product `Pauli.mul` is **not** associative up to stabilizer
+equivalence (the order-dependent `i`-phase changes the *sign*, and `+P`/`−P`
+have disjoint model spaces), so `(Pauli n, Pauli.mul)` does not form a monoidal
+category.  The honest monoidal/compact structure lives on the **symplectic
+`F₂`-representation**, where signs (the Clifford gauge) are quotiented out:
 
-The categorical face of the slogan *Clifford dynamics is gauge*: the
+* **Objects** (`SymPL n = Multiplicative ((Fin n → ZMod 2)²)`): unsigned Pauli
+  words / symplectic vectors, an elementary abelian `2`-group under XOR.
+* The discrete category `Discrete (SymPL n)` is **dagger symmetric monoidal**
+  (tensor = XOR of symplectic vectors, the abelian-group operation) and
+  **self-dual dagger compact closed**: each object squares to the unit
+  (`x · x = 1`), giving the self-pairing `η_x : I ⟶ x ⊗ x`, with the snake and
+  dagger-compatibility equations holding by subsingleton-of-homs.
+
+This is the categorical face of the slogan *"Clifford dynamics is gauge"*: the
 compact-closed tensor structure is exactly the sign-free symplectic group.
 -/
 

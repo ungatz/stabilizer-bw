@@ -88,6 +88,90 @@ The arithmetic and coding-theoretic readings are not the same proof. The Lean mo
 
 The arithmetic of $\mathbb{Z}[\zeta_8]$ and $\lambda$ — the addition, multiplication, $\lambda$-adic valuation — is the Haskell module [`../haskell/src/Cyclotomic.hs`](../haskell/src/Cyclotomic.hs). The closed-form upper bound and the named-character table are [`../haskell/src/Grade.hs`](../haskell/src/Grade.hs); the demo in `Main.hs` cross-checks every row of the table against the formula. The Lean side carries the formal proofs: single-qubit grade infrastructure in [`Matrices.lean`](../lean/StabilizerBW/Roots/Matrices.lean), the two-qubit kernel-verified diagonal table in `BW2.lean`, the three- and four-qubit grades in `BW3.lean` and `BW4.lean`, the all-*n* upper bound in `UpperBoundAllN.lean`, the lower-bound machinery in `LowerBoundAllN.lean` and `StrictSubsetLowerBoundAllN.lean`, the cross-level self-similarity in `CrossLevelSelfSimilarity.lean`, the multi-monomial Möbius closed form in `MultimonomialClosedForm.lean` and `MoebiusClosedFormAllN.lean`, the linear-phase grade enumerator in `T1A/`, and the Reed–Muller CSS construction in `BWCss/`.
 
+## The kernel of the grade homomorphism
+
+A natural question, raised by the sub-multiplicativity of $g$, is: what is the kernel? The grade is a homomorphism from the Clifford+$T$ monoid to $\mathbb{Z}_{\ge 0}$ (with addition as the multiplicative side); its kernel is the set of operators of grade zero. The headline, proved at every $n$ in [`../lean/StabilizerBW/Grade/Kernel/`](../lean/StabilizerBW/Grade/Kernel/), is
+
+```math
+\ker g \cap \bigl(\mathcal{C}_n + T \bigr) \;=\; \mathrm{LatticeStab}(L_n),
+```
+where $\mathcal{C}_n$ is the level-$n$ Clifford group, $T$ is the diagonal $T$-gate, and $\mathrm{LatticeStab}(L_n)$ is the lattice-stabilizer subgroup of $L_n$. In words: an integral Clifford+$T$ operator has grade zero if and only if it preserves the Barnes–Wall lattice setwise. The kernel is exactly the lattice-stabilizer sector.
+
+The kernel is a submonoid (closed under composition and contains the identity), proved unconditionally. At $n = 1$ the lattice-stabilizer group recovers the single-qubit Clifford group exactly, recovering the converse-direction theorem of chapter 11 as a corollary. At $n = 2$ the same identification holds with $|\mathrm{Cliff}_2| = 11{,}520$ the level-2 Clifford order.
+
+The kernel theorem also illuminates the *strata* of fixed positive grade. The non-zero strata are not subgroups of the Clifford+$T$ monoid — composition can decrease grade by overlap cancellation. The stratum $g = 2$ contains both $CS$ at $n = 2$ and $CCZ$ at $n = 3$, two operators with very different stabilizer-nullity ($CZ$ is its own commutant, $CCZ$ has commutant of order $8$). The shared grade does not imply shared T-count; the published T-counts $T(CS) = 2$ versus $T(CCZ) = 7$ ancilla-free show the stratum is not a T-count class.
+
+## A stratified Pauli-weight enumerator
+
+The grade alone is too coarse for some downstream questions. The *Pauli-weight enumerator* — counting basis operators by their Pauli weight in addition to their grade — refines the picture. Writing $W^{P, g}(X, Y)$ for the bivariate weight enumerator counting basis operators of Pauli weight $i$ and grade $j$ with coefficient on $X^i Y^j$,
+
+```math
+W^{P, g}(X, Y) \;=\; \prod_{i=1}^n \bigl(1 + X (1 + Y) \bigr).
+```
+This is the MacWilliams–Sloane factorisation specialised to the Barnes–Wall family. The factorisation is per-qubit: each qubit contributes a factor $1 + X(1 + Y)$, corresponding to "either trivial-weight grade-zero" (the $1$ term), "Pauli weight one and grade zero" (the $X$ term), or "Pauli weight one and grade one" (the $XY$ term). The closed form is kernel-checked at every $n$ in [`../lean/StabilizerBW/Grade/StratifiedMonotone/PauliWeightEnumerator.lean`](../lean/StabilizerBW/Grade/StratifiedMonotone/PauliWeightEnumerator.lean), with the stratum cardinality formula
+
+```math
+\#\{ M \in \mathcal{P}_n^{\mathrm{grade} = g} : \mathrm{weight}(M) = w \} \;=\; \binom{n}{w} \binom{w}{g}
+```
+falling out as the $X^w Y^g$ coefficient.
+
+## Tight and loose T-count witnesses
+
+Five named gates have grade $g(D) = T(D)$ exactly, sharpening the T-count lower-bound corollary to an *equality* on the named stratum:
+
+| gate | $g$ | $T$-count (ancilla-free) | reference |
+|---|---|---|---|
+| $T$ | $1$ | $1$ | trivially |
+| $CS$ | $2$ | $2$ | Selinger 2013 |
+| $cT$ | $3$ | $3$ | Selinger 2013 (T-depth one) |
+| $CCZ$ | $2$ | $7$ | Amy–Maslov–Mosca–Roetteler 2013 (meet-in-the-middle) |
+| $CCS$ | $4$ | $14$ | Amy–Maslov–Mosca–Roetteler 2013 |
+| $ccT$ | $5$ | $21$ | Amy–Maslov–Mosca–Roetteler 2013 |
+
+The first three rows are *tight*: the grade lower bound is exact at the named gate. The last three rows are *loose*: the grade is strictly smaller than the published ancilla-free T-count. The looseness is structural — the BW grade respects per-qubit linear-phase polynomial structure but does not see the deeper combinatorial complexity that AMMR's meet-in-the-middle algorithm uses to lower-bound the higher-arity controlled gates. The Lean module [`../lean/StabilizerBW/Grade/TightWitnesses/`](../lean/StabilizerBW/Grade/TightWitnesses/) records the roster with explicit attribution strings.
+
+## Grade versus stabilizer nullity
+
+The Jiang–Wang stabilizer nullity $\nu(U) = 2n - \log_2 |U \cdot \mathcal{P}_n \cdot U^\dagger \cap \mathcal{P}_n|$ is a separate T-count lower bound coming from the size of the stabilizer-preserving sub-Pauli group of $U$. The natural question is whether the BW grade and the stabilizer nullity dominate each other.
+
+The answer is *no*, and the witnesses are concrete:
+
+| gate | $g$ | $\nu$ | $T$-count |
+|---|---|---|---|
+| $cT$ at $n = 2$ | $3$ | $2$ | $3$ |
+| $CCZ$ at $n = 3$ | $2$ | $3$ | $7$ |
+
+At $cT$ the BW grade is sharper ($3 > 2$); at $CCZ$ the Jiang–Wang nullity is sharper ($3 > 2$). Both are below the published T-count, confirming both are genuine lower bounds. The two invariants measure *different* things — the BW grade reads $\lambda$-adic depth in the cyclotomic ring; the stabilizer nullity reads Pauli-group-conjugation collapse. There is no morphism between them. The roster is kernel-checked in [`../lean/StabilizerBW/Grade/Comparisons/Incomparability/`](../lean/StabilizerBW/Grade/Comparisons/Incomparability/).
+
+## Closed-form bandwidth at all $n$
+
+The *bandwidth gap* between the magic-state polytope and the stabilizer polytope is a quantitative magic monotone. For the all-ones Clifford facet at every $n \ge 2$,
+
+```math
+\mathrm{gap}(\rho) \;\ge\; \frac{V(\rho)}{6n + 2 g(\rho)},
+```
+where $V(\rho)$ is the magic-vector $\ell^1$-violation and the denominator $6n + 2g$ is the grade-enumerator-derived bandwidth bound at the facet. The closed form is kernel-checked at every $n$ in [`../lean/StabilizerBW/Grade/EnumeratorBound/BandwidthScalingAllN.lean`](../lean/StabilizerBW/Grade/EnumeratorBound/BandwidthScalingAllN.lean).
+
+For the magic state $|H\rangle^{\otimes n}$ — the $n$-fold tensor power of the magic state $|H\rangle = \cos(\pi/8)|0\rangle + \sin(\pi/8)|1\rangle$ — the bound specialises to
+
+```math
+\mathrm{gap}\bigl(|H\rangle^{\otimes n} \langle H|^{\otimes n}\bigr) \;\ge\; \frac{\sqrt{3} - 1}{6}.
+```
+The right-hand side is *independent of $n$*. The per-qubit magic content of the tensor power exactly cancels the per-qubit denominator growth: $V$ scales as $n(\sqrt{3} - 1)$ and the all-ones-facet denominator scales as $6n$, so the ratio is constant in $n$. This is, to the best of our knowledge, the first per-qubit-conserved magic-gap statement.
+
+## Grade audits of standard algorithms
+
+The grade lower bound applies to any Clifford+$T$ circuit, so it audits standard quantum algorithms via their published Clifford+$T$ decompositions:
+
+| algorithm | grade (closed form) | reference for decomposition |
+|---|---|---|
+| Quantum Phase Estimation, $k$ control bits | $k \cdot T_U + T_R \cdot k(k - 1)/2$ | textbook |
+| Amplitude Amplification, $m$ iterations | $m \cdot (T_O + T_D)$ | Brassard–Hoyer–Mosca–Tapp 2002 |
+| HHL, $k$ phase-bits, $E$ eigenvalues | $2 \cdot \mathrm{QPE}_k + E \cdot T_R$ | Harrow–Hassidim–Lloyd 2009 |
+| VQE, $L$ ansatz layers, $n$ qubits | $L \cdot n \cdot T_R + 3 \cdot T_R \cdot (n - 1)$ | Peruzzo et al. 2014 |
+
+Here $T_U$ is the per-controlled-unitary T-count, $T_R$ is the per-rotation T-count, $T_O$ and $T_D$ are the oracle and diffuser T-counts, and the formulae assume the strict $\{H, S, T, \mathrm{CNOT}\}$ Clifford+$T$ generator set with no ancilla-aided savings. The closed forms are kernel-checked in [`../lean/StabilizerBW/Grade/AlgorithmAudit/AQC/`](../lean/StabilizerBW/Grade/AlgorithmAudit/AQC/). Substantive content carried as named structural unknowns: the per-controlled-unitary T-count for each algorithm depends on the specific oracle and is left as a Prop-typed parameter to the closed form.
+
 ## What's new, what's borrowed
 
-The cyclotomic ring $\mathbb{Z}[\zeta_8]$ and its use in exact synthesis are standard, going back to Forest–Gosset–Kliuchnikov–McKinnon (2015) and Amy–Glaudell–Ross (2020). Certified *T*-count floors via stabilizer-rank or unitary-stabilizer-nullity invariants appear in Beverland et al. (2020) and Jiang–Wang (2023). What we add is the $\lambda$-adic grade itself, the explicit closed form for single-monomial characters, the all-*n* upper bound, the level-raising identity (one cyclotomic doubling = one ramified step), and the cross-level table; the Möbius closed form, the maximal-monomial lower bound at every $\nu$, and the strict-subset lower bound, all of which are recorded with the kernel proofs that establish them; the closed-form generating function on linear phases and its CSS-side recovery from a Reed–Muller pair.
+The cyclotomic ring $\mathbb{Z}[\zeta_8]$ and its use in exact synthesis are standard, going back to Forest–Gosset–Kliuchnikov–McKinnon (2015) and Amy–Glaudell–Ross (2020). Certified *T*-count floors via stabilizer-rank or unitary-stabilizer-nullity invariants appear in Beverland et al. (2020) and Jiang–Wang (2023). What we add is the $\lambda$-adic grade itself, the explicit closed form for single-monomial characters, the all-*n* upper bound, the level-raising identity (one cyclotomic doubling = one ramified step), and the cross-level table; the Möbius closed form, the maximal-monomial lower bound at every $\nu$, and the strict-subset lower bound, all of which are recorded with the kernel proofs that establish them; the closed-form generating function on linear phases and its CSS-side recovery from a Reed–Muller pair; the kernel-classification theorem $\ker g = \mathrm{LatticeStab}(L_n)$ at every $n$; the stratified Pauli-weight enumerator and its MacWilliams–Sloane factorisation; the T/CS/cT-tight roster (referencing Selinger 2013) and the CCZ/CCS/ccT-loose triple (referencing Amy–Maslov–Mosca–Roetteler 2013); the cT/CCZ pair witnessing two-way incomparability of the BW grade with the Jiang–Wang stabilizer nullity; the closed-form per-qubit-conserved bandwidth gap $(\sqrt{3} - 1)/6$ for $|H\rangle^{\otimes n}$ at every $n$; and the closed-form grade audits of Quantum Phase Estimation, Amplitude Amplification, HHL, and VQE.

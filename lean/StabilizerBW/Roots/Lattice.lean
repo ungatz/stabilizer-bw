@@ -31,42 +31,42 @@ def inL (v : Z8 × Z8) : Prop := oneI ∣ (v.1 + v.2)
 
 /-- Explicit formula for multiplication by `1+i`. -/
 theorem oneI_mul (w : Z8) :
- oneI * w = ⟨w.a - w.c, w.b - w.d, w.a + w.c, w.b + w.d⟩ := by
- ext <;> simp [oneI] <;> ring
+    oneI * w = ⟨w.a - w.c, w.b - w.d, w.a + w.c, w.b + w.d⟩ := by
+  ext <;> simp [oneI] <;> ring
 
 /-- The parity criterion `dvdOneI` is equivalent to honest divisibility by `1+i`. -/
 theorem dvdOneI_iff (z : Z8) : dvdOneI z ↔ oneI ∣ z := by
- constructor
- · rintro ⟨⟨p, hp⟩, ⟨q, hq⟩⟩
- refine ⟨⟨(z.a + z.c)/2, (z.b + z.d)/2, (z.c - z.a)/2, (z.d - z.b)/2⟩, ?_⟩
- have h1 : (z.a + z.c) = 2 * p := hp
- have h2 : (z.b + z.d) = 2 * q := hq
- ext <;> simp [oneI] <;> omega
- · rintro ⟨w, rfl⟩
- rw [oneI_mul]
- refine ⟨⟨w.a, ?_⟩, ⟨w.b, ?_⟩⟩ <;> simp <;> ring
+  constructor
+  · rintro ⟨⟨p, hp⟩, ⟨q, hq⟩⟩
+    refine ⟨⟨(z.a + z.c)/2, (z.b + z.d)/2, (z.c - z.a)/2, (z.d - z.b)/2⟩, ?_⟩
+    have h1 : (z.a + z.c) = 2 * p := hp
+    have h2 : (z.b + z.d) = 2 * q := hq
+    ext <;> simp [oneI] <;> omega
+  · rintro ⟨w, rfl⟩
+    rw [oneI_mul]
+    refine ⟨⟨w.a, ?_⟩, ⟨w.b, ?_⟩⟩ <;> simp <;> ring
 
 instance : DecidablePred inL := fun v =>
- decidable_of_iff (dvdOneI (v.1 + v.2)) (dvdOneI_iff _)
+  decidable_of_iff (dvdOneI (v.1 + v.2)) (dvdOneI_iff _)
 
 /-- Concrete decidable membership: `inL v ↔ dvdOneI (v.1+v.2)`. -/
 theorem inL_iff (v : Z8 × Z8) : inL v ↔ dvdOneI (v.1 + v.2) :=
- (dvdOneI_iff _).symm
+  (dvdOneI_iff _).symm
 
 /-! ## `L₃` is an `R`-submodule -/
 
 theorem inL_zero : inL (0, 0) := by simp [inL]
 
 theorem inL_add {v w : Z8 × Z8} (hv : inL v) (hw : inL w) : inL (v.1 + w.1, v.2 + w.2) := by
- unfold inL at *
- have : (v.1 + w.1) + (v.2 + w.2) = (v.1 + v.2) + (w.1 + w.2) := by ring
- rw [this]; exact Dvd.dvd.add hv hw
+  unfold inL at *
+  have : (v.1 + w.1) + (v.2 + w.2) = (v.1 + v.2) + (w.1 + w.2) := by ring
+  rw [this]; exact Dvd.dvd.add hv hw
 
 theorem inL_vsmul (r : Z8) {v : Z8 × Z8} (hv : inL v) : inL (vsmul r v) := by
- unfold inL vsmul at *
- simp only
- have : r * v.1 + r * v.2 = r * (v.1 + v.2) := by ring
- rw [this]; exact Dvd.dvd.mul_left hv r
+  unfold inL vsmul at *
+  simp only
+  have : r * v.1 + r * v.2 = r * (v.1 + v.2) := by ring
+  rw [this]; exact Dvd.dvd.mul_left hv r
 
 /-! ## Generators -/
 
@@ -87,37 +87,37 @@ def vadd (v w : Z8 × Z8) : Z8 × Z8 := (v.1 + w.1, v.2 + w.2)
 /-- Every lattice vector decomposes over the two generators:
 `v = v.1 • g₁ + k • g₂` where `v.1 + v.2 = (1+i)·k`. -/
 theorem inL_decompose {v : Z8 × Z8} (hv : inL v) :
- ∃ k : Z8, v = vadd (vsmul v.1 g1) (vsmul k g2) := by
- obtain ⟨k, hk⟩ := hv
- obtain ⟨x, y⟩ := v
- have hk' : x + y = oneI * k := hk
- refine ⟨k, ?_⟩
- simp only [vadd, vsmul, g1, g2, Prod.mk.injEq]
- constructor
- · ring
- · linear_combination hk'
+    ∃ k : Z8, v = vadd (vsmul v.1 g1) (vsmul k g2) := by
+  obtain ⟨k, hk⟩ := hv
+  obtain ⟨x, y⟩ := v
+  have hk' : x + y = oneI * k := hk
+  refine ⟨k, ?_⟩
+  simp only [vadd, vsmul, g1, g2, Prod.mk.injEq]
+  constructor
+  · ring
+  · linear_combination hk'
 
 /-! ## The reduction: a linear operator preserves `L₃` iff it preserves the generators -/
 
 /-- `Mat2.mulVec` is additive. -/
 theorem mulVec_add (M : Mat2) (v w : Z8 × Z8) :
- M.mulVec (vadd v w) = vadd (M.mulVec v) (M.mulVec w) := by
- simp [Mat2.mulVec, vadd]; constructor <;> ring
+    M.mulVec (vadd v w) = vadd (M.mulVec v) (M.mulVec w) := by
+  simp [Mat2.mulVec, vadd]; constructor <;> ring
 
 /-- `Mat2.mulVec` is `R`-homogeneous. -/
 theorem mulVec_vsmul (M : Mat2) (r : Z8) (v : Z8 × Z8) :
- M.mulVec (vsmul r v) = vsmul r (M.mulVec v) := by
- simp [Mat2.mulVec, vsmul]; constructor <;> ring
+    M.mulVec (vsmul r v) = vsmul r (M.mulVec v) := by
+  simp [Mat2.mulVec, vsmul]; constructor <;> ring
 
 /-- An operator maps `L₃` into `L₃`. -/
 def MapsToL (M : Mat2) : Prop := ∀ v, inL v → inL (M.mulVec v)
 
 /-- **Reduction lemma.** A matrix preserves `L₃` iff it preserves both generators. -/
 theorem mapsToL_of_gens (M : Mat2)
- (h1 : inL (M.mulVec g1)) (h2 : inL (M.mulVec g2)) : MapsToL M := by
- intro v hv
- obtain ⟨k, hk⟩ := inL_decompose hv
- rw [hk, mulVec_add, mulVec_vsmul, mulVec_vsmul]
- exact inL_add (inL_vsmul _ h1) (inL_vsmul _ h2)
+    (h1 : inL (M.mulVec g1)) (h2 : inL (M.mulVec g2)) : MapsToL M := by
+  intro v hv
+  obtain ⟨k, hk⟩ := inL_decompose hv
+  rw [hk, mulVec_add, mulVec_vsmul, mulVec_vsmul]
+  exact inL_add (inL_vsmul _ h1) (inL_vsmul _ h2)
 
 end Roots

@@ -1,23 +1,27 @@
 /-
-# Universality (Selinger-2011 shape)
+# PauliLogic/Categorical/Universality.lean — the Lambek side, Target 9
+
+## Universality (Selinger-2011 shape)
 
 Selinger's completeness theorem (*Finite dimensional Hilbert spaces are
 complete for dagger compact closed categories*, ENTCS 2011) says: an equation
 between morphisms holds in the syntactic dagger compact closed category iff it
 holds under interpretation in the semantic target.  For PL_n the analogous
-statement is the soundness-plus-completeness package, lifted to the
-categorical setting:
+statement is the **soundness + completeness** package of `PL_n` with respect to
+the stabilizer model, lifted to the categorical setting:
 
-  a sequent is valid in `Stab_n` iff it is provable in `Cat_PL_n`
-    (`universality`);
-  a morphism `P ⟶ Q` exists in `Cat_PL_n` iff `P` and `Q` are mutually
-    derivable (`hom_iff_mutual_derivable`);
-  a morphism `P ⟶ Q` exists iff the two objects receive the same
-    interpretation `[[P]] = [[Q]]` in `Stab_n` (`universality_categorical`).
+* a sequent is **valid in `Stab_n`** iff it is **provable in `Cat_PL_n`**
+  (`universality`);
+* a morphism `P ⟶ Q` exists in `Cat_PL_n` iff `P` and `Q` are **mutually
+  derivable** (`hom_iff_mutual_derivable`);
+* a morphism `P ⟶ Q` exists in `Cat_PL_n` iff the two objects receive the
+  **same interpretation** `[[P]] = [[Q]]` in `Stab_n`
+  (`universality_categorical`).
 
-Both directions use the already-mechanised `soundness` and `completeness_nonempty`
-as black boxes.  Nothing is carried as a hypothesis; the universality is
-unconditional.
+Both directions use the already-mechanised `soundness` (Soundness.lean) and
+`completeness_nonempty` (Completeness.lean) as black boxes, exactly as the
+  (See module docstring for the structural prescription.)
+is **unconditional**.
 -/
 
 import StabilizerBW.PauliLogic.Categorical.Interpret

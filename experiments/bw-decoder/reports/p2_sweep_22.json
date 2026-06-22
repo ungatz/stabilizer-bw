@@ -1,0 +1,42 @@
+[
+ {
+  "xz_sum": 0.6,
+  "violation": -0.4,
+  "min_q_qubit_mem": 0.000986
+ },
+ {
+  "xz_sum": 0.8,
+  "violation": -0.19999999999999996,
+  "min_q_qubit_mem": 0.003765
+ },
+ {
+  "xz_sum": 1.0,
+  "violation": 0.0,
+  "min_q_qubit_mem": 0.011896
+ },
+ {
+  "xz_sum": 1.05,
+  "violation": 0.050000000000000044,
+  "min_q_qubit_mem": 0.015659
+ },
+ {
+  "xz_sum": 1.13,
+  "violation": 0.1299999999999999,
+  "min_q_qubit_mem": 0.024269
+ },
+ {
+  "xz_sum": 1.2,
+  "violation": 0.19999999999999996,
+  "min_q_qubit_mem": 0.036417
+ },
+ {
+  "xz_sum": 1.3,
+  "violation": 0.30000000000000004,
+  "min_q_qubit_mem": 0.074059
+ },
+ {
+  "xz_sum": 1.414,
+  "violation": 0.4139999999999999,
+  "min_q_qubit_mem": 0.200806
+ }
+]

@@ -1,20 +1,25 @@
 /-
-# The interpretation functor `[[-]] : Cat_PL_n → Stab_n`
+# PauliLogic/Categorical/Interpret.lean — the Lambek side, Target 8
 
-We define the stabilizer category `Stab_n` concretely as the discrete category
-on stabilizer subspaces of `ℂ^(2ⁿ)` (model spaces `V Γ ⊆ Vec n`), and define
+## The interpretation functor `[[-]] : Cat_PL_n → Stab_n`
+
+We define the **stabilizer category** `Stab_n` concretely as the discrete
+category on stabilizer subspaces of `ℂ^(2ⁿ)` (model spaces `V Γ ⊆ Vec n`), and
 the interpretation functor sending
 
-  an object (signed Pauli word `P`) to its model space `V [P]` — the
-    `+1`-eigenspace of `pauliAction P`, i.e. the stabilizer code it defines;
-  a morphism `P ⟶ Q` (a stabilizer entailment `V [P] = V [Q]`) to the
-    corresponding identification of stabilizer subspaces.
+* an object (signed Pauli word `P`) to its **model space** `V [P]` — the
+  `+1`-eigenspace of the operator `pauliAction P`, i.e. the stabilizer code it
+  defines;
+* a morphism `P ⟶ Q` (a stabilizer entailment `V [P] = V [Q]`) to the
+  corresponding identification of stabilizer subspaces.
 
 Because `Cat_PL_n` is the thin entailment groupoid and `Stab_n` is discrete,
-the functor is automatically well-defined and faithful, and it commutes with
-the dagger (reversal of entailments), so it is a dagger functor.
+the functor is automatically well defined and **faithful**, and it is a
+**dagger functor**: it commutes with the dagger (reversal of entailments).
 
-The operator-level content (`pauliAction`) is supplied by `Soundness.lean`.
+This is the object/morphism core of the dagger-functor interpretation required
+by Selinger's framework; the operator-level content (`pauliAction`) is supplied
+by `Soundness.lean`.
 -/
 
 import StabilizerBW.PauliLogic.Categorical.PLnCategory

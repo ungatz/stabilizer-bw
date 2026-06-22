@@ -5,10 +5,10 @@ import Mathlib
 
 This file builds a concrete, computable model of the ring of integers
 
- `R = ℤ[ζ₈] = ℤ[x]/(x⁴+1)`,
+  `R = ℤ[ζ₈] = ℤ[x]/(x⁴+1)`,
 
 written `a + b·ζ + c·ζ² + d·ζ³` with `ζ = ζ₈` a primitive 8th root of unity, so that
-`ζ⁴ = -1`. We give `R` a `CommRing` structure, define complex conjugation, the
+`ζ⁴ = -1`.  We give `R` a `CommRing` structure, define complex conjugation, the
 relevant elements (`ζ`, `i = ζ²`, `λ = 1-ζ`, `1+i`, `√2`, the fundamental unit
 `u = 1-ζ+ζ³`), and characterise divisibility by `1+i` by an explicit decidable
 parity criterion which is proved equivalent to honest ring divisibility.
@@ -21,17 +21,17 @@ namespace Roots
 
 /-- An element of `R = ℤ[ζ₈] = ℤ[x]/(x⁴+1)`, written `a + b·ζ + c·ζ² + d·ζ³`. -/
 structure Z8 where
- a : ℤ
- b : ℤ
- c : ℤ
- d : ℤ
+  a : ℤ
+  b : ℤ
+  c : ℤ
+  d : ℤ
 deriving DecidableEq, Repr
 
 namespace Z8
 
 @[ext] theorem ext' {x y : Z8} (ha : x.a = y.a) (hb : x.b = y.b) (hc : x.c = y.c)
- (hd : x.d = y.d) : x = y := by
- cases x; cases y; simp_all
+    (hd : x.d = y.d) : x = y := by
+  cases x; cases y; simp_all
 
 instance : Zero Z8 := ⟨⟨0,0,0,0⟩⟩
 instance : One Z8 := ⟨⟨1,0,0,0⟩⟩
@@ -40,10 +40,10 @@ instance : Neg Z8 := ⟨fun x => ⟨-x.a, -x.b, -x.c, -x.d⟩⟩
 instance : Sub Z8 := ⟨fun x y => ⟨x.a-y.a, x.b-y.b, x.c-y.c, x.d-y.d⟩⟩
 /-- Multiplication modulo `x⁴ + 1` (so `ζ⁴ = -1`). -/
 instance : Mul Z8 := ⟨fun x y =>
- ⟨x.a*y.a - (x.b*y.d + x.c*y.c + x.d*y.b),
- x.a*y.b + x.b*y.a - (x.c*y.d + x.d*y.c),
- x.a*y.c + x.b*y.b + x.c*y.a - x.d*y.d,
- x.a*y.d + x.b*y.c + x.c*y.b + x.d*y.a⟩⟩
+  ⟨x.a*y.a - (x.b*y.d + x.c*y.c + x.d*y.b),
+   x.a*y.b + x.b*y.a - (x.c*y.d + x.d*y.c),
+   x.a*y.c + x.b*y.b + x.c*y.a - x.d*y.d,
+   x.a*y.d + x.b*y.c + x.c*y.b + x.d*y.a⟩⟩
 
 @[simp] theorem zero_a : (0:Z8).a = 0 := rfl
 @[simp] theorem zero_b : (0:Z8).b = 0 := rfl
@@ -66,31 +66,31 @@ instance : Mul Z8 := ⟨fun x y =>
 @[simp] theorem sub_c (x y:Z8) : (x-y).c = x.c-y.c := rfl
 @[simp] theorem sub_d (x y:Z8) : (x-y).d = x.d-y.d := rfl
 @[simp] theorem mul_a (x y:Z8) :
- (x*y).a = x.a*y.a - (x.b*y.d + x.c*y.c + x.d*y.b) := rfl
+    (x*y).a = x.a*y.a - (x.b*y.d + x.c*y.c + x.d*y.b) := rfl
 @[simp] theorem mul_b (x y:Z8) :
- (x*y).b = x.a*y.b + x.b*y.a - (x.c*y.d + x.d*y.c) := rfl
+    (x*y).b = x.a*y.b + x.b*y.a - (x.c*y.d + x.d*y.c) := rfl
 @[simp] theorem mul_c (x y:Z8) :
- (x*y).c = x.a*y.c + x.b*y.b + x.c*y.a - x.d*y.d := rfl
+    (x*y).c = x.a*y.c + x.b*y.b + x.c*y.a - x.d*y.d := rfl
 @[simp] theorem mul_d (x y:Z8) :
- (x*y).d = x.a*y.d + x.b*y.c + x.c*y.b + x.d*y.a := rfl
+    (x*y).d = x.a*y.d + x.b*y.c + x.c*y.b + x.d*y.a := rfl
 
 instance commRing : CommRing Z8 where
- add_assoc := by intros; ext <;> simp <;> ring
- zero_add := by intros; ext <;> simp
- add_zero := by intros; ext <;> simp
- add_comm := by intros; ext <;> simp <;> ring
- neg_add_cancel := by intros; ext <;> simp
- mul_assoc := by intros; ext <;> simp <;> ring
- one_mul := by intros; ext <;> simp
- mul_one := by intros; ext <;> simp
- left_distrib := by intros; ext <;> simp <;> ring
- right_distrib := by intros; ext <;> simp <;> ring
- mul_comm := by intros; ext <;> simp <;> ring
- sub_eq_add_neg := by intros; ext <;> simp <;> ring
- zero_mul := by intros; ext <;> simp
- mul_zero := by intros; ext <;> simp
- nsmul := nsmulRec
- zsmul := zsmulRec
+  add_assoc := by intros; ext <;> simp <;> ring
+  zero_add := by intros; ext <;> simp
+  add_zero := by intros; ext <;> simp
+  add_comm := by intros; ext <;> simp <;> ring
+  neg_add_cancel := by intros; ext <;> simp
+  mul_assoc := by intros; ext <;> simp <;> ring
+  one_mul := by intros; ext <;> simp
+  mul_one := by intros; ext <;> simp
+  left_distrib := by intros; ext <;> simp <;> ring
+  right_distrib := by intros; ext <;> simp <;> ring
+  mul_comm := by intros; ext <;> simp <;> ring
+  sub_eq_add_neg := by intros; ext <;> simp <;> ring
+  zero_mul := by intros; ext <;> simp
+  mul_zero := by intros; ext <;> simp
+  nsmul := nsmulRec
+  zsmul := zsmulRec
 
 /-! ## Named elements -/
 
@@ -132,7 +132,7 @@ theorem zeta_mul_sqrt2 : zeta * sqrt2 = oneI := by decide
 
 /-! ## Priority 1.3 — the ramified square: `(1-ζ)² = (1+i)·u`, and `u` is a unit. -/
 
-/-- `(1-ζ)² = (1+i)·u` with `u = 1-ζ+ζ³`. This is the level-3 ramification identity. -/
+/-- `(1-ζ)² = (1+i)·u` with `u = 1-ζ+ζ³`.  This is the level-3 ramification identity. -/
 theorem lam_sq : lam^2 = oneI * uu := by decide
 
 /-- The fundamental unit `u` is invertible, with inverse `-1-√2`. -/
@@ -142,7 +142,7 @@ theorem isUnit_uu : IsUnit uu := ⟨⟨uu, uuInv, uu_mul_uuInv, by rw [mul_comm]
 
 /-- Restatement: `λ² = (1+i)·u` with `u` a unit, exhibiting `(1+i) ∼ λ²`. -/
 theorem lam_sq_assoc : ∃ v : Z8, IsUnit v ∧ lam^2 = oneI * v :=
- ⟨uu, isUnit_uu, lam_sq⟩
+  ⟨uu, isUnit_uu, lam_sq⟩
 
 /-! ## Complex conjugation -/
 
@@ -155,15 +155,15 @@ def conj (z : Z8) : Z8 := ⟨z.a, -z.d, -z.c, -z.b⟩
 @[simp] theorem conj_d (z:Z8) : (conj z).d = -z.b := rfl
 
 @[simp] theorem conj_conj (z : Z8) : conj (conj z) = z := by
- cases z; simp [conj]
+  cases z; simp [conj]
 
 theorem conj_zeta : conj zeta = -zeta^3 := by decide
 
 theorem conj_add (x y : Z8) : conj (x+y) = conj x + conj y := by
- ext <;> simp [conj] <;> ring
+  ext <;> simp [conj] <;> ring
 
 theorem conj_mul (x y : Z8) : conj (x*y) = conj x * conj y := by
- ext <;> simp [conj] <;> ring
+  ext <;> simp [conj] <;> ring
 
 @[simp] theorem conj_one : conj 1 = 1 := by decide
 @[simp] theorem conj_zero : conj 0 = 0 := by decide
@@ -174,7 +174,7 @@ theorem conj_mul (x y : Z8) : conj (x*y) = conj x * conj y := by
 def dvdOneI (z : Z8) : Prop := (2 ∣ (z.a + z.c)) ∧ (2 ∣ (z.b + z.d))
 
 instance (z : Z8) : Decidable (dvdOneI z) := by
- unfold dvdOneI; infer_instance
+  unfold dvdOneI; infer_instance
 
 /-- `half z` divides every coordinate of `z` by 2 (exact iff the coordinates are even). -/
 def half (z : Z8) : Z8 := ⟨z.a/2, z.b/2, z.c/2, z.d/2⟩

@@ -1,20 +1,26 @@
 /-
-# Dagger compact closed categories
+# PauliLogic/Categorical/DaggerCompact.lean — the Lambek side, Target 3
 
-A dagger compact closed category (Selinger 2007 Defs. 3.1–3.3; Heunen–Vicary
-2019 Ch. 3) is a dagger symmetric monoidal category in which every object `X`
-has a dual `X*` with a unit (coevaluation) `η_X : 𝟙_ ⟶ X ⊗ X*` and counit
-(evaluation) `ε_X : X* ⊗ X ⟶ 𝟙_` satisfying
+## Dagger compact closed categories
 
-  the snake / zig-zag equations, packaged by Mathlib's `ExactPairing X X*`;
-  the dagger compatibility `dagger η_X = (β_ X X*).hom ≫ ε_X`.
+A **dagger compact closed category** (Selinger 2007, Defs. 3.1–3.3;
+Heunen–Vicary 2019, Ch. 3) is a dagger symmetric monoidal category in which
+every object `X` has a dual `X*` with a unit (coevaluation)
+`η_X : 𝟙_ ⟶ X ⊗ X*` and counit (evaluation) `ε_X : X* ⊗ X ⟶ 𝟙_` satisfying
 
-For the stabilizer setting every generating object is self-dual (`X* = X`,
-because a Hermitian Pauli word is its own inverse), so we also record the
-specialisation `SelfDualDaggerCompactClosed`.
+1. the **snake / zig-zag (compact closure) equations**, packaged by Mathlib's
+   `CategoryTheory.ExactPairing X X*`;
+2. the **dagger compatibility**: the dagger of the coevaluation is the
+   evaluation composed with the braiding,
+   `dagger η_X = (β_ X X*).hom ≫ ε_X`.
 
-We reuse Mathlib's `ExactPairing` rather than restating the snake equations,
-taking advantage of the existing rigid-monoidal infrastructure.
+For the PL_n / stabilizer setting every generating object is **self-dual**
+(`X* = X`, because a Hermitian Pauli word is its own inverse), so we also
+record the specialisation `SelfDualDaggerCompactClosed`.
+
+We reuse Mathlib's `ExactPairing` for the snake equations rather than restating
+them (per the standard convention to reuse rigid-monoidal infrastructure
+where present).
 -/
 
 import StabilizerBW.PauliLogic.Categorical.DaggerMonoidal
