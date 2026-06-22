@@ -1,0 +1,6 @@
+{
+ "violating": 289,
+ "total": 600,
+ "worst_ratio_Iconv_over_bound": 5.8364,
+ "max_Pauli_CHSH_sampled": 2.7326
+}

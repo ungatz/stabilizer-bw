@@ -1,18 +1,20 @@
 /-
-# Dagger symmetric monoidal categories
+# PauliLogic/Categorical/DaggerMonoidal.lean — the Lambek side, Target 2
 
-A dagger symmetric monoidal category (Selinger 2007 §3; Heunen–Vicary 2019)
-is a symmetric monoidal category that is simultaneously a dagger category,
-in a way compatible with the monoidal structure:
+## Dagger symmetric monoidal categories
 
-  the dagger preserves the tensor of morphisms,
-    `dagger (f ⊗ₘ g) = dagger f ⊗ₘ dagger g`;
-  the structural isomorphisms (associator, unitors) and the braiding are
-    *unitary*, meaning their dagger equals their inverse; concretely the
-    braiding satisfies `dagger (β_ X Y).hom = (β_ X Y).inv`.
+A **dagger symmetric monoidal category** (Selinger 2007, §3; Heunen–Vicary
+2019, Def. 3.x) is a symmetric monoidal category that is simultaneously a
+dagger category, in a way compatible with the monoidal structure:
+
+* the dagger preserves the tensor of morphisms:
+  `dagger (f ⊗ₘ g) = dagger f ⊗ₘ dagger g`;
+* the structural isomorphisms (associator, unitors) and the braiding are
+  *unitary*, i.e. their dagger equals their inverse; concretely the braiding
+  satisfies `dagger (β_ X Y).hom = (β_ X Y).inv`.
 
 We build on Mathlib's `CategoryTheory.SymmetricCategory` and the
-`DaggerCategory` class from `Dagger.lean`.
+`DaggerCategory` class of `Dagger.lean`.
 -/
 
 import StabilizerBW.PauliLogic.Categorical.Dagger

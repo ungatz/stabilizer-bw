@@ -36,3 +36,27 @@ The literature pointers used in the narrative documents.
 ## $\sqrt{\Pi}$ and the categorical lineage (referenced in the grade document only as the source of the cyclotomic-tower picture)
 
 * J. Carette, C. Heunen, R. Kaarsgaard, A. Sabry, *With a few square roots, quantum computing is as easy as $\pi$*, Proc. ACM Program. Lang. **8** (POPL), 2024.
+
+## Cyclotomic arithmetic
+
+* G. H. Hardy, E. M. Wright, *An Introduction to the Theory of Numbers*, 6th ed. (revised by D. R. Heath-Brown and J. H. Silverman), Oxford University Press, 2008. Chapter XV "Quadratic fields (1)" §15.1–15.4 supplies the local arithmetic of the prime above two in the relevant cyclotomic rings.
+
+## T-count benchmarks
+
+* P. Selinger, *Quantum circuits of T-depth one*, Phys. Rev. A **87** (2013), 042302. T-depth-one synthesis (and the T-count of the $T$, $CS$, $cT$ gates as part of the depth-one analysis).
+* M. Amy, D. Maslov, M. Mosca, M. Roetteler, *A meet-in-the-middle algorithm for fast synthesis of depth-optimal quantum circuits*, IEEE Trans. CAD **32** (2013), 818. Table I gives the ancilla-free T-count benchmarks used for the $CCZ$, $CCS$, $ccT$ comparisons.
+
+## Quantum algorithms (for the grade audits)
+
+* G. Brassard, P. Høyer, M. Mosca, A. Tapp, *Quantum amplitude amplification and estimation*, Contemp. Math. **305** (2002), 53.
+* A. W. Harrow, A. Hassidim, S. Lloyd, *Quantum algorithm for linear systems of equations*, Phys. Rev. Lett. **103** (2009), 150502.
+* A. Peruzzo, J. McClean, P. Shadbolt, M.-H. Yung, X.-Q. Zhou, P. J. Love, A. Aspuru-Guzik, J. L. O'Brien, *A variational eigenvalue solver on a photonic quantum processor*, Nat. Commun. **5** (2014), 4213.
+
+## Markov-chain mixing times
+
+* L. Saloff-Coste, *Lectures on finite Markov chains*, in *Lectures on probability theory and statistics* (Saint-Flour 1996), Lecture Notes in Math. **1665**, Springer, 1997, 301–413. Section 3 supplies the Ehrenfest urn analysis via Krawtchouk polynomials.
+* D. A. Levin, Y. Peres, *Markov Chains and Mixing Times*, 2nd ed. (with E. L. Wilmer), American Mathematical Society, 2017. Theorem 12.3 (Equations 12.11–12.12) is the generic spectral-gap-to-mixing-time conversion; §20.4 supplies the Ehrenfest urn worked example.
+
+## Additional decoding
+
+* E. Grigorescu, C. Peikert, *List decoding Barnes–Wall lattices*, Computational Complexity Conference, 2012.

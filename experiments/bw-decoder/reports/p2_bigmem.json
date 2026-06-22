@@ -1,0 +1,10 @@
+{
+ "boundary": {
+  "xz_sum": 1.0,
+  "min_q_dim4_mem": 0.0
+ },
+ "outside": {
+  "xz_sum": 1.13,
+  "min_q_dim4_mem": 0.017282
+ }
+}

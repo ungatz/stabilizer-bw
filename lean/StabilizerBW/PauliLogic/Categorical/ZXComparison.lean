@@ -1,26 +1,30 @@
 /-
-# Comparison with Backens 2014 (ZX-stabilizer completeness)
+# PauliLogic/Categorical/ZXComparison.lean — the Lambek side, Target 10
+
+## Comparison with Backens 2014 (ZX-stabilizer completeness)
 
 Backens' theorem (*The ZX-calculus is complete for stabilizer quantum
-mechanics*, NJP 2014) says the stabilizer fragment of the ZX-calculus, as a
-dagger compact closed category, is complete for stabilizer quantum mechanics.
-A fully formal proof of equivalence with the ZX-calculus is out of scope here
-because the ZX-calculus (and Backens' rewrite system) is not formalised in
-Lean.  We do the next best thing.
+mechanics*, NJP 2014) states that the stabilizer fragment of the ZX-calculus,
+as a dagger compact closed category, is complete for stabilizer quantum
+mechanics.  A *fully formal* proof of equivalence with the ZX-calculus is out
+of reach here because the ZX-calculus (and Backens' rewrite system) is not
+formalised in Lean — this is flagged as out of scope.
 
-`StabilizerZXModel` bundles a Backens-style ZX interpretation `zxInterp` of
-Pauli words together with the carried completeness/soundness fact `backens`
-(ZX-diagram equality modulo Backens' rewrite rules ⇔ `Cat_PL_n` morphism
-existence).  The carry is a `Prop`, never an `axiom`.
+Following the Tier-C prescription we therefore:
 
-`zx_stabilizer_comparison` proves the structural comparison: under any such
-model, ZX-stabilizer equality coincides with the stabilizer-subspace
-interpretation `[[-]] : Cat_PL_n → Stab_n` — using the unconditional
-`universality_categorical`.
-
-`stabModelOfInterpret` then exhibits a concrete `StabilizerZXModel` by taking
-the ZX interpretation to be the stabilizer interpretation itself, witnessing
-that the carried hypothesis is satisfiable and the comparison is non-vacuous.
+* make the comparison **statement** precise, carrying the ZX side as an
+  explicit **`Prop` hypothesis** (never an `axiom`): a `StabilizerZXModel`
+  bundles a Backens-style ZX interpretation `zxInterp` of Pauli words together
+  with the carried completeness/soundness fact `backens` (ZX-diagram equality
+  modulo Backens' rewrite rules ⇔ `Cat_PL_n` morphism existence);
+* **prove** the structural comparison theorem `zx_stabilizer_comparison`: under
+  any such model, ZX-stabilizer equality coincides with our stabilizer-subspace
+  interpretation `[[-]] : Cat_PL_n → Stab_n` (Target 8) — using the
+  unconditional `universality_categorical`;
+* **prove the trivial/consistency direction** (`stabModelOfInterpret`): a
+  `StabilizerZXModel` actually exists, taking the ZX interpretation to be our
+  own stabilizer interpretation, so the carried hypothesis is satisfiable and
+  the comparison is non-vacuous.
 -/
 
 import StabilizerBW.PauliLogic.Categorical.Universality
